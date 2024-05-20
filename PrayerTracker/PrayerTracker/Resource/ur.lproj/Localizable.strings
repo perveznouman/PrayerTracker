@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  PrayerTracker
+
+  Created by Nouman Pervez on 10/05/24.
+  
+*/
+"statistics" = "اعداد و شمار";
+"newEntry" = "نیا اندراج";
+"makeNewEntry" = "ایک نئی اندراج کو نشان زد کریں";
+"today" = "آج";
+"tomorrow" = "کل";
+"yesterday" = "کل";
