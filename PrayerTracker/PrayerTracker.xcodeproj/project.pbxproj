@@ -12,6 +12,7 @@
 		8044E8492BED5C6700CD186F /* PTStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E8482BED5C6700CD186F /* PTStats.swift */; };
 		8044E84B2BED5D1800CD186F /* PTMarkPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E84A2BED5D1800CD186F /* PTMarkPrayer.swift */; };
 		8044E84F2BED61D200CD186F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8044E8512BED61D200CD186F /* Localizable.strings */; };
+		807398DB2BFBC25400310623 /* PTColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807398DA2BFBC25400310623 /* PTColor.swift */; };
 		80B186622B99D46D0077683D /* PrayerTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B186612B99D46D0077683D /* PrayerTrackerApp.swift */; };
 		80B186642B99D46D0077683D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B186632B99D46D0077683D /* ContentView.swift */; };
 		80B186662B99D46E0077683D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80B186652B99D46E0077683D /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		8044E8502BED61D200CD186F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8044E8522BED61D900CD186F /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8044E8532BED61E000CD186F /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/Localizable.strings; sourceTree = "<group>"; };
+		807398DA2BFBC25400310623 /* PTColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTColor.swift; sourceTree = "<group>"; };
 		80B1865E2B99D46D0077683D /* PrayerTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrayerTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80B186612B99D46D0077683D /* PrayerTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTrackerApp.swift; sourceTree = "<group>"; };
 		80B186632B99D46D0077683D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				80FF53B92BFA656E00732DCF /* PTDate.swift */,
+				807398DA2BFBC25400310623 /* PTColor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */,
 				8044E8472BED5B5500CD186F /* PTRootView.swift in Sources */,
 				8044E8492BED5C6700CD186F /* PTStats.swift in Sources */,
+				807398DB2BFBC25400310623 /* PTColor.swift in Sources */,
 				8044E84B2BED5D1800CD186F /* PTMarkPrayer.swift in Sources */,
 				80B186642B99D46D0077683D /* ContentView.swift in Sources */,
 				80FF53BA2BFA656E00732DCF /* PTDate.swift in Sources */,
