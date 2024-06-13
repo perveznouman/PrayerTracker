@@ -25,6 +25,8 @@ extension UIColor {
         let b = CGFloat(v / Int(powf(256, 0)) % 256) / 255
         self.init(red: r, green: g, blue: b, alpha: alpha)
     }
+    
+    static let accentGreenColor = UIColor(red: 205.0/255.0, green: 255.0/255.0, blue: 1.0/255.0, alpha: 1.0)
 }
 
 extension Color {
@@ -44,7 +46,22 @@ extension Color {
             return UIColor(displayP3Red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         }
     }
-    
-    //F6EEC9
-    static let almond = Color(hex: "7469B6")
+    /*
+     https://colorhunt.co/
+     F6EEC9
+     7469B6
+     EADBC8
+     144 155 68
+     230 250 140
+     205 255 1
+     */
+
+    public static var accentGreenColor: Color {
+        return Color(UIColor(red: 205.0/255.0, green: 255.0/255.0, blue: 1.0/255.0, alpha: 1.0))
+    }
+
+    public static var viewBackgroundColor: Color {
+        return Color.white
+    }
+    static let almond = Color(hex: "EADBC8")
 }

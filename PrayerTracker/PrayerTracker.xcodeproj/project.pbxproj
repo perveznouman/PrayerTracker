@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80312B082BF77E9E0097A4C4 /* TempView.swift */; };
+		803BDA972BFBC57E001A47F8 /* Mukta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA902BFBC57E001A47F8 /* Mukta-Regular.ttf */; };
+		803BDA982BFBC57E001A47F8 /* Mukta-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA912BFBC57E001A47F8 /* Mukta-Light.ttf */; };
+		803BDA992BFBC57E001A47F8 /* Mukta-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA922BFBC57E001A47F8 /* Mukta-ExtraLight.ttf */; };
+		803BDA9A2BFBC57E001A47F8 /* Mukta-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA932BFBC57E001A47F8 /* Mukta-SemiBold.ttf */; };
+		803BDA9B2BFBC57E001A47F8 /* Mukta-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA942BFBC57E001A47F8 /* Mukta-Bold.ttf */; };
+		803BDA9C2BFBC57E001A47F8 /* Mukta-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA952BFBC57E001A47F8 /* Mukta-Medium.ttf */; };
+		803BDA9D2BFBC57E001A47F8 /* Mukta-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA962BFBC57E001A47F8 /* Mukta-ExtraBold.ttf */; };
 		8044E8472BED5B5500CD186F /* PTRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E8462BED5B5500CD186F /* PTRootView.swift */; };
 		8044E8492BED5C6700CD186F /* PTStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E8482BED5C6700CD186F /* PTStats.swift */; };
 		8044E84B2BED5D1800CD186F /* PTMarkPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E84A2BED5D1800CD186F /* PTMarkPrayer.swift */; };
@@ -24,6 +31,14 @@
 
 /* Begin PBXFileReference section */
 		80312B082BF77E9E0097A4C4 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
+		803BDA8F2BFBC442001A47F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		803BDA902BFBC57E001A47F8 /* Mukta-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Regular.ttf"; sourceTree = "<group>"; };
+		803BDA912BFBC57E001A47F8 /* Mukta-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Light.ttf"; sourceTree = "<group>"; };
+		803BDA922BFBC57E001A47F8 /* Mukta-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-ExtraLight.ttf"; sourceTree = "<group>"; };
+		803BDA932BFBC57E001A47F8 /* Mukta-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-SemiBold.ttf"; sourceTree = "<group>"; };
+		803BDA942BFBC57E001A47F8 /* Mukta-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Bold.ttf"; sourceTree = "<group>"; };
+		803BDA952BFBC57E001A47F8 /* Mukta-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Medium.ttf"; sourceTree = "<group>"; };
+		803BDA962BFBC57E001A47F8 /* Mukta-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-ExtraBold.ttf"; sourceTree = "<group>"; };
 		8044E8462BED5B5500CD186F /* PTRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTRootView.swift; sourceTree = "<group>"; };
 		8044E8482BED5C6700CD186F /* PTStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTStats.swift; sourceTree = "<group>"; };
 		8044E84A2BED5D1800CD186F /* PTMarkPrayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTMarkPrayer.swift; sourceTree = "<group>"; };
@@ -52,9 +67,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		803BDA462BFBC3CE001A47F8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				803BDA942BFBC57E001A47F8 /* Mukta-Bold.ttf */,
+				803BDA962BFBC57E001A47F8 /* Mukta-ExtraBold.ttf */,
+				803BDA922BFBC57E001A47F8 /* Mukta-ExtraLight.ttf */,
+				803BDA912BFBC57E001A47F8 /* Mukta-Light.ttf */,
+				803BDA952BFBC57E001A47F8 /* Mukta-Medium.ttf */,
+				803BDA902BFBC57E001A47F8 /* Mukta-Regular.ttf */,
+				803BDA932BFBC57E001A47F8 /* Mukta-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		8044E84C2BED611800CD186F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				803BDA462BFBC3CE001A47F8 /* Fonts */,
 				8044E8512BED61D200CD186F /* Localizable.strings */,
 			);
 			path = Resource;
@@ -79,6 +109,7 @@
 		80B186602B99D46D0077683D /* PrayerTracker */ = {
 			isa = PBXGroup;
 			children = (
+				803BDA8F2BFBC442001A47F8 /* Info.plist */,
 				80FF53B82BFA654C00732DCF /* Utils */,
 				80B186742B99D4FF0077683D /* Views */,
 				8044E84C2BED611800CD186F /* Resource */,
@@ -180,9 +211,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				803BDA982BFBC57E001A47F8 /* Mukta-Light.ttf in Resources */,
 				80B186692B99D46E0077683D /* Preview Assets.xcassets in Resources */,
+				803BDA992BFBC57E001A47F8 /* Mukta-ExtraLight.ttf in Resources */,
+				803BDA9A2BFBC57E001A47F8 /* Mukta-SemiBold.ttf in Resources */,
+				803BDA972BFBC57E001A47F8 /* Mukta-Regular.ttf in Resources */,
+				803BDA9B2BFBC57E001A47F8 /* Mukta-Bold.ttf in Resources */,
 				8044E84F2BED61D200CD186F /* Localizable.strings in Resources */,
+				803BDA9C2BFBC57E001A47F8 /* Mukta-Medium.ttf in Resources */,
 				80B186662B99D46E0077683D /* Assets.xcassets in Resources */,
+				803BDA9D2BFBC57E001A47F8 /* Mukta-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +389,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PrayerTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrayerTracker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -379,6 +418,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PrayerTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrayerTracker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

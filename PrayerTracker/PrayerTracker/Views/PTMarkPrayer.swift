@@ -15,36 +15,45 @@ struct PTMarkPrayer: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
+//                Rectangle()
+//                    .fill(Gradient(colors: [.almond, .gray]))
+//                    .ignoresSafeArea()
+                Color.viewBackgroundColor
+                    .ignoresSafeArea()
                 
-                Button(action: {
-                    showDatePicker.toggle()
-                }, label: {
-                    Text(Date.newEntryFormatter(date: selectedDate))
-                })
-                .padding()
-                
-                Spacer()
-                
-                if showDatePicker {
-                                        
-                    DatePicker(
-                        "",
-                        selection: $selectedDate,
-                        displayedComponents: .date
-                    )
-                    .labelsHidden()
-                    .datePickerStyle(.graphical)
-                    .frame(maxHeight: 400)
+                VStack {
+                    
+                    Button(action: {
+                        showDatePicker.toggle()
+                    }, label: {
+                        Text(Date.newEntryFormatter(date: selectedDate))
+                    })
+                    .font(.custom("Mukta-Bold", size: 20))
+                    .padding()
+                    Spacer()
+                    
+                    if showDatePicker {
+                        
+                        DatePicker(
+                            "",
+                            selection: $selectedDate,
+                            displayedComponents: .date
+                        )
+                        .labelsHidden()
+                        .datePickerStyle(.graphical)
+                        .frame(maxHeight: 400)
+                    }
+                    
+                    //                NavigationLink(LocalizedStringKey("makeNewEntry")) {
+                    //                    TempView()
+                    //
+                    //                }
+                    
                 }
-                
-//                NavigationLink(LocalizedStringKey("makeNewEntry")) {
-//                    TempView()
-//                    
-//                }
-                
             }
             .navigationTitle(LocalizedStringKey("newEntry"))
+            .navigationBarTitleDisplayMode(.large)
         }
         .edgesIgnoringSafeArea(.bottom)
     }
