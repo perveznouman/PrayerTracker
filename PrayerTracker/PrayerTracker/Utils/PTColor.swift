@@ -61,7 +61,12 @@ extension Color {
     }
 
     public static var viewBackgroundColor: Color {
+        return Color.black
+    }
+    
+    public static var calendarFontColor: Color {
         return Color.white
     }
+    
     static let almond = Color(hex: "EADBC8")
 }

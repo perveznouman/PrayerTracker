@@ -38,8 +38,13 @@ struct PTMarkPrayer: View {
                         DatePicker(
                             "",
                             selection: $selectedDate,
+                            in: ...Date(),
                             displayedComponents: .date
                         )
+                        .preferredColorScheme(.dark)
+//                        .tint(.red)
+                        .colorMultiply(.calendarFontColor)
+
                         .labelsHidden()
                         .datePickerStyle(.graphical)
                         .frame(maxHeight: 400)

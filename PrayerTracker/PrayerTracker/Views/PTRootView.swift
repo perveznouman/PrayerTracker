@@ -22,6 +22,7 @@ struct PTRootView: View {
                 Label(LocalizedStringKey("statistics"), image: "stats")
             }
         }
+        .font(Font.custom("Mukta-ExtraBold", size:18))
         .accentColor(.accentGreenColor)
     }
 }
