@@ -54,10 +54,13 @@ extension Color {
      144 155 68
      230 250 140
      205 255 1
+     rgb(8, 143, 143)
+     rgb(9, 121, 105)
+     rgb(175, 225, 175)
      */
 
     public static var PTAccentColor: Color {
-        return Color(UIColor(red: 205.0/255.0, green: 255.0/255.0, blue: 1.0/255.0, alpha: 1.0))
+        return Color(UIColor(red: 8/255.0, green: 143/255.0, blue: 143/255.0, alpha: 1.0))
     }
 
     public static var PTNavBarColor: Color {

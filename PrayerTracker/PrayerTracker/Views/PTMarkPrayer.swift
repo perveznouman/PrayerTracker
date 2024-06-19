@@ -27,7 +27,7 @@ struct PTMarkPrayer: View {
                 Color.PTViewBackgroundColor
                     .ignoresSafeArea()
                 
-                VStack {
+                VStack(spacing:0) {
                     
                     Button(action: {
                         showDatePicker.toggle()
@@ -35,8 +35,7 @@ struct PTMarkPrayer: View {
                         Text(Date.newEntryFormatter(date: selectedDate))
                     })
                     .font(.PTButtonTitle)
-                    .padding()
-                    Spacer()
+                    .padding(.top, 10)
                     
                     if showDatePicker {
                         
@@ -62,11 +61,13 @@ struct PTMarkPrayer: View {
                         PrayerListCell()
                         PrayerListCell()
                     }
+                    .scrollDisabled(true)
+                    .contentMargins(.vertical, 0) //To remove spacing in header section
+                    .frame(maxHeight: 225)
                     .preferredColorScheme(.dark)
                     .colorMultiply(Color.PTWhite)
-                    .onAppear(perform: {
-                        UITableView.appearance().isScrollEnabled = false
-                    })
+                    
+                    Spacer()
                     //                NavigationLink(LocalizedStringKey("makeNewEntry")) {
                     //                    TempView()
                     //
@@ -91,11 +92,11 @@ struct PrayerListCell: View {
     var body: some View {
         HStack {
             Text("Isha")
-                .foregroundColor(.PTAccentColor)
+                .foregroundColor(.PTWhite)
                 .font(.PTPrayerCell)
             Toggle("", isOn: .constant(true))
         }
-        .listRowBackground(Color.black)
+        .listRowBackground(Color.PTViewBackgroundColor)
     }
 }
 
