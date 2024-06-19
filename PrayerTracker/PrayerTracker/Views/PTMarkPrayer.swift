@@ -12,14 +12,19 @@ struct PTMarkPrayer: View {
     let calendar = Calendar.current
     @State private var showDatePicker = false
     @State private var selectedDate = Date()
+    @State private var offered = true
 
+    init() {
+//        UINavigationBar.appearance().backgroundColor = .systemPink
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
+    }
     var body: some View {
         NavigationView {
             ZStack {
 //                Rectangle()
 //                    .fill(Gradient(colors: [.almond, .gray]))
 //                    .ignoresSafeArea()
-                Color.viewBackgroundColor
+                Color.PTViewBackgroundColor
                     .ignoresSafeArea()
                 
                 VStack {
@@ -29,7 +34,7 @@ struct PTMarkPrayer: View {
                     }, label: {
                         Text(Date.newEntryFormatter(date: selectedDate))
                     })
-                    .font(.custom("Mukta-Bold", size: 20))
+                    .font(.PTButtonTitle)
                     .padding()
                     Spacer()
                     
@@ -43,13 +48,25 @@ struct PTMarkPrayer: View {
                         )
                         .preferredColorScheme(.dark)
 //                        .tint(.red)
-                        .colorMultiply(.calendarFontColor)
+                        .colorMultiply(.PTWhite)
 
                         .labelsHidden()
                         .datePickerStyle(.graphical)
                         .frame(maxHeight: 400)
                     }
                     
+                    List {
+                        PrayerListCell()
+                        PrayerListCell()
+                        PrayerListCell()
+                        PrayerListCell()
+                        PrayerListCell()
+                    }
+                    .preferredColorScheme(.dark)
+                    .colorMultiply(Color.PTWhite)
+                    .onAppear(perform: {
+                        UITableView.appearance().isScrollEnabled = false
+                    })
                     //                NavigationLink(LocalizedStringKey("makeNewEntry")) {
                     //                    TempView()
                     //
@@ -58,12 +75,31 @@ struct PTMarkPrayer: View {
                 }
             }
             .navigationTitle(LocalizedStringKey("newEntry"))
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+
+            
         }
         .edgesIgnoringSafeArea(.bottom)
+    }
+    
+}
+
+struct PrayerListCell: View {
+    
+    var body: some View {
+        HStack {
+            Text("Isha")
+                .foregroundColor(.PTAccentColor)
+                .font(.PTPrayerCell)
+            Toggle("", isOn: .constant(true))
+        }
+        .listRowBackground(Color.black)
     }
 }
 
 #Preview {
+//    PrayerListCell()
     PTMarkPrayer()
 }

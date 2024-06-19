@@ -12,21 +12,22 @@ struct PTStats: View {
     init() {
         
 //        UINavigationBar.appearance().backgroundColor = .systemPink
-        UINavigationBar.appearance().largeTitleTextAttributes = [
-            .foregroundColor: UIColor.accentGreenColor]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
     
     var body: some View {
         
         NavigationView {
             ZStack {
-                Color.viewBackgroundColor
+                Color.PTViewBackgroundColor
                     .ignoresSafeArea()
                 Text(LocalizedStringKey("statistics"))
                     .navigationTitle("statistics")
-                    .foregroundColor(.accentGreenColor)
+                    .foregroundColor(.PTAccentColor)
             }
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
         .edgesIgnoringSafeArea(.bottom)
     }

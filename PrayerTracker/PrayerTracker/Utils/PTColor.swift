@@ -26,7 +26,7 @@ extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: alpha)
     }
     
-    static let accentGreenColor = UIColor(red: 205.0/255.0, green: 255.0/255.0, blue: 1.0/255.0, alpha: 1.0)
+    static let PTAccentColor = UIColor(red: 205.0/255.0, green: 255.0/255.0, blue: 1.0/255.0, alpha: 1.0)
 }
 
 extension Color {
@@ -56,17 +56,21 @@ extension Color {
      205 255 1
      */
 
-    public static var accentGreenColor: Color {
+    public static var PTAccentColor: Color {
         return Color(UIColor(red: 205.0/255.0, green: 255.0/255.0, blue: 1.0/255.0, alpha: 1.0))
     }
 
-    public static var viewBackgroundColor: Color {
+    public static var PTNavBarColor: Color {
+        return Color(UIColor(red: 230/255.0, green: 255.0/255.0, blue: 140/255.0, alpha: 1.0))
+    }
+    
+    public static var PTViewBackgroundColor: Color {
         return Color.black
     }
     
-    public static var calendarFontColor: Color {
+    public static var PTWhite: Color {
         return Color.white
     }
     
-    static let almond = Color(hex: "EADBC8")
+    static let PTAlmond = Color(hex: "EADBC8")
 }
