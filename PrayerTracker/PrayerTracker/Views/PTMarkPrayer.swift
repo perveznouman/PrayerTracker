@@ -28,14 +28,40 @@ struct PTMarkPrayer: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing:0) {
-                    
-                    Button(action: {
-                        showDatePicker.toggle()
-                    }, label: {
-                        Text(Date.newEntryFormatter(date: selectedDate))
-                    })
-                    .font(.PTButtonTitle)
-                    .padding(.top, 10)
+                    HStack {
+                        DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: "<")
+                        DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: Date.newEntryFormatter(date: selectedDate))
+                        DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: ">")
+
+//                        Spacer()
+//                        Button(action: {
+//                            showDatePicker.toggle()
+//                        }, label: {
+//                            Text("<")
+//                        })
+//                        .font(.PTButtonTitle)
+//                        .padding(.top, 10)
+//                        
+//                        Spacer()
+//                        Button(action: {
+//                            showDatePicker.toggle()
+//                        }, label: {
+//                            Text(Date.newEntryFormatter(date: selectedDate))
+//                        })
+//                        .font(.PTButtonTitle)
+//                        .padding(.top, 10)
+//                        
+//                        Spacer()
+//                        Button(action: {
+//                            showDatePicker.toggle()
+//                        }, label: {
+//                            Text(">")
+//                        })
+//                        .font(.PTButtonTitle)
+//                        .padding(.top, 10)
+                        
+                        Spacer()
+                    }
                     
                     if showDatePicker {
                         
@@ -48,7 +74,6 @@ struct PTMarkPrayer: View {
                         .preferredColorScheme(.dark)
 //                        .tint(.red)
                         .colorMultiply(.PTWhite)
-
                         .labelsHidden()
                         .datePickerStyle(.graphical)
                         .frame(maxHeight: 400)
@@ -62,7 +87,7 @@ struct PTMarkPrayer: View {
                         PrayerListCell()
                     }
                     .scrollDisabled(true)
-                    .contentMargins(.vertical, 0) //To remove spacing in header section
+                    .contentMargins(.vertical, 10) //To remove spacing in header section
                     .frame(maxHeight: 225)
                     .preferredColorScheme(.dark)
                     .colorMultiply(Color.PTWhite)
@@ -82,9 +107,27 @@ struct PTMarkPrayer: View {
 
             
         }
+        .accentColor(.PTAccentColor)
         .edgesIgnoringSafeArea(.bottom)
     }
     
+}
+
+struct DateSection: View {
+    
+    @Binding var shouldShowDatePicker: Bool
+    var buttonTitle: String
+
+    var body: some View {
+        Spacer()
+        Button(action: {
+            shouldShowDatePicker.toggle()
+        }, label: {
+            Text(buttonTitle)
+        })
+        .font(.PTButtonTitle)
+        .padding(.top, 10)
+    }
 }
 
 struct PrayerListCell: View {
@@ -95,12 +138,15 @@ struct PrayerListCell: View {
                 .foregroundColor(.PTWhite)
                 .font(.PTPrayerCell)
             Toggle("", isOn: .constant(true))
+                .tint(.PTAccentColor)
+
         }
         .listRowBackground(Color.PTViewBackgroundColor)
     }
 }
 
 #Preview {
+//    DateSection(shouldShowDatePicker: true, buttonTitle: "<")
 //    PrayerListCell()
     PTMarkPrayer()
 }
