@@ -11,3 +11,8 @@
 "today" = "آج";
 "tomorrow" = "کل";
 "yesterday" = "کل";
+"fajr" = "فجر";
+"zuhar" = "ظہر";
+"asar" = "عصر";
+"maghrib" = "مغرب";
+"esha" = "عشاء";

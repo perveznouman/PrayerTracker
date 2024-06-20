@@ -12,3 +12,8 @@
 "today" = "Today";
 "tomorrow" = "Tomorrow";
 "yesterday" = "Yesterday";
+"fajr" = "Fajr";
+"zuhar" = "Zuhar";
+"asar" = "Asar";
+"maghrib" = "Maghrib";
+"esha" = "Esha";

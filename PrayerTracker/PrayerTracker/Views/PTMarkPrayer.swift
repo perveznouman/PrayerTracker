@@ -13,7 +13,12 @@ struct PTMarkPrayer: View {
     @State private var showDatePicker = false
     @State private var selectedDate = Date()
     @State private var offered = true
-
+    @State private var prayers: [Prayer] = [Prayer(name: "fajr", isOffered: false),
+                                            Prayer(name: "zuhar", isOffered: true),
+                                            Prayer(name: "asar", isOffered: false),
+                                            Prayer(name: "maghrib", isOffered: true),
+                                            Prayer(name: "esha", isOffered: false)]
+    
     init() {
 //        UINavigationBar.appearance().backgroundColor = .systemPink
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
@@ -21,9 +26,6 @@ struct PTMarkPrayer: View {
     var body: some View {
         NavigationView {
             ZStack {
-//                Rectangle()
-//                    .fill(Gradient(colors: [.almond, .gray]))
-//                    .ignoresSafeArea()
                 Color.PTViewBackgroundColor
                     .ignoresSafeArea()
                 
@@ -32,34 +34,6 @@ struct PTMarkPrayer: View {
                         DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: "<")
                         DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: Date.newEntryFormatter(date: selectedDate))
                         DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: ">")
-
-//                        Spacer()
-//                        Button(action: {
-//                            showDatePicker.toggle()
-//                        }, label: {
-//                            Text("<")
-//                        })
-//                        .font(.PTButtonTitle)
-//                        .padding(.top, 10)
-//                        
-//                        Spacer()
-//                        Button(action: {
-//                            showDatePicker.toggle()
-//                        }, label: {
-//                            Text(Date.newEntryFormatter(date: selectedDate))
-//                        })
-//                        .font(.PTButtonTitle)
-//                        .padding(.top, 10)
-//                        
-//                        Spacer()
-//                        Button(action: {
-//                            showDatePicker.toggle()
-//                        }, label: {
-//                            Text(">")
-//                        })
-//                        .font(.PTButtonTitle)
-//                        .padding(.top, 10)
-                        
                         Spacer()
                     }
                     
@@ -79,12 +53,8 @@ struct PTMarkPrayer: View {
                         .frame(maxHeight: 400)
                     }
                     
-                    List {
-                        PrayerListCell()
-                        PrayerListCell()
-                        PrayerListCell()
-                        PrayerListCell()
-                        PrayerListCell()
+                    List($prayers) { $prayer in
+                        PrayerListCell(prayer: $prayer)
                     }
                     .scrollDisabled(true)
                     .contentMargins(.vertical, 10) //To remove spacing in header section
@@ -97,15 +67,12 @@ struct PTMarkPrayer: View {
                     //                    TempView()
                     //
                     //                }
-                    
                 }
             }
             .navigationTitle(LocalizedStringKey("newEntry"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
-
-            
         }
         .accentColor(.PTAccentColor)
         .edgesIgnoringSafeArea(.bottom)
@@ -131,13 +98,13 @@ struct DateSection: View {
 }
 
 struct PrayerListCell: View {
-    
+    @Binding var prayer: Prayer
     var body: some View {
         HStack {
-            Text("Isha")
+            Text(NSLocalizedString(prayer.name, comment: ""))
                 .foregroundColor(.PTWhite)
                 .font(.PTPrayerCell)
-            Toggle("", isOn: .constant(true))
+            Toggle("", isOn: $prayer.isOffered)
                 .tint(.PTAccentColor)
 
         }
