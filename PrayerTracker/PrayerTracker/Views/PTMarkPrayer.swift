@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct PTMarkPrayer: View {
     let date = Date()
@@ -13,8 +14,8 @@ struct PTMarkPrayer: View {
     @State private var showDatePicker = false
     @State private var selectedDate = Date()
     @State private var offered = true
-    @State private var prayerVM: PrayerViewModel = PrayerViewModel()
-    
+    @StateObject private var prayerVM: PrayerViewModel = PrayerViewModel()
+
     init() {
 //        UINavigationBar.appearance().backgroundColor = .systemPink
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
@@ -59,6 +60,8 @@ struct PTMarkPrayer: View {
                     .colorMultiply(Color.PTWhite)
                     
                     Spacer()
+                    TodaysPrayerPieChartView(aggregatedPrayers: prayerVM.aggregatedData)
+                    Spacer()
                 }
             }
             .navigationTitle(LocalizedStringKey("newEntry"))
@@ -69,7 +72,43 @@ struct PTMarkPrayer: View {
         .accentColor(.PTAccentColor)
         .edgesIgnoringSafeArea(.bottom)
     }
-    
+}
+
+struct TodaysPrayerPieChartView: View {
+    var aggregatedPrayers: [TodaysPrayerAggregatedData]
+    let colorMapping: [String: Color] = [
+        "Offered": .PTAccentColor,
+        "Not Offered": .gray
+    ]
+    var body: some View {
+        
+        Chart {
+            ForEach(aggregatedPrayers) { prayer in
+                SectorMark(angle: .value("Count", prayer.count))
+                    .foregroundStyle(colorMapping[prayer.category] ?? .gray)
+            }
+        }
+//        .frame(height: 300)
+        .padding(.horizontal, 15)
+        .padding(.top, 10)
+        .scaledToFit()
+        
+        // Legend
+        HStack {
+            ForEach(aggregatedPrayers) { prayer in
+                HStack {
+                    Rectangle()
+                        .fill(colorMapping[prayer.category] ?? .gray)
+                        .frame(width: 10, height: 10)
+                    Text(LocalizedStringKey(prayer.category))
+                        .foregroundColor(colorMapping[prayer.category] ?? .gray)
+                        .font(.PTGraphLegand)
+                }
+                .padding(.horizontal, 4)
+            }
+        }
+        .padding(.top, 16)
+    }
 }
 
 struct DateSection: View {
@@ -106,7 +145,9 @@ struct PrayerListCell: View {
 }
 
 #Preview {
+//    TodaysPrayerPieChartView()
 //    DateSection(shouldShowDatePicker: true, buttonTitle: "<")
 //    PrayerListCell()
     PTMarkPrayer()
+        .environment(\.locale, .init(identifier: "ur"))
 }

@@ -54,6 +54,7 @@ extension UIFont {
 extension Font {
     public static let PTButtonTitle = Font.custom("Mukta-Bold", size: 25, relativeTo: .largeTitle)
     public static let PTPrayerCell = Font.custom("Mukta-Medium", size: 20, relativeTo: .body)
+    public static let PTGraphLegand = Font.custom("Mukta-Bold", size: 11, relativeTo: .subheadline)
 
 //    public static let titleCustom = Font.custom("Lobster-Regular", size: 28, relativeTo: .title)
 //    public static let title2Custom = Font.custom("Lobster-Regular", size: 22, relativeTo: .title2)

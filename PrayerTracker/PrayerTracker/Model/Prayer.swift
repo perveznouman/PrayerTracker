@@ -13,3 +13,9 @@ struct Prayer: Identifiable {
     var isOffered: Bool
     var isEnabled: Bool
 }
+
+struct TodaysPrayerAggregatedData: Identifiable {
+    var id = UUID()
+    var category: String
+    var count: Int
+}
