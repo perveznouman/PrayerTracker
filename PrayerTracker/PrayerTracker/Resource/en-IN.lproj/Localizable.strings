@@ -16,3 +16,6 @@
 "asar" = "Asar";
 "maghrib" = "Maghrib";
 "esha" = "Esha";
+"weekly" = "Weekly";
+"monthly" = "Monthly";
+"yearly" = "Yearly";

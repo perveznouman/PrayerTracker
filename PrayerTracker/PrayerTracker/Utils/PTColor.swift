@@ -26,7 +26,10 @@ extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: alpha)
     }
     
-    static let PTAccentColor = UIColor(red: 205.0/255.0, green: 255.0/255.0, blue: 1.0/255.0, alpha: 1.0)
+    static let PTAccentColor = UIColor(red: 8/255.0, green: 143/255.0, blue: 143/255.0, alpha: 1.0)
+    public static var PTWhite: UIColor {
+        return UIColor.white
+    }
 }
 
 extension Color {

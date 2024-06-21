@@ -13,11 +13,7 @@ struct PTMarkPrayer: View {
     @State private var showDatePicker = false
     @State private var selectedDate = Date()
     @State private var offered = true
-    @State private var prayers: [Prayer] = [Prayer(name: "fajr", isOffered: false),
-                                            Prayer(name: "zuhar", isOffered: true),
-                                            Prayer(name: "asar", isOffered: false),
-                                            Prayer(name: "maghrib", isOffered: true),
-                                            Prayer(name: "esha", isOffered: false)]
+    @State private var prayerVM: PrayerViewModel = PrayerViewModel()
     
     init() {
 //        UINavigationBar.appearance().backgroundColor = .systemPink
@@ -53,7 +49,7 @@ struct PTMarkPrayer: View {
                         .frame(maxHeight: 400)
                     }
                     
-                    List($prayers) { $prayer in
+                    List($prayerVM.prayers) { $prayer in
                         PrayerListCell(prayer: $prayer)
                     }
                     .scrollDisabled(true)
@@ -63,10 +59,6 @@ struct PTMarkPrayer: View {
                     .colorMultiply(Color.PTWhite)
                     
                     Spacer()
-                    //                NavigationLink(LocalizedStringKey("makeNewEntry")) {
-                    //                    TempView()
-                    //
-                    //                }
                 }
             }
             .navigationTitle(LocalizedStringKey("newEntry"))
@@ -101,10 +93,11 @@ struct PrayerListCell: View {
     @Binding var prayer: Prayer
     var body: some View {
         HStack {
-            Text(NSLocalizedString(prayer.name, comment: ""))
+            Text(LocalizedStringKey(prayer.name))
                 .foregroundColor(.PTWhite)
                 .font(.PTPrayerCell)
             Toggle("", isOn: $prayer.isOffered)
+                .disabled(!prayer.isEnabled)
                 .tint(.PTAccentColor)
 
         }

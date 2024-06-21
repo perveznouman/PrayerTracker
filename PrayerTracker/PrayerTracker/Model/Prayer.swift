@@ -11,4 +11,5 @@ struct Prayer: Identifiable {
     var id = UUID()
     var name: String
     var isOffered: Bool
+    var isEnabled: Bool
 }
