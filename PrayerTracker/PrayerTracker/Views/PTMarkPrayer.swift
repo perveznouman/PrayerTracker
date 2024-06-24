@@ -78,14 +78,15 @@ struct TodaysPrayerPieChartView: View {
     var aggregatedPrayers: [TodaysPrayerAggregatedData]
     let colorMapping: [String: Color] = [
         "Offered": .PTAccentColor,
-        "Not Offered": .gray
+        "Not Offered": .PTRed,
+        "Wait": .PTGray
     ]
     var body: some View {
         
         Chart {
             ForEach(aggregatedPrayers) { prayer in
                 SectorMark(angle: .value("Count", prayer.count))
-                    .foregroundStyle(colorMapping[prayer.category] ?? .gray)
+                    .foregroundStyle(colorMapping[prayer.category] ?? .PTGray)
             }
         }
 //        .frame(height: 300)
@@ -98,10 +99,10 @@ struct TodaysPrayerPieChartView: View {
             ForEach(aggregatedPrayers) { prayer in
                 HStack {
                     Rectangle()
-                        .fill(colorMapping[prayer.category] ?? .gray)
+                        .fill(colorMapping[prayer.category] ?? .PTGray)
                         .frame(width: 10, height: 10)
                     Text(LocalizedStringKey(prayer.category))
-                        .foregroundColor(colorMapping[prayer.category] ?? .gray)
+                        .foregroundColor(colorMapping[prayer.category] ?? .PTGray)
                         .font(.PTGraphLegand)
                 }
                 .padding(.horizontal, 4)

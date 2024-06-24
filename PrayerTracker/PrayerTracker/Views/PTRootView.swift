@@ -29,4 +29,5 @@ struct PTRootView: View {
 
 #Preview {
     PTRootView()
+//        .environment(\.locale, .init(identifier: "ur"))
 }

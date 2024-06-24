@@ -84,5 +84,4 @@ struct PTStats: View {
 
 #Preview {
     PTStats()
-//        .environment(\.locale, .init(identifier: "ur"))
 }
