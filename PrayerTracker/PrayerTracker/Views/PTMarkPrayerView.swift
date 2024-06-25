@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct PTMarkPrayer: View {
+struct PTMarkPrayerView: View {
     let date = Date()
     let calendar = Calendar.current
     @State private var showDatePicker = false
@@ -28,9 +28,9 @@ struct PTMarkPrayer: View {
                 
                 VStack(spacing:0) {
                     HStack {
-                        DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: "<")
-                        DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: Date.newEntryFormatter(date: selectedDate))
-                        DateSection(shouldShowDatePicker: $showDatePicker, buttonTitle: ">")
+                        PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: "<")
+                        PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: Date.newEntryFormatter(date: selectedDate))
+                        PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: ">")
                         Spacer()
                     }
                     
@@ -51,7 +51,7 @@ struct PTMarkPrayer: View {
                     }
                     
                     List($prayerVM.prayers) { $prayer in
-                        PrayerListCell(prayer: $prayer)
+                        PTPrayerListCellView(prayer: $prayer)
                     }
                     .scrollDisabled(true)
                     .contentMargins(.vertical, 10) //To remove spacing in header section
@@ -60,7 +60,7 @@ struct PTMarkPrayer: View {
                     .colorMultiply(Color.PTWhite)
                     
                     Spacer()
-                    TodaysPrayerPieChartView(aggregatedPrayers: prayerVM.aggregatedData)
+                    PTTodaysPrayerPieChartView(aggregatedPrayers: prayerVM.aggregatedData)
                     Spacer()
                 }
             }
@@ -74,13 +74,13 @@ struct PTMarkPrayer: View {
     }
 }
 
-struct TodaysPrayerPieChartView: View {
+struct PTTodaysPrayerPieChartView: View {
+    
     var aggregatedPrayers: [TodaysPrayerAggregatedData]
-    let colorMapping: [String: Color] = [
-        "Offered": .PTAccentColor,
-        "Not Offered": .PTRed,
-        "Wait": .PTGray
-    ]
+    let colorMapping: [String: Color] = [ "Offered": .PTAccentColor,
+                                          "Not Offered": .PTRed,
+                                          "Wait": .PTGray]
+    
     var body: some View {
         
         Chart {
@@ -112,7 +112,7 @@ struct TodaysPrayerPieChartView: View {
     }
 }
 
-struct DateSection: View {
+struct PTDateSectionView: View {
     
     @Binding var shouldShowDatePicker: Bool
     var buttonTitle: String
@@ -129,7 +129,7 @@ struct DateSection: View {
     }
 }
 
-struct PrayerListCell: View {
+struct PTPrayerListCellView: View {
     @Binding var prayer: Prayer
     var body: some View {
         HStack {
@@ -146,9 +146,9 @@ struct PrayerListCell: View {
 }
 
 #Preview {
-//    TodaysPrayerPieChartView()
-//    DateSection(shouldShowDatePicker: true, buttonTitle: "<")
-//    PrayerListCell()
-    PTMarkPrayer()
+//    PTTodaysPrayerPieChartView()
+//    PTDateSectionView(shouldShowDatePicker: true, buttonTitle: "<")
+//    PTPrayerListCellView()
+    PTMarkPrayerView()
 //        .environment(\.locale, .init(identifier: "ur"))
 }

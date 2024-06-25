@@ -17,7 +17,7 @@ import SwiftUI
 //    case yearly
 //}
 
-enum Stats: String, CaseIterable, Equatable {
+enum PTStats: String, CaseIterable, Equatable {
     
     case weekly = "weekly"
     case monthly = "monthly"
@@ -26,7 +26,7 @@ enum Stats: String, CaseIterable, Equatable {
 }
 
 
-struct PTStats: View {
+struct PTStatsView: View {
     
     init() {
         
@@ -39,7 +39,7 @@ struct PTStats: View {
 //        UISegmentedControl.appearance().setTitleTextAttributes([.font: UIFont.boldFont(ofSize: 19)], for: .normal)
     }
     
-    @State private var selectedParameter: Stats = .weekly
+    @State private var selectedParameter: PTStats = .weekly
     
     var body: some View {
         
@@ -72,10 +72,10 @@ struct PTStats: View {
 
 struct PickerView: View {
     
-    @Binding var selectedSegment: Stats
+    @Binding var selectedSegment: PTStats
     var body: some View {
         Picker("", selection: $selectedSegment) {
-            ForEach(Stats.allCases, id: \.self) { stats in
+            ForEach(PTStats.allCases, id: \.self) { stats in
                 Text(LocalizedStringKey(stats.rawValue))
                     .font(.PTButtonTitle)
             }
@@ -90,5 +90,5 @@ struct PickerView: View {
 
 #Preview {
 //    PickerView(selectedSegment: .constant(.weekly))
-    PTStats()
+    PTStatsView()
 }

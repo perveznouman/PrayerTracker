@@ -15,10 +15,10 @@ struct PTRootView: View {
     
     var body: some View {
         TabView {
-            PTMarkPrayer().tabItem {
+            PTMarkPrayerView().tabItem {
                 Label(LocalizedStringKey("newEntry"), image: "add-entry")
             }
-            PTStats().tabItem {
+            PTStatsView().tabItem {
                 Label(LocalizedStringKey("statistics"), image: "stats")
             }
 //            TempView().tabItem {
