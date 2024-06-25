@@ -46,9 +46,11 @@ extension UIFont {
         return customFont(name: fontName, size: size)
     }
     
-    static func boldFont(ofSize size: CGFloat) -> UIFont {
+    static func PTBoldFont(ofSize size: CGFloat) -> UIFont {
         return customFont(name: "Mukta-Bold", size: size)
     }
+    public static let PTButtonTitle = UIFont.customFont(name: "Mukta-Bold", size: 25)
+
 }
 
 extension Font {

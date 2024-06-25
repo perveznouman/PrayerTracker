@@ -21,6 +21,9 @@ struct PTRootView: View {
             PTStats().tabItem {
                 Label(LocalizedStringKey("statistics"), image: "stats")
             }
+//            TempView().tabItem {
+//                Label("More", systemImage: "ellipsis")
+//            }
         }
 //        .font(Font.custom("Mukta-ExtraBold", size:18))
         .accentColor(.PTAccentColor)

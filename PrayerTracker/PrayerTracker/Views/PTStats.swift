@@ -40,8 +40,7 @@ struct PTStats: View {
     }
     
     @State private var selectedParameter: Stats = .weekly
-//    var statsParameters = ["Weekly", "Monthly", "Yearly"]
-//    @State private var allParams = Stats.allCases
+    
     var body: some View {
         
         NavigationView {
@@ -50,18 +49,7 @@ struct PTStats: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    Picker("", selection: $selectedParameter) {
-                        ForEach(Stats.allCases, id: \.self) { stats in
-                            Text(LocalizedStringKey(stats.rawValue))
-                                .font(.PTButtonTitle)
-                        }
-                    }
-                    .tint(.PTAccentColor)
-                    .pickerStyle(.segmented)
-                    .padding(.top, 20)
-                    .padding(.leading, 15)
-                    .padding(.trailing, 15)
-
+                    PickerView(selectedSegment: $selectedParameter)
                     Spacer()
                 }
                 Text(LocalizedStringKey(selectedParameter.rawValue))
@@ -82,6 +70,25 @@ struct PTStats: View {
     }
 }
 
+struct PickerView: View {
+    
+    @Binding var selectedSegment: Stats
+    var body: some View {
+        Picker("", selection: $selectedSegment) {
+            ForEach(Stats.allCases, id: \.self) { stats in
+                Text(LocalizedStringKey(stats.rawValue))
+                    .font(.PTButtonTitle)
+            }
+        }
+        .tint(.PTAccentColor)
+        .pickerStyle(.segmented)
+        .padding(.top, 20)
+        .padding(.leading, 15)
+        .padding(.trailing, 15)
+    }
+}
+
 #Preview {
+//    PickerView(selectedSegment: .constant(.weekly))
     PTStats()
 }

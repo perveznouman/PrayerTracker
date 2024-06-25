@@ -9,7 +9,17 @@ import SwiftUI
 
 struct TempView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            ZStack {
+                Text("Hello, World!")
+            }
+            .navigationTitle(LocalizedStringKey("More"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+        }
+        .accentColor(.PTAccentColor)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

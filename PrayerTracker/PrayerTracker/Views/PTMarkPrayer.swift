@@ -150,5 +150,5 @@ struct PrayerListCell: View {
 //    DateSection(shouldShowDatePicker: true, buttonTitle: "<")
 //    PrayerListCell()
     PTMarkPrayer()
-        .environment(\.locale, .init(identifier: "ur"))
+//        .environment(\.locale, .init(identifier: "ur"))
 }
