@@ -17,7 +17,6 @@ struct PTMarkPrayerView: View {
     @StateObject private var prayerVM: PrayerViewModel = PrayerViewModel()
 
     init() {
-//        UINavigationBar.appearance().backgroundColor = .systemPink
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
     var body: some View {
@@ -34,22 +33,6 @@ struct PTMarkPrayerView: View {
                         Spacer()
                     }
                     
-                    if showDatePicker {
-                        
-                        DatePicker(
-                            "",
-                            selection: $selectedDate,
-                            in: ...Date(),
-                            displayedComponents: .date
-                        )
-                        .preferredColorScheme(.dark)
-//                        .tint(.red)
-                        .colorMultiply(.PTWhite)
-                        .labelsHidden()
-                        .datePickerStyle(.graphical)
-                        .frame(maxHeight: 400)
-                    }
-                    
                     List($prayerVM.prayers) { $prayer in
                         PTPrayerListCellView(prayer: $prayer)
                     }
@@ -63,6 +46,10 @@ struct PTMarkPrayerView: View {
                     PTTodaysPrayerPieChartView(aggregatedPrayers: prayerVM.aggregatedData)
                     Spacer()
                 }
+                
+                if showDatePicker {
+                    PTDatePickerView(currentSelectedDate: $selectedDate, shouldShowPicker: $showDatePicker)
+                }
             }
             .navigationTitle(LocalizedStringKey("newEntry"))
             .navigationBarTitleDisplayMode(.inline)
@@ -71,6 +58,42 @@ struct PTMarkPrayerView: View {
         }
         .accentColor(.PTAccentColor)
         .edgesIgnoringSafeArea(.bottom)
+    }
+}
+
+struct PTDatePickerView: View {
+    
+    @Binding var currentSelectedDate: Date
+    @Binding var shouldShowPicker: Bool
+    
+    var body: some View {
+        ZStack {
+            Color.PTViewBackgroundColor.opacity(0.8)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    shouldShowPicker.toggle()
+                }
+            VStack {
+                Spacer()
+                DatePicker(
+                    "",
+                    selection: $currentSelectedDate,
+                    in: ...Date(),
+                    displayedComponents: .date
+                )
+                .onChange(of: currentSelectedDate) { oldValue, newValue in
+                    print(oldValue)
+                    print(newValue)
+                    shouldShowPicker.toggle()
+                }
+                .preferredColorScheme(.dark)
+                // .tint(.red)
+                .colorMultiply(.PTWhite)
+                .labelsHidden()
+                .datePickerStyle(.graphical)
+                .frame(maxHeight: 400)
+            }
+        }
     }
 }
 
@@ -146,6 +169,7 @@ struct PTPrayerListCellView: View {
 }
 
 #Preview {
+//    PTDatePickerView(currentSelectedDate: .constant(Date()), shouldShowPicker: .constant(true))
 //    PTTodaysPrayerPieChartView()
 //    PTDateSectionView(shouldShowDatePicker: true, buttonTitle: "<")
 //    PTPrayerListCellView()

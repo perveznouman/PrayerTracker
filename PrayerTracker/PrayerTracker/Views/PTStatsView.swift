@@ -49,7 +49,7 @@ struct PTStatsView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    PickerView(selectedSegment: $selectedParameter)
+                    PTStatsPickerView(selectedSegment: $selectedParameter)
                     Spacer()
                 }
                 Text(LocalizedStringKey(selectedParameter.rawValue))
@@ -70,7 +70,7 @@ struct PTStatsView: View {
     }
 }
 
-struct PickerView: View {
+struct PTStatsPickerView: View {
     
     @Binding var selectedSegment: PTStats
     var body: some View {
