@@ -108,8 +108,17 @@ struct PTTodaysPrayerPieChartView: View {
         
         Chart {
             ForEach(aggregatedPrayers) { prayer in
-                SectorMark(angle: .value("Count", prayer.count))
+                
+                SectorMark(angle: .value("Count", prayer.count), innerRadius: .ratio(0.6), angularInset: 1.0)
                     .foregroundStyle(colorMapping[prayer.category] ?? .PTGray)
+                    .cornerRadius(6.0)
+                    .annotation(position: .overlay) {
+                        if(prayer.count > 0) {
+                            Text("\(prayer.count)")
+                                .font(.PTPrayerCell)
+                                .foregroundStyle(.white)
+                    }
+                }
             }
         }
 //        .frame(height: 300)
