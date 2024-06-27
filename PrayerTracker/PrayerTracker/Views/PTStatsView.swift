@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Charts
 
 //enum Stats: String, CaseIterable, Identifiable {
 //    var id: String {
@@ -50,10 +50,13 @@ struct PTStatsView: View {
                 
                 VStack {
                     PTStatsPickerView(selectedSegment: $selectedParameter)
+                        .padding(.bottom)
+                    PTBarChartView(selectedSegment: $selectedParameter)
+                        .padding(.top)
                     Spacer()
                 }
-                Text(LocalizedStringKey(selectedParameter.rawValue))
-                    .foregroundColor(.white)
+//                Text(LocalizedStringKey(selectedParameter.rawValue))
+//                    .foregroundColor(.white)
 
                 //                NavigationLink(LocalizedStringKey("makeNewEntry")) {
                 //                    TempView()
@@ -70,6 +73,35 @@ struct PTStatsView: View {
     }
 }
 
+
+struct PTBarChartView: View {
+    @Binding var selectedSegment: PTStats
+
+    var body: some View {
+        
+        let _: [String: Color] = [ "Offered": .PTRed,
+                                              "Not Offered": .PTRed,
+                                              "Wait": .PTGray]
+        let prayerData = PTWeeklyViewModel(selectedSegment)
+        
+        Chart {
+            ForEach(prayerData.xAxis.indices, id: \.self) { index in
+                BarMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
+//                    .foregroundStyle(by: .value("Day", weekdays[index]))
+                    .annotation {
+                        Text("\(prayerData.offered[index])")
+                            .foregroundColor(.PTWhite)
+                }
+            }
+        }
+        .chartYAxis{
+            AxisMarks(position: .leading, values: prayerData.yValues)
+        }
+        .frame(maxHeight: 300)
+        .padding(.horizontal)
+    }
+}
+
 struct PTStatsPickerView: View {
     
     @Binding var selectedSegment: PTStats
@@ -80,6 +112,10 @@ struct PTStatsPickerView: View {
                     .font(.PTButtonTitle)
             }
         }
+        .onChange(of: selectedSegment, { oldValue, newValue in
+            print(oldValue)
+            print(newValue)
+        })
         .tint(.PTAccentColor)
         .pickerStyle(.segmented)
         .padding(.top, 20)
@@ -89,6 +125,7 @@ struct PTStatsPickerView: View {
 }
 
 #Preview {
+//    PTBarChartView()
 //    PickerView(selectedSegment: .constant(.weekly))
     PTStatsView()
 }

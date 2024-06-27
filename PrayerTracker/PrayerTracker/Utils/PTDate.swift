@@ -26,7 +26,17 @@ extension Date {
         return formatter.string(from: date)
     }
    
-   
+    func currentMonthDays() -> Int {
+        let calendar = Calendar.current
+        let dateComponents = DateComponents(year: calendar.component(.year, from: self), month: calendar.component(.month, from: self))
+        let date = calendar.date(from: dateComponents)!
+        let range = calendar.range(of: .day, in: .month, for: date)!
+        let numDays = range.count
+        return numDays
+    }
+
+    
+
     
     /*
    static func dayDifference(from date: Date) -> Int {
@@ -73,6 +83,12 @@ extension Date {
              let ageComponents = calendar.dateComponents([.year], from: date, to: self)
              return ageComponents.year ?? 0
          }
+     
+     var month: String {
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "MMMM"
+         return dateFormatter.string(from: self)
+     }
      
      */
     

@@ -14,7 +14,7 @@ struct PTMarkPrayerView: View {
     @State private var showDatePicker = false
     @State private var selectedDate = Date()
     @State private var offered = true
-    @StateObject private var prayerVM: PrayerViewModel = PrayerViewModel()
+    @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
@@ -99,7 +99,7 @@ struct PTDatePickerView: View {
 
 struct PTTodaysPrayerPieChartView: View {
     
-    var aggregatedPrayers: [TodaysPrayerAggregatedData]
+    var aggregatedPrayers: [PTTodaysPrayerAggregatedData]
     let colorMapping: [String: Color] = [ "Offered": .PTAccentColor,
                                           "Not Offered": .PTRed,
                                           "Wait": .PTGray]
@@ -162,7 +162,7 @@ struct PTDateSectionView: View {
 }
 
 struct PTPrayerListCellView: View {
-    @Binding var prayer: Prayer
+    @Binding var prayer: PTTodaysPrayer
     var body: some View {
         HStack {
             Text(LocalizedStringKey(prayer.name))

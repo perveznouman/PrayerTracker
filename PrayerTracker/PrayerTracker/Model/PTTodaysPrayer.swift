@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Prayer: Identifiable {
+struct PTTodaysPrayer: Identifiable {
     var id = UUID()
     var name: String
     var isOffered: Bool
     var isEnabled: Bool
 }
 
-struct TodaysPrayerAggregatedData: Identifiable {
+struct PTTodaysPrayerAggregatedData: Identifiable {
     var id = UUID()
     var category: String
     var count: Int
