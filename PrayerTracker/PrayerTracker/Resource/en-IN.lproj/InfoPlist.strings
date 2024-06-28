@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  PrayerTracker
+
+  Created by Nouman Pervez on 29/06/24.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "App require location access to show prayer time";

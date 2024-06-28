@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  PrayerTracker
+
+  Created by Nouman Pervez on 29/06/24.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "ایپ کو نماز کا وقت دکھانے کے لیے مقام تک رسائی درکار ہے";

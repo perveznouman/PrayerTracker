@@ -27,6 +27,7 @@
 		80B110C32C2F3CDC006D449A /* PTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C22C2F3CDC006D449A /* PTLocationManager.swift */; };
 		80B110C82C2F531E006D449A /* PTConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C72C2F531E006D449A /* PTConstant.swift */; };
 		80B110CC2C2F596A006D449A /* PTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110CB2C2F596A006D449A /* PTUserDefaults.swift */; };
+		80B110CF2C2F65F6006D449A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80B110D12C2F65F6006D449A /* InfoPlist.strings */; };
 		80B186622B99D46D0077683D /* PrayerTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B186612B99D46D0077683D /* PrayerTrackerApp.swift */; };
 		80B186642B99D46D0077683D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B186632B99D46D0077683D /* ContentView.swift */; };
 		80B186662B99D46E0077683D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80B186652B99D46E0077683D /* Assets.xcassets */; };
@@ -61,6 +62,9 @@
 		80B110C42C2F4F13006D449A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		80B110C72C2F531E006D449A /* PTConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConstant.swift; sourceTree = "<group>"; };
 		80B110CB2C2F596A006D449A /* PTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTUserDefaults.swift; sourceTree = "<group>"; };
+		80B110D02C2F65F6006D449A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		80B110D22C2F65FA006D449A /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		80B110D32C2F65FB006D449A /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		80B1865E2B99D46D0077683D /* PrayerTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrayerTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80B186612B99D46D0077683D /* PrayerTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTrackerApp.swift; sourceTree = "<group>"; };
 		80B186632B99D46D0077683D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				803BDA462BFBC3CE001A47F8 /* Fonts */,
 				8044E8512BED61D200CD186F /* Localizable.strings */,
 				80B110C42C2F4F13006D449A /* PrivacyInfo.xcprivacy */,
+				80B110D12C2F65F6006D449A /* InfoPlist.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 				8044E84F2BED61D200CD186F /* Localizable.strings in Resources */,
 				803BDA9C2BFBC57E001A47F8 /* Mukta-Medium.ttf in Resources */,
 				80B186662B99D46E0077683D /* Assets.xcassets in Resources */,
+				80B110CF2C2F65F6006D449A /* InfoPlist.strings in Resources */,
 				803BDA9D2BFBC57E001A47F8 /* Mukta-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +315,16 @@
 				8044E8532BED61E000CD186F /* ur */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		80B110D12C2F65F6006D449A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80B110D02C2F65F6006D449A /* en */,
+				80B110D22C2F65FA006D449A /* en-IN */,
+				80B110D32C2F65FB006D449A /* ur */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
