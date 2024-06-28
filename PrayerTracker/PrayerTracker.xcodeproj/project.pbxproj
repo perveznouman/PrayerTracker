@@ -24,6 +24,9 @@
 		8044E84F2BED61D200CD186F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8044E8512BED61D200CD186F /* Localizable.strings */; };
 		807398DB2BFBC25400310623 /* PTColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807398DA2BFBC25400310623 /* PTColor.swift */; };
 		807EDFB62C1B17BC005552C8 /* PTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807EDFB52C1B17BC005552C8 /* PTFont.swift */; };
+		80B110C32C2F3CDC006D449A /* PTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C22C2F3CDC006D449A /* PTLocationManager.swift */; };
+		80B110C82C2F531E006D449A /* PTConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C72C2F531E006D449A /* PTConstant.swift */; };
+		80B110CC2C2F596A006D449A /* PTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110CB2C2F596A006D449A /* PTUserDefaults.swift */; };
 		80B186622B99D46D0077683D /* PrayerTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B186612B99D46D0077683D /* PrayerTrackerApp.swift */; };
 		80B186642B99D46D0077683D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B186632B99D46D0077683D /* ContentView.swift */; };
 		80B186662B99D46E0077683D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80B186652B99D46E0077683D /* Assets.xcassets */; };
@@ -54,6 +57,10 @@
 		8044E8532BED61E000CD186F /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807398DA2BFBC25400310623 /* PTColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTColor.swift; sourceTree = "<group>"; };
 		807EDFB52C1B17BC005552C8 /* PTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFont.swift; sourceTree = "<group>"; };
+		80B110C22C2F3CDC006D449A /* PTLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationManager.swift; sourceTree = "<group>"; };
+		80B110C42C2F4F13006D449A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		80B110C72C2F531E006D449A /* PTConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConstant.swift; sourceTree = "<group>"; };
+		80B110CB2C2F596A006D449A /* PTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTUserDefaults.swift; sourceTree = "<group>"; };
 		80B1865E2B99D46D0077683D /* PrayerTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrayerTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80B186612B99D46D0077683D /* PrayerTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTrackerApp.swift; sourceTree = "<group>"; };
 		80B186632B99D46D0077683D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,8 +118,17 @@
 			children = (
 				803BDA462BFBC3CE001A47F8 /* Fonts */,
 				8044E8512BED61D200CD186F /* Localizable.strings */,
+				80B110C42C2F4F13006D449A /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		80B110C12C2EBD8D006D449A /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				80B110C22C2F3CDC006D449A /* PTLocationManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		80B186552B99D46D0077683D = {
@@ -137,6 +153,7 @@
 				803BDA8F2BFBC442001A47F8 /* Info.plist */,
 				80FF53B82BFA654C00732DCF /* Utils */,
 				80B186742B99D4FF0077683D /* Views */,
+				80B110C12C2EBD8D006D449A /* Manager */,
 				8002D16C2C2435150018E2C8 /* Model */,
 				8002D16F2C24AA4E0018E2C8 /* ViewModels */,
 				8044E84C2BED611800CD186F /* Resource */,
@@ -175,6 +192,8 @@
 				80FF53B92BFA656E00732DCF /* PTDate.swift */,
 				807398DA2BFBC25400310623 /* PTColor.swift */,
 				807EDFB52C1B17BC005552C8 /* PTFont.swift */,
+				80B110C72C2F531E006D449A /* PTConstant.swift */,
+				80B110CB2C2F596A006D449A /* PTUserDefaults.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -261,12 +280,15 @@
 			files = (
 				80B1866B2B99D46E0077683D /* Persistence.swift in Sources */,
 				807EDFB62C1B17BC005552C8 /* PTFont.swift in Sources */,
+				80B110CC2C2F596A006D449A /* PTUserDefaults.swift in Sources */,
 				80B1866E2B99D46E0077683D /* PrayerTracker.xcdatamodeld in Sources */,
 				80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */,
 				8044E8472BED5B5500CD186F /* PTRootView.swift in Sources */,
+				80B110C32C2F3CDC006D449A /* PTLocationManager.swift in Sources */,
 				8044E8492BED5C6700CD186F /* PTStatsView.swift in Sources */,
 				8002D16E2C2435370018E2C8 /* PTTodaysPrayer.swift in Sources */,
 				807398DB2BFBC25400310623 /* PTColor.swift in Sources */,
+				80B110C82C2F531E006D449A /* PTConstant.swift in Sources */,
 				8044E84B2BED5D1800CD186F /* PTMarkPrayerView.swift in Sources */,
 				80B186642B99D46D0077683D /* ContentView.swift in Sources */,
 				800E599E2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift in Sources */,
@@ -422,6 +444,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrayerTracker/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App require location access to show prayer time";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -451,6 +474,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrayerTracker/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App require location access to show prayer time";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

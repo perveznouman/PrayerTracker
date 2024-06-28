@@ -15,12 +15,17 @@ struct PTMarkPrayerView: View {
     @State private var selectedDate = Date()
     @State private var offered = true
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
+    @StateObject var locationManager = PTLocationManager()
+        
+    var userCity: String {
+        return locationManager.cityName ?? String(localized: "unknown")
+    }
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.PTViewBackgroundColor
                     .ignoresSafeArea()
@@ -52,6 +57,23 @@ struct PTMarkPrayerView: View {
                 }
             }
             .navigationTitle(LocalizedStringKey("newEntry"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button (action: {
+                        print("Location")
+                    }) {
+                        HStack(spacing:0) {
+                            Image(systemName: "location.fill")
+                                .font(.system(size: 13))
+                            Text(userCity)
+                                .font(.PTLocationButton)
+                        }
+                        .frame(maxWidth:150)
+                    }
+                    .foregroundColor(.PTWhite)
+                    .controlSize(.small)
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
