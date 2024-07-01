@@ -12,11 +12,13 @@ struct PTMarkPrayerView: View {
     let date = Date()
     let calendar = Calendar.current
     @State private var showDatePicker = false
+    @State private var showLocationSearchView = false
     @State private var selectedDate = Date()
     @State private var offered = true
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
     @StateObject var locationManager = PTLocationManager()
-        
+    let locationSearchService = PTLocationSearchManager()
+
     var userCity: String {
         return locationManager.cityName ?? String(localized: "unknown")
     }
@@ -60,7 +62,7 @@ struct PTMarkPrayerView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button (action: {
-                        print("Location")
+                        showLocationSearchView.toggle()
                     }) {
                         HStack(spacing:0) {
                             Image(systemName: "location.fill")
@@ -69,6 +71,10 @@ struct PTMarkPrayerView: View {
                                 .font(.PTLocationButton)
                         }
                         .frame(maxWidth:150)
+                    }
+                    .sheet(isPresented: $showLocationSearchView) {
+                        PTLocationSearchView(locationSearchService: locationSearchService, selectedData: "", showLocationSearchView: showLocationSearchView)
+                        
                     }
                     .foregroundColor(.PTWhite)
                     .controlSize(.small)
@@ -80,6 +86,51 @@ struct PTMarkPrayerView: View {
         }
         .accentColor(.PTAccentColor)
         .edgesIgnoringSafeArea(.bottom)
+    }
+}
+
+struct PTLocationSearchView: View {
+    
+    @ObservedObject var locationSearchService: PTLocationSearchManager
+    @State var selectedData: String
+    @State var showLocationSearchView: Bool
+    
+    var body: some View {
+        
+        ZStack {
+            Color.PTViewBackgroundColor.opacity(0.8)
+                .ignoresSafeArea()
+            VStack(spacing:0) {
+                SearchBar(text: $locationSearchService.searchQuery)
+                List(locationSearchService.completions) { completion in
+                    PTSearchResultCellView(cellText: completion.title.description, subtitle: completion.subtitle.description)
+                        .frame(maxHeight:40)
+//                    VStack(alignment: .leading, spacing: 0) {
+//                        Text(completion.title)
+//                        Text(completion.subtitle)
+//                            .font(.subheadline)
+//                            .foregroundColor(.gray)
+//                    }
+                }
+                
+                //                .onTapGesture {
+                //                    selectedData = locationSearchService.completions[0].title
+                //                    print("Selected data: \($selectedData)")
+                //                }
+                //                .onAppear(perform: {
+                //                    selectedData = locationSearchService.completions[0].title
+                //                })
+                .scrollDisabled(false)
+                .contentMargins(.vertical, 0) //To remove spacing in header section
+                .frame(maxHeight: .infinity)
+                .preferredColorScheme(.dark)
+                .colorMultiply(Color.PTWhite)
+                
+            }
+        }
+//        .onAppear(perform: {
+//            showLocationSearchView.toggle()
+//        })
     }
 }
 
@@ -199,7 +250,24 @@ struct PTPrayerListCellView: View {
     }
 }
 
+struct PTSearchResultCellView : View {
+     var cellText: String
+     var subtitle: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(cellText)
+                .foregroundColor(.PTWhite)
+                .font(.PTLocationButton)
+            Text(subtitle)
+                .font(.PTCellDetailedText)
+                .foregroundColor(.PTGray)
+        }
+    }
+}
 #Preview {
+//    PTSearchResultCellView(cellText: .constant("Vaniymabadi"), subtitle: .constant("Tamil Nadu"))
+//    PTLocationSearchView(locationSearchService: PTLocationSearchManager(), selectedData: "")
 //    PTDatePickerView(currentSelectedDate: .constant(Date()), shouldShowPicker: .constant(true))
 //    PTTodaysPrayerPieChartView()
 //    PTDateSectionView(shouldShowDatePicker: true, buttonTitle: "<")

@@ -49,7 +49,6 @@ class PTLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         lastLocation = location
-        print(#function, location)
         getCityAndCountryLocation(latitude: lastLocation?.coordinate.latitude ?? 0.0, longitude: lastLocation?.coordinate.longitude ?? 0.0)
     }
     
@@ -64,10 +63,4 @@ class PTLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
              UserDefaults.standard.save(customObject: locationObj, inKey: PTConstantKey.location)
          }
      }
-}
-
-struct PTLocation: Codable {
-    let latitude: Double
-    let longitude: Double
-    let city: String
 }
