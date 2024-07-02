@@ -110,17 +110,13 @@ struct PTLocationSearchView: View {
                 List(locationSearchService.completions) { completion in
                     PTSearchResultCellView(cellText: completion.title.description, subtitle: completion.subtitle.description)
                         .frame(maxHeight:40)
+                        .onTapGesture {
+                            selectedLocation = completion.title
+                            let locationObj = PTLocation(latitude: 0.0, longitude: 0.0, city: selectedLocation ?? "")
+                            locationVm.save(locationObj)
+                            showView.toggle()
+                        }
                 }
-                
-                .onTapGesture {
-                    selectedLocation = locationSearchService.completions[0].title
-                    let locationObj = PTLocation(latitude: 0.0, longitude: 0.0, city: selectedLocation ?? "")
-                    locationVm.save(locationObj)
-                    showView.toggle()
-                }
-                //                .onAppear(perform: {
-                //                    selectedData = locationSearchService.completions[0].title
-                //                })
                 .scrollDisabled(false)
                 .contentMargins(.vertical, 0) //To remove spacing in header section
                 .frame(maxHeight: .infinity)
