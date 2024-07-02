@@ -17,10 +17,11 @@ struct PTMarkPrayerView: View {
     @State private var offered = true
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
     @StateObject var locationManager = PTLocationManager()
+    @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     @State var userSelectedLocation: String!
-
     var userCity: String {
-        return locationManager.cityName ?? String(localized: "unknown")
+        return locationViewModel.location?.city ?? String(localized: "unknown")
+//        return locationManager.cityName ?? String(localized: "unknown")
     }
 
     init() {
@@ -74,8 +75,6 @@ struct PTMarkPrayerView: View {
                     }
                     .sheet(isPresented: $showLocationSearchView) {
                         PTLocationSearchView(selectedLocation: $userSelectedLocation, showView: $showLocationSearchView)
-//                        PTLocationSearchView(locationSearchService: locationSearchService, selectedData: "", showLocationSearchView: showLocationSearchView)
-                        
                     }
                     .foregroundColor(.PTWhite)
                     .controlSize(.small)
@@ -95,6 +94,7 @@ struct PTLocationSearchView: View {
     @ObservedObject private var locationSearchService: PTLocationSearchManager = PTLocationSearchManager()
     @Binding var selectedLocation: String!
     @Binding var showView: Bool
+    var locationVm: PTLocationViewModel = PTLocationViewModel.shared
 
     var body: some View {
         
@@ -111,7 +111,7 @@ struct PTLocationSearchView: View {
                 .onTapGesture {
                     selectedLocation = locationSearchService.completions[0].title
                     let locationObj = PTLocation(latitude: 0.0, longitude: 0.0, city: selectedLocation ?? "")
-                   PTLocationViewModel().save(locationObj)
+                    locationVm.save(locationObj)
                     showView.toggle()
                 }
                 //                .onAppear(perform: {
