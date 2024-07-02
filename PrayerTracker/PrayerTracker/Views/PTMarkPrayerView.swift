@@ -17,7 +17,7 @@ struct PTMarkPrayerView: View {
     @State private var offered = true
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
     @StateObject var locationManager = PTLocationManager()
-    let locationSearchService = PTLocationSearchManager()
+    @State var userSelectedLocation: String!
 
     var userCity: String {
         return locationManager.cityName ?? String(localized: "unknown")
@@ -73,7 +73,8 @@ struct PTMarkPrayerView: View {
                         .frame(maxWidth:150)
                     }
                     .sheet(isPresented: $showLocationSearchView) {
-                        PTLocationSearchView(locationSearchService: locationSearchService, selectedData: "", showLocationSearchView: showLocationSearchView)
+                        PTLocationSearchView(selectedLocation: $userSelectedLocation, showView: $showLocationSearchView)
+//                        PTLocationSearchView(locationSearchService: locationSearchService, selectedData: "", showLocationSearchView: showLocationSearchView)
                         
                     }
                     .foregroundColor(.PTWhite)
@@ -91,10 +92,10 @@ struct PTMarkPrayerView: View {
 
 struct PTLocationSearchView: View {
     
-    @ObservedObject var locationSearchService: PTLocationSearchManager
-    @State var selectedData: String
-    @State var showLocationSearchView: Bool
-    
+    @ObservedObject private var locationSearchService: PTLocationSearchManager = PTLocationSearchManager()
+    @Binding var selectedLocation: String!
+    @Binding var showView: Bool
+
     var body: some View {
         
         ZStack {
@@ -105,18 +106,14 @@ struct PTLocationSearchView: View {
                 List(locationSearchService.completions) { completion in
                     PTSearchResultCellView(cellText: completion.title.description, subtitle: completion.subtitle.description)
                         .frame(maxHeight:40)
-//                    VStack(alignment: .leading, spacing: 0) {
-//                        Text(completion.title)
-//                        Text(completion.subtitle)
-//                            .font(.subheadline)
-//                            .foregroundColor(.gray)
-//                    }
                 }
                 
-                //                .onTapGesture {
-                //                    selectedData = locationSearchService.completions[0].title
-                //                    print("Selected data: \($selectedData)")
-                //                }
+                .onTapGesture {
+                    selectedLocation = locationSearchService.completions[0].title
+                    let locationObj = PTLocation(latitude: 0.0, longitude: 0.0, city: selectedLocation ?? "")
+                   PTLocationViewModel().save(locationObj)
+                    showView.toggle()
+                }
                 //                .onAppear(perform: {
                 //                    selectedData = locationSearchService.completions[0].title
                 //                })

@@ -41,7 +41,8 @@ class PTLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         locationStatus = status
         if status == .notDetermined || status == .denied {
-            let storedLocation = UserDefaults.standard.retrieve(object: PTLocation.self, fromKey: PTConstantKey.location)
+            let storedLocation = PTLocationViewModel().retrieve()
+            //UserDefaults.standard.retrieve(object: PTLocation.self, fromKey: PTConstantKey.location)
             self.cityName = storedLocation?.city
         }
     }
@@ -60,7 +61,7 @@ class PTLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
              }
              self.cityName = placeMark.locality ?? ""
              let locationObj = PTLocation(latitude: self.lastLocation?.coordinate.latitude ?? 0.0, longitude: self.lastLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "")
-             UserDefaults.standard.save(customObject: locationObj, inKey: PTConstantKey.location)
+            PTLocationViewModel().save(locationObj)
          }
      }
 }

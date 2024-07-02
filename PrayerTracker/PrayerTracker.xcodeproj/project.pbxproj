@@ -10,6 +10,8 @@
 		8002D16E2C2435370018E2C8 /* PTTodaysPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8002D16D2C2435370018E2C8 /* PTTodaysPrayer.swift */; };
 		8002D1712C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8002D1702C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift */; };
 		800E599E2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */; };
+		802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABA2C33D39E00187AB6 /* PTObservable.swift */; };
+		802EAABD2C33E92200187AB6 /* PTLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */; };
 		80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80312B082BF77E9E0097A4C4 /* TempView.swift */; };
 		803BDA972BFBC57E001A47F8 /* Mukta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA902BFBC57E001A47F8 /* Mukta-Regular.ttf */; };
 		803BDA982BFBC57E001A47F8 /* Mukta-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA912BFBC57E001A47F8 /* Mukta-Light.ttf */; };
@@ -45,6 +47,8 @@
 		8002D16D2C2435370018E2C8 /* PTTodaysPrayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTodaysPrayer.swift; sourceTree = "<group>"; };
 		8002D1702C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTodaysPrayerViewModel.swift; sourceTree = "<group>"; };
 		800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTWeeksPrayer.swift; sourceTree = "<group>"; };
+		802EAABA2C33D39E00187AB6 /* PTObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTObservable.swift; sourceTree = "<group>"; };
+		802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationViewModel.swift; sourceTree = "<group>"; };
 		80312B082BF77E9E0097A4C4 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
 		803BDA8F2BFBC442001A47F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		803BDA902BFBC57E001A47F8 /* Mukta-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Regular.ttf"; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			children = (
 				8002D1702C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift */,
 				80B274692C3288E800BBA0C7 /* PTWeeklyViewModel.swift */,
+				802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 				807EDFB52C1B17BC005552C8 /* PTFont.swift */,
 				80B110C72C2F531E006D449A /* PTConstant.swift */,
 				80B110CB2C2F596A006D449A /* PTUserDefaults.swift */,
+				802EAABA2C33D39E00187AB6 /* PTObservable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -312,8 +318,10 @@
 				80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */,
 				8044E8472BED5B5500CD186F /* PTRootView.swift in Sources */,
 				80B110C32C2F3CDC006D449A /* PTLocationManager.swift in Sources */,
+				802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */,
 				8044E8492BED5C6700CD186F /* PTStatsView.swift in Sources */,
 				8002D16E2C2435370018E2C8 /* PTTodaysPrayer.swift in Sources */,
+				802EAABD2C33E92200187AB6 /* PTLocationViewModel.swift in Sources */,
 				80B2746C2C32895400BBA0C7 /* PTLocation.swift in Sources */,
 				80B274702C328A4100BBA0C7 /* PTSearchRepresentable.swift in Sources */,
 				807398DB2BFBC25400310623 /* PTColor.swift in Sources */,
