@@ -9,19 +9,23 @@ import SwiftUI
 import Charts
 
 struct PTMarkPrayerView: View {
-    let date = Date()
-    let calendar = Calendar.current
+    
+    // View handling
     @State private var showDatePicker = false
     @State private var showLocationSearchView = false
+
+    // Prayer
+    let date = Date()
+    let calendar = Calendar.current
     @State private var selectedDate = Date()
     @State private var offered = true
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
-    @StateObject var locationManager = PTLocationManager()
+
+    // Location
+    var locationManager = PTLocationManager()
     @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
-    @State var userSelectedLocation: String!
     var userCity: String {
         return locationViewModel.location?.city ?? String(localized: "unknown")
-//        return locationManager.cityName ?? String(localized: "unknown")
     }
 
     init() {
@@ -74,7 +78,7 @@ struct PTMarkPrayerView: View {
                         .frame(maxWidth:150)
                     }
                     .sheet(isPresented: $showLocationSearchView) {
-                        PTLocationSearchView(selectedLocation: $userSelectedLocation, showView: $showLocationSearchView)
+                        PTLocationSearchView(showView: $showLocationSearchView)
                     }
                     .foregroundColor(.PTWhite)
                     .controlSize(.small)
@@ -92,7 +96,7 @@ struct PTMarkPrayerView: View {
 struct PTLocationSearchView: View {
     
     @ObservedObject private var locationSearchService: PTLocationSearchManager = PTLocationSearchManager()
-    @Binding var selectedLocation: String!
+    @State private var selectedLocation: String!
     @Binding var showView: Bool
     var locationVm: PTLocationViewModel = PTLocationViewModel.shared
 
@@ -125,9 +129,6 @@ struct PTLocationSearchView: View {
                 
             }
         }
-//        .onAppear(perform: {
-//            showLocationSearchView.toggle()
-//        })
     }
 }
 

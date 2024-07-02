@@ -8,12 +8,12 @@
 import Foundation
 import CoreLocation
 
-class PTLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+class PTLocationManager: NSObject, CLLocationManagerDelegate {
 
     private let locationManager = CLLocationManager()
     private var locationStatus: CLAuthorizationStatus?
     private var lastLocation: CLLocation?
-    @Published var cityName: String = ""
+    private var cityName: String = ""
     var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
 
     private var statusString: String {
