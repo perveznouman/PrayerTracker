@@ -111,9 +111,11 @@ struct PTLocationSearchView: View {
                     PTSearchResultCellView(cellText: completion.title.description, subtitle: completion.subtitle.description)
                         .frame(maxHeight:40)
                         .onTapGesture {
+                            locationSearchService.getCityLatLong(result: completion) { location in
+                                let locationObj = PTLocation(latitude: location.latitude, longitude: location.longitude,  city: location.city, country: location.country)
+                                locationVm.save(locationObj)
+                            }
                             selectedLocation = completion.title
-                            let locationObj = PTLocation(latitude: 0.0, longitude: 0.0, city: selectedLocation ?? "")
-                            locationVm.save(locationObj)
                             showView.toggle()
                         }
                 }
@@ -251,12 +253,15 @@ struct PTSearchResultCellView : View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(cellText)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.PTWhite)
                 .font(.PTLocationButton)
             Text(subtitle)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.PTCellDetailedText)
                 .foregroundColor(.PTGray)
         }
+        .contentShape(Rectangle())
     }
 }
 #Preview {

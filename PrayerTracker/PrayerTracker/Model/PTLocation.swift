@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct PTLocation: Codable {
+struct PTLocation: Codable, Hashable {
     let latitude: Double
     let longitude: Double
     let city: String
+    let country: String
 }

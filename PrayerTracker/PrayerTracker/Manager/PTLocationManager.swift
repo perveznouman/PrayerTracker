@@ -14,7 +14,7 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
     private var locationStatus: CLAuthorizationStatus?
     private var lastLocation: CLLocation?
     private var cityName: String = ""
-    var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
+    private var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
 
     private var statusString: String {
         guard let status = locationStatus else {
@@ -60,7 +60,7 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
                  return
              }
              self.cityName = placeMark.locality ?? ""
-             let locationObj = PTLocation(latitude: self.lastLocation?.coordinate.latitude ?? 0.0, longitude: self.lastLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "")
+            let locationObj = PTLocation(latitude: self.lastLocation?.coordinate.latitude ?? 0.0, longitude: self.lastLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "", country: placeMark.country ?? "")
             self.locationViewModel.save(locationObj)
          }
      }
