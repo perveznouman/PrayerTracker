@@ -13,6 +13,7 @@ import Combine
 class PTLocationSearchManager : NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
     @Published var searchQuery = ""
     @Published var completions: [MKLocalSearchCompletion] = []
+    @Published var error: Error!
     private var completer: MKLocalSearchCompleter
     private var cancellable: AnyCancellable?
     
@@ -23,13 +24,14 @@ class PTLocationSearchManager : NSObject, ObservableObject, MKLocalSearchComplet
         cancellable = $searchQuery.assign(to: \.queryFragment, on: self.completer)
         completer.delegate = self
     }
-    
+    func triggerError() {
+        self.error = NSError(domain: "com.example.error", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Simulated error"])
+    }
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         self.completions = completer.results
     }
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print(#function, error.localizedDescription)
-//        fatalError(#function, file: "Handle offline in location search")
+        self.error = error
     }
     func getCityLatLong(result: MKLocalSearchCompletion, completion: @escaping (PTLocation) -> Void) {
         var searchResult: PTLocation?

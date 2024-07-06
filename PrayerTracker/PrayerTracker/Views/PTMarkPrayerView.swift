@@ -97,6 +97,7 @@ struct PTLocationSearchView: View {
     
     @ObservedObject private var locationSearchService: PTLocationSearchManager = PTLocationSearchManager()
     @State private var selectedLocation: String!
+    @State private var showAlert: Bool = false
     @Binding var showView: Bool
     var locationVm: PTLocationViewModel = PTLocationViewModel.shared
 
@@ -126,6 +127,18 @@ struct PTLocationSearchView: View {
                 .colorMultiply(Color.PTWhite)
                 
             }
+        }
+        .onReceive(locationSearchService.$error, perform: { error in
+            showAlert = error != nil
+        })
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(locationSearchService.error?.localizedDescription ?? "An unknown error occurred"),
+                dismissButton: .default(Text("OK")) {
+                    locationSearchService.error = nil
+                }
+            )
         }
     }
 }
