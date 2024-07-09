@@ -24,9 +24,12 @@ class PTLocationSearchManager : NSObject, ObservableObject, MKLocalSearchComplet
         cancellable = $searchQuery.assign(to: \.queryFragment, on: self.completer)
         completer.delegate = self
     }
+   /* 
+    Example to create error Object
     func triggerError() {
         self.error = NSError(domain: "com.example.error", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Simulated error"])
     }
+    */
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         self.completions = completer.results
     }

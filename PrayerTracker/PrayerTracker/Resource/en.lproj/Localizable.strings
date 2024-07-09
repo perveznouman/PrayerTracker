@@ -6,6 +6,11 @@
   
 */
 
+"ok" = "Ok";
+"error" = "Error";
+"unknownError" = "An unknown error occurred";
+"cancel" = "Cancel";
+
 "statistics" = "Statistics";
 "newEntry" = "New Entry";
 "makeNewEntry" = "Mark a new entry";

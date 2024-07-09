@@ -131,15 +131,10 @@ struct PTLocationSearchView: View {
         .onReceive(locationSearchService.$error, perform: { error in
             showAlert = error != nil
         })
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text("Error"),
-                message: Text(locationSearchService.error?.localizedDescription ?? "An unknown error occurred"),
-                dismissButton: .default(Text("OK")) {
-                    locationSearchService.error = nil
-                }
-            )
-        }
+        .customAlert(LocalizedStringKey("error"), isPresented: $showAlert, actionText: LocalizedStringKey("ok"), cancelButton: false, action: {},
+                     message: {
+            Text(locationSearchService.error?.localizedDescription ?? NSLocalizedString("unknownError", comment: ""))
+        })
     }
 }
 
