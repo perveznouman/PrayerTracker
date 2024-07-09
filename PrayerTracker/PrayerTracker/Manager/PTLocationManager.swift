@@ -33,6 +33,8 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
 
     override init() {
         super.init()
+        let storedLocation = locationViewModel.retrieve()
+        self.cityName = storedLocation?.city ?? ""
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
