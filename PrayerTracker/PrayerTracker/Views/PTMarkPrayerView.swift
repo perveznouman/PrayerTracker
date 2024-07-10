@@ -37,28 +37,30 @@ struct PTMarkPrayerView: View {
                 Color.PTViewBackgroundColor
                     .ignoresSafeArea()
                 
-                VStack(spacing:0) {
-                    HStack {
-                        PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: "<")
-                        PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: Date.newEntryFormatter(date: selectedDate))
-                        PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: ">")
-                        Spacer()
+                ScrollView { 
+                    VStack(spacing: 0) {
+                        HStack {
+                            PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: "<")
+                            PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: Date.newEntryFormatter(date: selectedDate))
+                            PTDateSectionView(shouldShowDatePicker: $showDatePicker, buttonTitle: ">")
+                            Spacer()
+                        }
+                        
+                        List($prayerVM.prayers) { $prayer in
+                            PTPrayerListCellView(prayer: $prayer)
+                                .frame(height:40)
+                        }
+                        .scrollDisabled(true)
+                        .contentMargins(.vertical, 10) //To remove spacing in header section
+                        .frame(minHeight:340)
+                        .preferredColorScheme(.dark)
+                        .colorMultiply(Color.PTWhite)
+                        
+                        PTTodaysPrayerPieChartView(aggregatedPrayers: prayerVM.aggregatedData)
+                        Spacer(minLength: 80)
                     }
-                    
-                    List($prayerVM.prayers) { $prayer in
-                        PTPrayerListCellView(prayer: $prayer)
-                    }
-                    .scrollDisabled(true)
-                    .contentMargins(.vertical, 10) //To remove spacing in header section
-                    .frame(maxHeight: 225)
-                    .preferredColorScheme(.dark)
-                    .colorMultiply(Color.PTWhite)
-                    
-                    Spacer()
-                    PTTodaysPrayerPieChartView(aggregatedPrayers: prayerVM.aggregatedData)
-                    Spacer()
+                    .padding(.bottom)
                 }
-                
                 if showDatePicker {
                     PTDatePickerView(currentSelectedDate: $selectedDate, shouldShowPicker: $showDatePicker)
                 }
@@ -66,7 +68,7 @@ struct PTMarkPrayerView: View {
             .navigationTitle(LocalizedStringKey("newEntry"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button (action: {
+                    Button(action: {
                         showLocationSearchView.toggle()
                     }) {
                         HStack(spacing:0) {
@@ -87,9 +89,9 @@ struct PTMarkPrayerView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .accentColor(.PTAccentColor)
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .accentColor(.PTAccentColor)
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -242,9 +244,13 @@ struct PTPrayerListCellView: View {
     @Binding var prayer: PTTodaysPrayer
     var body: some View {
         HStack {
-            Text(LocalizedStringKey(prayer.name))
-                .foregroundColor(.PTWhite)
-                .font(.PTPrayerCell)
+            VStack(alignment:.leading, spacing: 0) {
+                Text(LocalizedStringKey(prayer.name))
+                    .foregroundColor(.PTWhite)
+                    .font(.PTPrayerCell)
+                Text("4:45 PM")
+                    .font(.PTCellDetailedText)
+            }
             Toggle("", isOn: $prayer.isOffered)
                 .disabled(!prayer.isEnabled)
                 .tint(.PTAccentColor)
@@ -278,7 +284,7 @@ struct PTSearchResultCellView : View {
 //    PTDatePickerView(currentSelectedDate: .constant(Date()), shouldShowPicker: .constant(true))
 //    PTTodaysPrayerPieChartView()
 //    PTDateSectionView(shouldShowDatePicker: true, buttonTitle: "<")
-//    PTPrayerListCellView()
+//    PTPrayerListCellView(prayer: .constant(PTTodaysPrayer(name: "Fajr", isOffered: true, isEnabled: true)))
     PTMarkPrayerView()
 //        .environment(\.locale, .init(identifier: "ur"))
 }
