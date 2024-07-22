@@ -37,12 +37,12 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
         self.cityName = storedLocation?.city ?? ""
         self.currentLocation = CLLocation(latitude: storedLocation?.latitude ?? 0.0, longitude: storedLocation?.longitude ?? 0.0)
         self.manuallySavedLocation = storedLocation?.isManualSaved ?? false
-        if (!self.manuallySavedLocation) {
+    //    if (!self.manuallySavedLocation) {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
-        }
+    //    }
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -55,7 +55,7 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        if (!self.manuallySavedLocation && isNotInRanger(location)) {
+        if (/*!self.manuallySavedLocation && */ isNotInRanger(location)) {
             currentLocation = location
             getCityAndCountryLocation(latitude: currentLocation?.coordinate.latitude ?? 0.0, longitude: currentLocation?.coordinate.longitude ?? 0.0)
         }

@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 class PTLocationConfirmer: NSObject {
-    private let distanceThreshold = 5000.0; // 5 km
+    private let distanceThreshold = 10000.0; // 10 km
 
     var currentLocation: CLLocation?
     

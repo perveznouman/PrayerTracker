@@ -56,7 +56,7 @@ class PTLocationSearchManager : PTLocationConfirmer, ObservableObject, MKLocalSe
             
             for item in response.mapItems {
                 if let location = item.placemark.location {
-                    let city = item.placemark.locality ?? ""
+                    let city = item.placemark.name ?? ""
                     var country = item.placemark.country ?? ""
                     if country.isEmpty {
                         country = item.placemark.countryCode ?? ""
