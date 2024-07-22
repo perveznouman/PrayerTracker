@@ -10,7 +10,7 @@ import MapKit
 import Combine
 
 
-class PTLocationSearchManager : NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
+class PTLocationSearchManager : PTLocationConfirmer, ObservableObject, MKLocalSearchCompleterDelegate {
     @Published var searchQuery = ""
     @Published var completions: [MKLocalSearchCompletion] = []
     @Published var error: Error!

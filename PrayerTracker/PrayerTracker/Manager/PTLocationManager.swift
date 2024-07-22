@@ -8,11 +8,10 @@
 import Foundation
 import CoreLocation
 
-class PTLocationManager: NSObject, CLLocationManagerDelegate {
+class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
 
     private let locationManager = CLLocationManager()
     private var locationStatus: CLAuthorizationStatus?
-    private var lastLocation: CLLocation?
     private var cityName: String = ""
     private var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     private var manuallySavedLocation: Bool = true
@@ -36,6 +35,7 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         let storedLocation = locationViewModel.retrieve()
         self.cityName = storedLocation?.city ?? ""
+        self.currentLocation = CLLocation(latitude: storedLocation?.latitude ?? 0.0, longitude: storedLocation?.longitude ?? 0.0)
         self.manuallySavedLocation = storedLocation?.isManualSaved ?? false
         if (!self.manuallySavedLocation) {
             locationManager.delegate = self
@@ -55,9 +55,9 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        if (!self.manuallySavedLocation) {
-            lastLocation = location
-            getCityAndCountryLocation(latitude: lastLocation?.coordinate.latitude ?? 0.0, longitude: lastLocation?.coordinate.longitude ?? 0.0)
+        if (!self.manuallySavedLocation && isNotInRanger(location)) {
+            currentLocation = location
+            getCityAndCountryLocation(latitude: currentLocation?.coordinate.latitude ?? 0.0, longitude: currentLocation?.coordinate.longitude ?? 0.0)
         }
     }
     
@@ -68,7 +68,7 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
                 return
             }
             self.cityName = placeMark.locality ?? ""
-            let locationObj = PTLocation(latitude: self.lastLocation?.coordinate.latitude ?? 0.0, longitude: self.lastLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "", country: placeMark.country ?? "", isManualSaved: false)
+            let locationObj = PTLocation(latitude: self.currentLocation?.coordinate.latitude ?? 0.0, longitude: self.currentLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "", country: placeMark.country ?? "", isManualSaved: false)
             self.locationViewModel.save(locationObj)
         }
      }
