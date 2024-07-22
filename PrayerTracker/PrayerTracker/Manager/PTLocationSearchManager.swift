@@ -62,7 +62,7 @@ class PTLocationSearchManager : NSObject, ObservableObject, MKLocalSearchComplet
                         country = item.placemark.countryCode ?? ""
                     }
                     if !city.isEmpty {
-                        searchResult = PTLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, city: city, country: country)
+                        searchResult = PTLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, city: city, country: country, isManualSaved: true)
                     }
                 }
             }

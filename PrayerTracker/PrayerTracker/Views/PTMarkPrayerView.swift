@@ -115,7 +115,7 @@ struct PTLocationSearchView: View {
                         .frame(maxHeight:40)
                         .onTapGesture {
                             locationSearchService.getCityLatLong(result: completion) { location in
-                                let locationObj = PTLocation(latitude: location.latitude, longitude: location.longitude,  city: location.city, country: location.country)
+                                let locationObj = PTLocation(latitude: location.latitude, longitude: location.longitude,  city: location.city, country: location.country, isManualSaved: true)
                                 locationVm.save(locationObj)
                             }
                             selectedLocation = completion.title

@@ -15,6 +15,7 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
     private var lastLocation: CLLocation?
     private var cityName: String = ""
     private var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
+    private var manuallySavedLocation: Bool = true
 
     private var statusString: String {
         guard let status = locationStatus else {
@@ -35,10 +36,13 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         let storedLocation = locationViewModel.retrieve()
         self.cityName = storedLocation?.city ?? ""
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        self.manuallySavedLocation = storedLocation?.isManualSaved ?? false
+        if (!self.manuallySavedLocation) {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -51,19 +55,21 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        lastLocation = location
-        getCityAndCountryLocation(latitude: lastLocation?.coordinate.latitude ?? 0.0, longitude: lastLocation?.coordinate.longitude ?? 0.0)
+        if (!self.manuallySavedLocation) {
+            lastLocation = location
+            getCityAndCountryLocation(latitude: lastLocation?.coordinate.latitude ?? 0.0, longitude: lastLocation?.coordinate.longitude ?? 0.0)
+        }
     }
     
     private func getCityAndCountryLocation(latitude: Double, longitude: Double) {
 
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude), preferredLocale: Locale.current) { placemarks, _ in
-             guard let placeMark = placemarks?.first else {
-                 return
-             }
-             self.cityName = placeMark.locality ?? ""
-            let locationObj = PTLocation(latitude: self.lastLocation?.coordinate.latitude ?? 0.0, longitude: self.lastLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "", country: placeMark.country ?? "")
+            guard let placeMark = placemarks?.first else {
+                return
+            }
+            self.cityName = placeMark.locality ?? ""
+            let locationObj = PTLocation(latitude: self.lastLocation?.coordinate.latitude ?? 0.0, longitude: self.lastLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "", country: placeMark.country ?? "", isManualSaved: false)
             self.locationViewModel.save(locationObj)
-         }
+        }
      }
 }

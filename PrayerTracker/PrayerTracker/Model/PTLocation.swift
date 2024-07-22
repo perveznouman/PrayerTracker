@@ -12,4 +12,5 @@ struct PTLocation: Codable, Hashable {
     let longitude: Double
     let city: String
     let country: String
+    let isManualSaved: Bool
 }
