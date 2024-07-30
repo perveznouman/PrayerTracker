@@ -8,10 +8,10 @@
 import Foundation
 import CoreLocation
 
-class PTLocationConfirmer: NSObject {
-    private let distanceThreshold = 10000.0; // 10 km
-
+class PTLocationConfirmer: NSObject, ObservableObject {
+    private let distanceThreshold = 20000.0; // 20 km
     var currentLocation: CLLocation?
+    @Published var todaysPrayer: [PTTodaysPrayer] = []
     
     func isNotInRanger(_ newLocation: CLLocation) -> Bool {
         if currentLocation == nil {
@@ -23,6 +23,13 @@ class PTLocationConfirmer: NSObject {
             return true
         }
         return false
+    }
+    
+    func callPrayerTimingAPI() {
+        PTPrayerTimingRequester().getPrayerTimings(currentLocation!.coordinate.latitude, currentLocation!.coordinate.longitude) { vm in
+            self.todaysPrayer = vm
+        }
+                                                   
     }
 
 }

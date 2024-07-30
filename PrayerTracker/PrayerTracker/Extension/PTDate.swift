@@ -36,7 +36,29 @@ extension Date {
     }
 
     
-
+    var date: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd"
+        return dateFormatter.string(from: self)
+    }
+    
+    var month: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM"
+        return dateFormatter.string(from: self)
+    }
+    
+    var monthEng: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM"
+        return dateFormatter.string(from: self)
+    }
+    
+    var year: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY"
+        return dateFormatter.string(from: self)
+    }
     
     /*
    static func dayDifference(from date: Date) -> Int {

@@ -70,6 +70,7 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
             self.cityName = placeMark.locality ?? ""
             let locationObj = PTLocation(latitude: self.currentLocation?.coordinate.latitude ?? 0.0, longitude: self.currentLocation?.coordinate.longitude ?? 0.0, city: placeMark.locality ?? "", country: placeMark.country ?? "", isManualSaved: false)
             self.locationViewModel.save(locationObj)
+            self.callPrayerTimingAPI()
         }
      }
 }

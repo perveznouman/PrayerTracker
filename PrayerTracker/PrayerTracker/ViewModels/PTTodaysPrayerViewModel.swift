@@ -9,11 +9,11 @@ import Foundation
 
 class PTTodaysPrayerViewModel: ObservableObject {
     
-    @Published var prayers: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true),
-                                        PTTodaysPrayer(name: "zuhar", isOffered: true, isEnabled: true),
-                                        PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true),
-                                        PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: false),
-                                        PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: false)]
+    @Published var prayers: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: "--"),
+                                        PTTodaysPrayer(name: "zuhar", isOffered: true, isEnabled: true, time: "--"),
+                                        PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: "--"),
+                                        PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: false, time: "--"),
+                                        PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: false, time: "--")]
     
     var aggregatedData: [PTTodaysPrayerAggregatedData] {
         let offeredCount = prayers.filter { $0.isOffered && $0.isEnabled }.count

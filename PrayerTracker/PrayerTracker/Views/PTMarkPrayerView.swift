@@ -22,7 +22,7 @@ struct PTMarkPrayerView: View {
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
 
     // Location
-    var locationManager = PTLocationManager()
+    @ObservedObject var locationManager = PTLocationManager()
     @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     var userCity: String {
         return locationViewModel.location?.city ?? String(localized: "unknown")
@@ -46,8 +46,12 @@ struct PTMarkPrayerView: View {
                             Spacer()
                         }
                         
-                        List($prayerVM.prayers) { $prayer in
-                            PTPrayerListCellView(prayer: $prayer)
+//                        List($prayerVM.prayers) { $prayer in
+//                            PTPrayerListCellView(prayer: $prayer)
+//                                .frame(height:40)
+//                        }
+                        List($locationManager.todaysPrayer) { $prayer in
+                            PTPrayerListCellView(timings: $prayer)
                                 .frame(height:40)
                         }
                         .scrollDisabled(true)
@@ -241,18 +245,18 @@ struct PTDateSectionView: View {
 }
 
 struct PTPrayerListCellView: View {
-    @Binding var prayer: PTTodaysPrayer
+    @Binding var timings: PTTodaysPrayer
     var body: some View {
         HStack {
             VStack(alignment:.leading, spacing: 0) {
-                Text(LocalizedStringKey(prayer.name))
+                Text(LocalizedStringKey(timings.name))
                     .foregroundColor(.PTWhite)
                     .font(.PTPrayerCell)
-                Text("4:45 PM")
+                Text(timings.time)
                     .font(.PTCellDetailedText)
             }
-            Toggle("", isOn: $prayer.isOffered)
-                .disabled(!prayer.isEnabled)
+            Toggle("", isOn: $timings.isOffered)
+                .disabled(!timings.isEnabled)
                 .tint(.PTAccentColor)
 
         }

@@ -12,6 +12,7 @@ struct PTTodaysPrayer: Identifiable {
     var name: String
     var isOffered: Bool
     var isEnabled: Bool
+    var time: String
 }
 
 struct PTTodaysPrayerAggregatedData: Identifiable {
