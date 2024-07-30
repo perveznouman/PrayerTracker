@@ -9,9 +9,9 @@ import Foundation
 
 class PTTodaysPrayerViewModel: ObservableObject {
     
-    @Published var prayers: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: "--"),
-                                        PTTodaysPrayer(name: "zuhar", isOffered: true, isEnabled: true, time: "--"),
-                                        PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: "--"),
+    @Published var prayers: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: false, time: "--"),
+                                        PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: false, time: "--"),
+                                        PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: false, time: "--"),
                                         PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: false, time: "--"),
                                         PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: false, time: "--")]
     

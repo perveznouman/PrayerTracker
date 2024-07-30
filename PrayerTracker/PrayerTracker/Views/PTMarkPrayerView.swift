@@ -22,7 +22,7 @@ struct PTMarkPrayerView: View {
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
 
     // Location
-    @ObservedObject var locationManager = PTLocationManager()
+    @StateObject var locationManager = PTLocationManager()
     @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     var userCity: String {
         return locationViewModel.location?.city ?? String(localized: "unknown")
@@ -118,10 +118,7 @@ struct PTLocationSearchView: View {
                     PTSearchResultCellView(cellText: completion.title.description, subtitle: completion.subtitle.description)
                         .frame(maxHeight:40)
                         .onTapGesture {
-                            locationSearchService.getCityLatLong(result: completion) { location in
-                                let locationObj = PTLocation(latitude: location.latitude, longitude: location.longitude,  city: location.city, country: location.country, isManualSaved: true)
-                                locationVm.save(locationObj)
-                            }
+                            locationSearchService.getCityLatLong(result: completion) { _ in }
                             selectedLocation = completion.title
                             showView.toggle()
                         }

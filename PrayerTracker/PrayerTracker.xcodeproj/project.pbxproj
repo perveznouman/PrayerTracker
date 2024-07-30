@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800293AB2C53F29800860D27 /* PTPrayerTimeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800293AA2C53F29800860D27 /* PTPrayerTimeResponse.swift */; };
 		8002D16E2C2435370018E2C8 /* PTTodaysPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8002D16D2C2435370018E2C8 /* PTTodaysPrayer.swift */; };
 		8002D1712C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8002D1702C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift */; };
+		800AAF052C4EE8E700CCA454 /* PTLocationConfirmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800AAF042C4EE8E700CCA454 /* PTLocationConfirmer.swift */; };
 		800E599E2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */; };
 		802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABA2C33D39E00187AB6 /* PTObservable.swift */; };
 		802EAABD2C33E92200187AB6 /* PTLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */; };
@@ -26,6 +28,8 @@
 		8044E84F2BED61D200CD186F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8044E8512BED61D200CD186F /* Localizable.strings */; };
 		807398DB2BFBC25400310623 /* PTColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807398DA2BFBC25400310623 /* PTColor.swift */; };
 		807EDFB62C1B17BC005552C8 /* PTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807EDFB52C1B17BC005552C8 /* PTFont.swift */; };
+		808909A72C539B9200C2038C /* TempTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808909A62C539B9200C2038C /* TempTodo.swift */; };
+		808909A92C53B60800C2038C /* PTTodayPrayerTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808909A82C53B60800C2038C /* PTTodayPrayerTimeViewModel.swift */; };
 		80B110C32C2F3CDC006D449A /* PTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C22C2F3CDC006D449A /* PTLocationManager.swift */; };
 		80B110C82C2F531E006D449A /* PTConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C72C2F531E006D449A /* PTConstant.swift */; };
 		80B110CC2C2F596A006D449A /* PTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110CB2C2F596A006D449A /* PTUserDefaults.swift */; };
@@ -40,14 +44,19 @@
 		80B2746C2C32895400BBA0C7 /* PTLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2746B2C32895400BBA0C7 /* PTLocation.swift */; };
 		80B2746E2C3289B100BBA0C7 /* PTLocationSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2746D2C3289B100BBA0C7 /* PTLocationSearchManager.swift */; };
 		80B274702C328A4100BBA0C7 /* PTSearchRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2746F2C328A4100BBA0C7 /* PTSearchRepresentable.swift */; };
+		80BF17142C47055D00458B1F /* PTNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BF17132C47055D00458B1F /* PTNetworkManager.swift */; };
+		80BF17162C47086500458B1F /* PTPrayerTimingRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BF17152C47086500458B1F /* PTPrayerTimingRequester.swift */; };
+		80DA25562C4AADD100B99AF3 /* PTString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DA25552C4AADD100B99AF3 /* PTString.swift */; };
 		80EE9F9C2C3C779E00D25CBF /* PTAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EE9F9B2C3C779E00D25CBF /* PTAlertView.swift */; };
 		80EE9F9E2C3C790400D25CBF /* PTCustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EE9F9D2C3C790400D25CBF /* PTCustomAlert.swift */; };
 		80FF53BA2BFA656E00732DCF /* PTDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FF53B92BFA656E00732DCF /* PTDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		800293AA2C53F29800860D27 /* PTPrayerTimeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPrayerTimeResponse.swift; sourceTree = "<group>"; };
 		8002D16D2C2435370018E2C8 /* PTTodaysPrayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTodaysPrayer.swift; sourceTree = "<group>"; };
 		8002D1702C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTodaysPrayerViewModel.swift; sourceTree = "<group>"; };
+		800AAF042C4EE8E700CCA454 /* PTLocationConfirmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationConfirmer.swift; sourceTree = "<group>"; };
 		800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTWeeksPrayer.swift; sourceTree = "<group>"; };
 		802EAABA2C33D39E00187AB6 /* PTObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTObservable.swift; sourceTree = "<group>"; };
 		802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationViewModel.swift; sourceTree = "<group>"; };
@@ -68,6 +77,8 @@
 		8044E8532BED61E000CD186F /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807398DA2BFBC25400310623 /* PTColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTColor.swift; sourceTree = "<group>"; };
 		807EDFB52C1B17BC005552C8 /* PTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFont.swift; sourceTree = "<group>"; };
+		808909A62C539B9200C2038C /* TempTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempTodo.swift; sourceTree = "<group>"; };
+		808909A82C53B60800C2038C /* PTTodayPrayerTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTodayPrayerTimeViewModel.swift; sourceTree = "<group>"; };
 		80B110C22C2F3CDC006D449A /* PTLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationManager.swift; sourceTree = "<group>"; };
 		80B110C42C2F4F13006D449A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		80B110C72C2F531E006D449A /* PTConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConstant.swift; sourceTree = "<group>"; };
@@ -86,6 +97,9 @@
 		80B2746B2C32895400BBA0C7 /* PTLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocation.swift; sourceTree = "<group>"; };
 		80B2746D2C3289B100BBA0C7 /* PTLocationSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationSearchManager.swift; sourceTree = "<group>"; };
 		80B2746F2C328A4100BBA0C7 /* PTSearchRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTSearchRepresentable.swift; sourceTree = "<group>"; };
+		80BF17132C47055D00458B1F /* PTNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNetworkManager.swift; sourceTree = "<group>"; };
+		80BF17152C47086500458B1F /* PTPrayerTimingRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPrayerTimingRequester.swift; sourceTree = "<group>"; };
+		80DA25552C4AADD100B99AF3 /* PTString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTString.swift; sourceTree = "<group>"; };
 		80EE9F9B2C3C779E00D25CBF /* PTAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTAlertView.swift; sourceTree = "<group>"; };
 		80EE9F9D2C3C790400D25CBF /* PTCustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTCustomAlert.swift; sourceTree = "<group>"; };
 		80FF53B92BFA656E00732DCF /* PTDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDate.swift; sourceTree = "<group>"; };
@@ -108,6 +122,7 @@
 				8002D16D2C2435370018E2C8 /* PTTodaysPrayer.swift */,
 				800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */,
 				80B2746B2C32895400BBA0C7 /* PTLocation.swift */,
+				800293AA2C53F29800860D27 /* PTPrayerTimeResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -118,6 +133,7 @@
 				8002D1702C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift */,
 				80B274692C3288E800BBA0C7 /* PTWeeklyViewModel.swift */,
 				802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */,
+				808909A82C53B60800C2038C /* PTTodayPrayerTimeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -150,6 +166,7 @@
 		80B110C12C2EBD8D006D449A /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				800AAF042C4EE8E700CCA454 /* PTLocationConfirmer.swift */,
 				80B110C22C2F3CDC006D449A /* PTLocationManager.swift */,
 				80B2746D2C3289B100BBA0C7 /* PTLocationSearchManager.swift */,
 			);
@@ -175,7 +192,9 @@
 		80B186602B99D46D0077683D /* PrayerTracker */ = {
 			isa = PBXGroup;
 			children = (
+				808909A62C539B9200C2038C /* TempTodo.swift */,
 				803BDA8F2BFBC442001A47F8 /* Info.plist */,
+				80BF17122C4704CB00458B1F /* Networking */,
 				80EE9F952C3C75A600D25CBF /* Extension */,
 				80FF53B82BFA654C00732DCF /* Utils */,
 				80B186742B99D4FF0077683D /* Views */,
@@ -222,6 +241,15 @@
 			path = ViewWrapper;
 			sourceTree = "<group>";
 		};
+		80BF17122C4704CB00458B1F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				80BF17132C47055D00458B1F /* PTNetworkManager.swift */,
+				80BF17152C47086500458B1F /* PTPrayerTimingRequester.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		80EE9F952C3C75A600D25CBF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +258,7 @@
 				807EDFB52C1B17BC005552C8 /* PTFont.swift */,
 				80B110CB2C2F596A006D449A /* PTUserDefaults.swift */,
 				802EAABA2C33D39E00187AB6 /* PTObservable.swift */,
+				80DA25552C4AADD100B99AF3 /* PTString.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -343,19 +372,26 @@
 				80EE9F9E2C3C790400D25CBF /* PTCustomAlert.swift in Sources */,
 				802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */,
 				8044E8492BED5C6700CD186F /* PTStatsView.swift in Sources */,
+				800AAF052C4EE8E700CCA454 /* PTLocationConfirmer.swift in Sources */,
 				8002D16E2C2435370018E2C8 /* PTTodaysPrayer.swift in Sources */,
+				80DA25562C4AADD100B99AF3 /* PTString.swift in Sources */,
 				802EAABD2C33E92200187AB6 /* PTLocationViewModel.swift in Sources */,
 				80EE9F9C2C3C779E00D25CBF /* PTAlertView.swift in Sources */,
 				80B2746C2C32895400BBA0C7 /* PTLocation.swift in Sources */,
 				80B274702C328A4100BBA0C7 /* PTSearchRepresentable.swift in Sources */,
 				807398DB2BFBC25400310623 /* PTColor.swift in Sources */,
 				80B110C82C2F531E006D449A /* PTConstant.swift in Sources */,
+				808909A72C539B9200C2038C /* TempTodo.swift in Sources */,
+				80BF17162C47086500458B1F /* PTPrayerTimingRequester.swift in Sources */,
 				8044E84B2BED5D1800CD186F /* PTMarkPrayerView.swift in Sources */,
 				80B186642B99D46D0077683D /* ContentView.swift in Sources */,
 				800E599E2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift in Sources */,
 				8002D1712C24AA690018E2C8 /* PTTodaysPrayerViewModel.swift in Sources */,
 				80FF53BA2BFA656E00732DCF /* PTDate.swift in Sources */,
+				808909A92C53B60800C2038C /* PTTodayPrayerTimeViewModel.swift in Sources */,
 				80B186622B99D46D0077683D /* PrayerTrackerApp.swift in Sources */,
+				800293AB2C53F29800860D27 /* PTPrayerTimeResponse.swift in Sources */,
+				80BF17142C47055D00458B1F /* PTNetworkManager.swift in Sources */,
 				80B2746A2C3288E800BBA0C7 /* PTWeeklyViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

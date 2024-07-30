@@ -28,14 +28,14 @@ class PTTodayPrayerTimeViewModel {
 
 class PTTimingsViewModel {
 
-    var prayers: [PTTodaysPrayer]?
+    @Published var prayers: [PTTodaysPrayer]?
     
     init(_ timings: PTTimings) {
         prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: timings.fajr.replaceString(" (IST)", by: "")),
-                   PTTodaysPrayer(name: "zuhar", isOffered: true, isEnabled: true, time: timings.dhuhr.replaceString(" (IST)", by: "")),
+                   PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: true, time: timings.dhuhr.replaceString(" (IST)", by: "")),
                    PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: timings.asr.replaceString(" (IST)", by: "")),
-                   PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: false, time: timings.maghrib.replaceString(" (IST)", by: "")),
-                   PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: false, time: timings.isha.replaceString(" (IST)", by: ""))]
+                   PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: true, time: timings.maghrib.replaceString(" (IST)", by: "")),
+                   PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: true, time: timings.isha.replaceString(" (IST)", by: ""))]
     }
 
 }

@@ -22,12 +22,13 @@ struct PTTimings: Codable {
 
     enum CodingKeys: String, CodingKey {
         case fajr = "Fajr"
-//        case sunrise = "Sunrise"
         case dhuhr = "Dhuhr"
         case asr = "Asr"
-//        case sunset = "Sunset"
         case maghrib = "Maghrib"
         case isha = "Isha"
+        
+//        case sunrise = "Sunrise"
+//        case sunset = "Sunset"
 //        case imsak = "Imsak"
 //        case midnight = "Midnight"
 //        case firstthird = "Firstthird"

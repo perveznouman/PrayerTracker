@@ -13,7 +13,6 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private var locationStatus: CLAuthorizationStatus?
     private var cityName: String = ""
-    private var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     private var manuallySavedLocation: Bool = true
 
     private var statusString: String {

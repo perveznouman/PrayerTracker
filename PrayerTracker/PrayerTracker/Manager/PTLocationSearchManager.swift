@@ -63,6 +63,9 @@ class PTLocationSearchManager : PTLocationConfirmer, MKLocalSearchCompleterDeleg
                     }
                     if !city.isEmpty {
                         searchResult = PTLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, city: city, country: country, isManualSaved: true)
+                        self.currentLocation = CLLocation(latitude: searchResult?.latitude ?? 0.0, longitude: searchResult?.longitude ?? 0.0)
+                        self.locationViewModel.save(searchResult!)
+                        self.callPrayerTimingAPI()
                     }
                 }
             }
