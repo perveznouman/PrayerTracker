@@ -12,11 +12,11 @@ class PTLocationConfirmer: NSObject, ObservableObject {
     private let distanceThreshold = 20000.0; // 20 km
     var currentLocation: CLLocation?
     var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
-    @Published var todaysPrayer: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: false, time: "--"),
-                                                     PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: false, time: "--"),
-                                                     PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: false, time: "--"),
-                                                     PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: false, time: "--"),
-                                                     PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: false, time: "--")] 
+    @Published var todaysPrayer: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: "--"),
+                                                     PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: true, time: "--"),
+                                                     PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: "--"),
+                                                     PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: true, time: "--"),
+                                                     PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: true, time: "--")]
 //    {
 //        willSet {
 //            self.objectWillChange.send()

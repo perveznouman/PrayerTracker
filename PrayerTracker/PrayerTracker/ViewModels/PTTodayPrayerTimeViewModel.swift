@@ -28,7 +28,7 @@ class PTTodayPrayerTimeViewModel {
 
 class PTTimingsViewModel {
 
-    @Published var prayers: [PTTodaysPrayer]?
+    var prayers: [PTTodaysPrayer]?
     
     init(_ timings: PTTimings) {
         prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: timings.fajr.replaceString(" (IST)", by: "")),
