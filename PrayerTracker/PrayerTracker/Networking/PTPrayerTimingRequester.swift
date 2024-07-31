@@ -9,7 +9,7 @@ import Foundation
 
 class PTPrayerTimingRequester {
     
-    func getPrayerTimings(_ lat: Double, _ longs: Double, completion: @escaping ([PTTodaysPrayer]) -> Void) {
+    func getPrayerTimings(_ lat: Double, _ longs: Double, completion: @escaping (PTPrayerTimeResponse) -> Void) {
         
 //    https://api.aladhan.com/v1/timings/17-07-2007?latitude=12.6825&longitude=-78.6167&method=1
 //    https://api.aladhan.com/v1/calendar/2024/08?latitude=51.508515&longitude=-0.1254872&method=2
@@ -28,8 +28,7 @@ class PTPrayerTimingRequester {
             
             PTNetworkManager().load(resource: prayerTimeResource) { result in
                 if let _ = result {
-                    let vm = PTTodayPrayerTimeViewModel(prayerTimeResponse: result!)
-                    completion(vm.timings!.prayers!)
+                    completion(result!)
                 }
             }
 //        }

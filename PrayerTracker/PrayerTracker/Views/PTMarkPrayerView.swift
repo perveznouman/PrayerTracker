@@ -22,7 +22,7 @@ struct PTMarkPrayerView: View {
     @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
 
     // Location
-    @StateObject var locationManager = PTLocationManager()
+    let location = PTLocationManager() // To initialize location service
     @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     var userCity: String {
         return locationViewModel.location?.city ?? String(localized: "unknown")
@@ -46,11 +46,7 @@ struct PTMarkPrayerView: View {
                             Spacer()
                         }
                         
-//                        List($prayerVM.prayers) { $prayer in
-//                            PTPrayerListCellView(prayer: $prayer)
-//                                .frame(height:40)
-//                        }
-                        List($locationManager.todaysPrayer) { $prayer in
+                        List($locationViewModel.todaysPrayer) { $prayer in
                             PTPrayerListCellView(timings: $prayer)
                                 .frame(height:40)
                         }
@@ -105,7 +101,6 @@ struct PTLocationSearchView: View {
     @State private var selectedLocation: String!
     @State private var showAlert: Bool = false
     @Binding var showView: Bool
-    var locationVm: PTLocationViewModel = PTLocationViewModel.shared
 
     var body: some View {
         
