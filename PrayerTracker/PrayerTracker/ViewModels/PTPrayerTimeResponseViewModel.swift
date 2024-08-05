@@ -7,10 +7,10 @@
 
 import Foundation
 
-class PTTodayPrayerTimeViewModel {
+class PTPrayerTimeResponseViewModel {
     
     let prayerTimeResponse: PTPrayerTimeResponse
-    var timings: PTTimingsViewModel?
+    var timings: PTTodaysTimingsViewModel?
 
     init(prayerTimeResponse: PTPrayerTimeResponse) {
         self.prayerTimeResponse = prayerTimeResponse
@@ -19,14 +19,14 @@ class PTTodayPrayerTimeViewModel {
         let intDate = Int(Date().BHDate)
         for item in allData {
             if (item.key == monthExpression) {
-               timings = PTTimingsViewModel(item.value[(intDate ?? 1) - 1].timings)
+               timings = PTTodaysTimingsViewModel(item.value[(intDate ?? 1) - 1].timings)
                 return
             }
         }
     }
 }
 
-class PTTimingsViewModel {
+class PTTodaysTimingsViewModel {
 
     var prayers: [PTTodaysPrayer]?
     

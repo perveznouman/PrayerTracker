@@ -30,7 +30,7 @@ class PTLocationViewModel: ObservableObject {
     }
     
     func savePrayerTime(_ response: PTPrayerTimeResponse) {
-        self.todaysPrayer = PTTodayPrayerTimeViewModel(prayerTimeResponse: response).timings?.prayers ?? []
+        self.todaysPrayer = PTPrayerTimeResponseViewModel(prayerTimeResponse: response).timings?.prayers ?? []
         UserDefaults.standard.save(customObject: response, inKey: location?.city ?? "")
     }
     
@@ -38,7 +38,7 @@ class PTLocationViewModel: ObservableObject {
     func retrievePrayerTime() -> [PTTodaysPrayer] {
         let pData = UserDefaults.standard.retrieve(object: PTPrayerTimeResponse.self, fromKey: location?.city ?? "")
         if (pData != nil) {
-            self.todaysPrayer = PTTodayPrayerTimeViewModel(prayerTimeResponse: pData!).timings?.prayers ?? []
+            self.todaysPrayer = PTPrayerTimeResponseViewModel(prayerTimeResponse: pData!).timings?.prayers ?? []
         }
         return self.todaysPrayer
     }
