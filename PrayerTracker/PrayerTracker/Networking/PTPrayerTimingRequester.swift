@@ -14,8 +14,8 @@ class PTPrayerTimingRequester {
 //    https://api.aladhan.com/v1/timings/17-07-2007?latitude=12.6825&longitude=-78.6167&method=1
 //    https://api.aladhan.com/v1/calendar/2024/08?latitude=51.508515&longitude=-0.1254872&method=2
         var url: URL
-        let month = Date().month
-        let year = Date().year
+        let month = Date().BHMonth
+        let year = Date().BHYear
         
 //        if let location = PTLocationViewModel.shared.retrieve() {
             url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())\(month.escaped())?latitude=\(lat)&longitude=\(longs)&method=1")!

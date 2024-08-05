@@ -159,6 +159,7 @@ struct PTDatePickerView: View {
                 .onChange(of: currentSelectedDate) { oldValue, newValue in
                     print(oldValue)
                     print(newValue)
+                    PTPrayerTimeViewModel().prayerTime(date: newValue)
                     shouldShowPicker.toggle()
                 }
                 .preferredColorScheme(.dark)

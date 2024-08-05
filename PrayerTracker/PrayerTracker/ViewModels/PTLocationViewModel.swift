@@ -42,4 +42,30 @@ class PTLocationViewModel: ObservableObject {
         }
         return self.todaysPrayer
     }
+    
+    func defaultPrayerTime() {
+        todaysPrayer = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: "--"),
+                        PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: true, time: "--"),
+                        PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: "--"),
+                        PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: true, time: "--"),
+                        PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: true, time: "--")]
+    }
+}
+
+
+class PTPrayerTimeViewModel {
+    
+    private var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
+
+    init() {}
+    
+    func prayerTime(date pickedDated: Date) {
+        
+        if !pickedDated.BHIsToday {
+            locationViewModel.defaultPrayerTime()
+        }
+        else {
+           let _ = locationViewModel.retrievePrayerTime()
+        }
+    }
 }

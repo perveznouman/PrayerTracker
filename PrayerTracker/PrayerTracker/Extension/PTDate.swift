@@ -36,28 +36,32 @@ extension Date {
     }
 
     
-    var date: String {
+    var BHDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd"
         return dateFormatter.string(from: self)
     }
     
-    var month: String {
+    var BHMonth: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"
         return dateFormatter.string(from: self)
     }
     
-    var monthEng: String {
+    var BHMonthEng: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM"
         return dateFormatter.string(from: self)
     }
     
-    var year: String {
+    var BHYear: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY"
         return dateFormatter.string(from: self)
+    }
+    
+    var BHIsToday: Bool {
+       return Calendar.current.isDateInToday(self)
     }
     
     /*
@@ -91,10 +95,6 @@ extension Date {
             let calendar = Calendar.current
             return calendar.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
         }
-     
-     func isPastDate() -> Bool {
-            return self < Date()
-        }
 
         func isFutureDate() -> Bool {
             return self > Date()
@@ -105,12 +105,6 @@ extension Date {
              let ageComponents = calendar.dateComponents([.year], from: date, to: self)
              return ageComponents.year ?? 0
          }
-     
-     var month: String {
-         let dateFormatter = DateFormatter()
-         dateFormatter.dateFormat = "MMMM"
-         return dateFormatter.string(from: self)
-     }
      
      */
     

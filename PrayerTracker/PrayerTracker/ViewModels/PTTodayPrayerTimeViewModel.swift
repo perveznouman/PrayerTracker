@@ -15,8 +15,8 @@ class PTTodayPrayerTimeViewModel {
     init(prayerTimeResponse: PTPrayerTimeResponse) {
         self.prayerTimeResponse = prayerTimeResponse
         let allData = prayerTimeResponse.data
-        let monthExpression = Date().month.replacingOccurrences(of: #"^([+-])?0+"#, with: "$1", options: .regularExpression) // removing preceding zeros
-        let intDate = Int(Date().date)
+        let monthExpression = Date().BHMonth.replacingOccurrences(of: #"^([+-])?0+"#, with: "$1", options: .regularExpression) // removing preceding zeros
+        let intDate = Int(Date().BHDate)
         for item in allData {
             if (item.key == monthExpression) {
                timings = PTTimingsViewModel(item.value[(intDate ?? 1) - 1].timings)
