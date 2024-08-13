@@ -64,6 +64,14 @@ extension Date {
        return Calendar.current.isDateInToday(self)
     }
     
+    var BHLocalStorageFormat: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"
+        return formatter.string(from: self)
+    }
+
+
+    
     /*
    static func dayDifference(from date: Date) -> Int {
         let calendar = Calendar.current

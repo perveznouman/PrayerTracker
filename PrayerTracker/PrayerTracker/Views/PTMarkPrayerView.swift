@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Charts
+import SwiftData
 
 struct PTMarkPrayerView: View {
     
@@ -239,6 +240,14 @@ struct PTDateSectionView: View {
 
 struct PTPrayerListCellView: View {
     @Binding var timings: PTTodaysPrayer
+//    @Bindable var dailyPrayerData: PTDailyPrayerData
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query(filter: {
+           PTDailyPrayerData.makeDatePredicate(for: Date())
+       }())
+       var todaysPrayer: [PTDailyPrayerData]
+    
     var body: some View {
         HStack {
             VStack(alignment:.leading, spacing: 0) {
@@ -249,6 +258,11 @@ struct PTPrayerListCellView: View {
                     .font(.PTCellDetailedText)
             }
             Toggle("", isOn: $timings.isOffered)
+                .onChange(of: timings.isOffered) { oldValue, newValue in
+                    let p = PTDailyPrayerData(name: timings.name, offered: newValue, date: Date())
+                    modelContext.insert(p)
+                }
+
                 .disabled(!timings.isEnabled)
                 .tint(.PTAccentColor)
 

@@ -22,6 +22,7 @@
 		803BDA9B2BFBC57E001A47F8 /* Mukta-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA942BFBC57E001A47F8 /* Mukta-Bold.ttf */; };
 		803BDA9C2BFBC57E001A47F8 /* Mukta-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA952BFBC57E001A47F8 /* Mukta-Medium.ttf */; };
 		803BDA9D2BFBC57E001A47F8 /* Mukta-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA962BFBC57E001A47F8 /* Mukta-ExtraBold.ttf */; };
+		80446E762C6BE4A40082937A /* PTDailyPrayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80446E752C6BE4A40082937A /* PTDailyPrayerData.swift */; };
 		8044E8472BED5B5500CD186F /* PTRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E8462BED5B5500CD186F /* PTRootView.swift */; };
 		8044E8492BED5C6700CD186F /* PTStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E8482BED5C6700CD186F /* PTStatsView.swift */; };
 		8044E84B2BED5D1800CD186F /* PTMarkPrayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8044E84A2BED5D1800CD186F /* PTMarkPrayerView.swift */; };
@@ -67,6 +68,7 @@
 		803BDA942BFBC57E001A47F8 /* Mukta-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Bold.ttf"; sourceTree = "<group>"; };
 		803BDA952BFBC57E001A47F8 /* Mukta-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Medium.ttf"; sourceTree = "<group>"; };
 		803BDA962BFBC57E001A47F8 /* Mukta-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-ExtraBold.ttf"; sourceTree = "<group>"; };
+		80446E752C6BE4A40082937A /* PTDailyPrayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDailyPrayerData.swift; sourceTree = "<group>"; };
 		8044E8462BED5B5500CD186F /* PTRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTRootView.swift; sourceTree = "<group>"; };
 		8044E8482BED5C6700CD186F /* PTStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTStatsView.swift; sourceTree = "<group>"; };
 		8044E84A2BED5D1800CD186F /* PTMarkPrayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTMarkPrayerView.swift; sourceTree = "<group>"; };
@@ -148,6 +150,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		80446E742C6BE42D0082937A /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				80446E752C6BE4A40082937A /* PTDailyPrayerData.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
 		8044E84C2BED611800CD186F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +207,7 @@
 				80B110C12C2EBD8D006D449A /* Manager */,
 				8002D16C2C2435150018E2C8 /* Model */,
 				8002D16F2C24AA4E0018E2C8 /* ViewModels */,
+				80446E742C6BE42D0082937A /* SwiftData */,
 				8044E84C2BED611800CD186F /* Resource */,
 				80B186612B99D46D0077683D /* PrayerTrackerApp.swift */,
 				80B186652B99D46E0077683D /* Assets.xcassets */,
@@ -365,6 +376,7 @@
 				80EE9F9E2C3C790400D25CBF /* PTCustomAlert.swift in Sources */,
 				802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */,
 				8044E8492BED5C6700CD186F /* PTStatsView.swift in Sources */,
+				80446E762C6BE4A40082937A /* PTDailyPrayerData.swift in Sources */,
 				800AAF052C4EE8E700CCA454 /* PTLocationConfirmer.swift in Sources */,
 				8002D16E2C2435370018E2C8 /* PTTodaysPrayer.swift in Sources */,
 				80DA25562C4AADD100B99AF3 /* PTString.swift in Sources */,

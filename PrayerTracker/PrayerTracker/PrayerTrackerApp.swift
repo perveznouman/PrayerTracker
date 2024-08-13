@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct PrayerTrackerApp: App {
@@ -14,5 +15,6 @@ struct PrayerTrackerApp: App {
         WindowGroup {
             PTRootView()
         }
+        .modelContainer(for: [PTDailyPrayerData.self])
     }
 }
