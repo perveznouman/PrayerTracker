@@ -28,11 +28,17 @@ struct PTMarkPrayerView: View {
     var userCity: String {
         return locationViewModel.location?.city ?? String(localized: "unknown")
     }
+    
+    //SwiftData
+    @Environment(PTSwiftDataManager.self) private var viewModel
+    @Environment(\.modelContext) private var modelContext
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         NavigationStack {
             ZStack {
                 Color.PTViewBackgroundColor
@@ -48,7 +54,7 @@ struct PTMarkPrayerView: View {
                         }
                         
                         List($locationViewModel.todaysPrayer) { $prayer in
-                            PTPrayerListCellView(timings: $prayer)
+                            PTPrayerListCellView(timings: $prayer, selectedDate: $selectedDate, viewModel: viewModel)
                                 .frame(height:40)
                         }
                         .scrollDisabled(true)
@@ -86,7 +92,9 @@ struct PTMarkPrayerView: View {
                     .foregroundColor(.PTWhite)
                     .controlSize(.small)
                 }
-            }
+            }.onAppear(perform: {
+                viewModel.fetchPrayers(for: selectedDate, withContext: modelContext)
+            })
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
@@ -139,10 +147,15 @@ struct PTLocationSearchView: View {
 
 struct PTDatePickerView: View {
     
+    @Environment(PTSwiftDataManager.self) private var viewModel
+    @Environment(\.modelContext) private var modelContext
+    
     @Binding var currentSelectedDate: Date
     @Binding var shouldShowPicker: Bool
     
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         ZStack {
             Color.PTViewBackgroundColor.opacity(0.8)
                 .ignoresSafeArea()
@@ -162,6 +175,7 @@ struct PTDatePickerView: View {
                     print(newValue)
                     PTPrayerTimeViewModel().prayerTime(date: newValue)
                     shouldShowPicker.toggle()
+                    viewModel.fetchPrayers(for: currentSelectedDate, withContext: modelContext)
                 }
                 .preferredColorScheme(.dark)
                 // .tint(.red)
@@ -240,13 +254,9 @@ struct PTDateSectionView: View {
 
 struct PTPrayerListCellView: View {
     @Binding var timings: PTTodaysPrayer
-//    @Bindable var dailyPrayerData: PTDailyPrayerData
+    @Binding var selectedDate: Date
     
     @Environment(\.modelContext) private var modelContext
-    @Query(filter: {
-           PTDailyPrayerData.makeDatePredicate(for: Date())
-       }())
-       var todaysPrayer: [PTDailyPrayerData]
     
     var body: some View {
         HStack {
@@ -259,10 +269,9 @@ struct PTPrayerListCellView: View {
             }
             Toggle("", isOn: $timings.isOffered)
                 .onChange(of: timings.isOffered) { oldValue, newValue in
-                    let p = PTDailyPrayerData(name: timings.name, offered: newValue, date: Date())
+                    let p = PTDailyPrayerData(name: timings.name, offered: newValue, date: selectedDate)
                     modelContext.insert(p)
                 }
-
                 .disabled(!timings.isEnabled)
                 .tint(.PTAccentColor)
 

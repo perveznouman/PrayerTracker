@@ -11,9 +11,12 @@ import SwiftData
 @main
 struct PrayerTrackerApp: App {
 
+    @State private var dataManager: PTSwiftDataManager = PTSwiftDataManager()
+
     var body: some Scene {
         WindowGroup {
             PTRootView()
+                .environment(dataManager)
         }
         .modelContainer(for: [PTDailyPrayerData.self])
     }

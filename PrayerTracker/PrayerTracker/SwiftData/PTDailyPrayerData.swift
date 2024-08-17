@@ -25,6 +25,9 @@ class PTDailyPrayerData {
     
     static func makeDatePredicate(for date: Date) -> Predicate<PTDailyPrayerData> {
         let dateString = date.BHLocalStorageFormat
-        return #Predicate { $0.date == dateString }
+        return #Predicate<PTDailyPrayerData> { dailyData in
+            dailyData.date == dateString
+        }
+//        return #Predicate { $0.date == dateString }
     }
 }
