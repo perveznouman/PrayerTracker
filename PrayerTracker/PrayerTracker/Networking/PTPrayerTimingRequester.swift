@@ -17,7 +17,6 @@ class PTPrayerTimingRequester {
         let month = Date().BHMonth
         let year = Date().BHYear
         
-//        if let location = PTLocationViewModel.shared.retrieve() {
             url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())\(month.escaped())?latitude=\(lat)&longitude=\(longs)&method=1")!
             
             let prayerTimeResource = Resource<PTPrayerTimeResponse>(url: url) { data in
@@ -31,6 +30,5 @@ class PTPrayerTimingRequester {
                     completion(result!)
                 }
             }
-//        }
     }
 }

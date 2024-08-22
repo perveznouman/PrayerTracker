@@ -28,6 +28,5 @@ class PTDailyPrayerData {
         return #Predicate<PTDailyPrayerData> { dailyData in
             dailyData.date == dateString
         }
-//        return #Predicate { $0.date == dateString }
     }
 }

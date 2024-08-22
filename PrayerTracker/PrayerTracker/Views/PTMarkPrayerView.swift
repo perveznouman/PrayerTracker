@@ -16,11 +16,8 @@ struct PTMarkPrayerView: View {
     @State private var showLocationSearchView = false
 
     // Prayer
-    let date = Date()
-    let calendar = Calendar.current
     @State private var selectedDate = Date()
-    @State private var offered = true
-    @StateObject private var prayerVM: PTTodaysPrayerViewModel = PTTodaysPrayerViewModel()
+    @ObservedObject private var prayerVM: PTDailyPrayerViewModel = PTDailyPrayerViewModel.shared
 
     // Location
     let location = PTLocationManager() // To initialize location service
@@ -30,14 +27,14 @@ struct PTMarkPrayerView: View {
     }
     
     //SwiftData
-    @Environment(PTSwiftDataManager.self) private var viewModel
+    @Environment(PTSwiftDataManager.self) private var dataManager
     @Environment(\.modelContext) private var modelContext
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
     var body: some View {
-        @Bindable var viewModel = viewModel
+        @Bindable var dataManager = dataManager
 
         NavigationStack {
             ZStack {
@@ -53,7 +50,7 @@ struct PTMarkPrayerView: View {
                             Spacer()
                         }
                         
-                        List($locationViewModel.todaysPrayer) { $prayer in
+                        List($prayerVM.prayers) { $prayer in
                              PTPrayerListCellView(timings: $prayer, selectedDate: $selectedDate)
                                 .frame(height:40)
                         }
@@ -93,8 +90,8 @@ struct PTMarkPrayerView: View {
                     .controlSize(.small)
                 }
             }.onAppear(perform: {
-                viewModel.fetchPrayers(for: selectedDate, withContext: modelContext)
-                locationViewModel.todaysPrayer = viewModel.sortedData
+                dataManager.fetchPrayers(for: selectedDate, withContext: modelContext)
+                prayerVM.prayers = dataManager.sortedData
             })
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
@@ -148,15 +145,15 @@ struct PTLocationSearchView: View {
 
 struct PTDatePickerView: View {
     
-    @Environment(PTSwiftDataManager.self) private var viewModel
+    @Environment(PTSwiftDataManager.self) private var dataManager
     @Environment(\.modelContext) private var modelContext
     
     @Binding var currentSelectedDate: Date
     @Binding var shouldShowPicker: Bool
-    @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
+    @ObservedObject private var prayerVM: PTDailyPrayerViewModel = PTDailyPrayerViewModel.shared
 
     var body: some View {
-        @Bindable var viewModel = viewModel
+        @Bindable var dataManager = dataManager
 
         ZStack {
             Color.PTViewBackgroundColor.opacity(0.8)
@@ -175,10 +172,10 @@ struct PTDatePickerView: View {
                 .onChange(of: currentSelectedDate) { oldValue, newValue in
                     print(oldValue)
                     print(newValue)
-                    PTPrayerTimeViewModel().prayerTime(date: newValue)
+                    prayerVM.loadPrayerTime(date: newValue)
                     shouldShowPicker.toggle()
-                    viewModel.fetchPrayers(for: currentSelectedDate, withContext: modelContext)
-                    locationViewModel.todaysPrayer = viewModel.sortedData
+                    dataManager.fetchPrayers(for: currentSelectedDate, withContext: modelContext)
+                    prayerVM.prayers = dataManager.sortedData
                 }
                 .preferredColorScheme(.dark)
                 // .tint(.red)

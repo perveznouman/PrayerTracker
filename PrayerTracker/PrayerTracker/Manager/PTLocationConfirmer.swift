@@ -12,7 +12,8 @@ class PTLocationConfirmer: NSObject, ObservableObject {
     private let distanceThreshold = 20000.0; // 20 km
     var currentLocation: CLLocation?
     var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
-    
+    var dailyPrayerVm: PTDailyPrayerViewModel = PTDailyPrayerViewModel.shared
+
     func isNotInRanger(_ newLocation: CLLocation) -> Bool {
         if currentLocation == nil {
             currentLocation = newLocation
@@ -27,7 +28,7 @@ class PTLocationConfirmer: NSObject, ObservableObject {
     
     func callPrayerTimingAPI() {
         PTPrayerTimingRequester().getPrayerTimings(currentLocation!.coordinate.latitude, currentLocation!.coordinate.longitude) { vm in
-            self.locationViewModel.savePrayerTime(vm)
+            self.dailyPrayerVm.savePrayerTime(vm)
         }
                                                    
     }

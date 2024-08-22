@@ -36,7 +36,7 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
         self.cityName = storedLocation?.city ?? ""
         self.currentLocation = CLLocation(latitude: storedLocation?.latitude ?? 0.0, longitude: storedLocation?.longitude ?? 0.0)
         self.manuallySavedLocation = storedLocation?.isManualSaved ?? false
-        let _ = locationViewModel.retrievePrayerTime()
+        let _ = dailyPrayerVm.retrievePrayerTime()
         if (!self.manuallySavedLocation) {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
