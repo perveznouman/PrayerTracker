@@ -31,11 +31,11 @@ class PTTodaysTimingsViewModel {
     var prayers: [PTTodaysPrayer]?
     
     init(_ timings: PTTimings) {
-        prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: timings.fajr.replaceString(" (IST)", by: "")),
-                   PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: true, time: timings.dhuhr.replaceString(" (IST)", by: "")),
-                   PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: timings.asr.replaceString(" (IST)", by: "")),
-                   PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: true, time: timings.maghrib.replaceString(" (IST)", by: "")),
-                   PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: true, time: timings.isha.replaceString(" (IST)", by: ""))]
+        prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: timings.fajr.replaceString(" (IST)", by: ""), date: .now),
+                   PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: true, time: timings.dhuhr.replaceString(" (IST)", by: ""), date: .now),
+                   PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: timings.asr.replaceString(" (IST)", by: ""), date: .now),
+                   PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: true, time: timings.maghrib.replaceString(" (IST)", by: ""), date: .now),
+                   PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: true, time: timings.isha.replaceString(" (IST)", by: ""), date: .now)]
     }
 
 }

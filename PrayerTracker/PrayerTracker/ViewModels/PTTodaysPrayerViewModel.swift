@@ -9,13 +9,12 @@ import Foundation
 
 class PTTodaysPrayerViewModel: ObservableObject {
     
-    @Published var prayers: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: false, time: "--"),
-                                        PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: false, time: "--"),
-                                        PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: false, time: "--"),
-                                        PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: false, time: "--"),
-                                        PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: false, time: "--")]
+    var prayers: [PTTodaysPrayer] = []
     
     var aggregatedData: [PTTodaysPrayerAggregatedData] {
+        
+        let locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
+        self.prayers = locationViewModel.todaysPrayer
         let offeredCount = prayers.filter { $0.isOffered && $0.isEnabled }.count
         let notOfferedCount = prayers.filter { !$0.isOffered && $0.isEnabled }.count
         let notOpened = prayers.filter { !$0.isEnabled }.count
@@ -26,4 +25,20 @@ class PTTodaysPrayerViewModel: ObservableObject {
     }
     
     init() {}
+}
+
+class PTDailyPrayerViewModel {
+    
+    func mapPrayer(prayers: [PTDailyPrayerData]) -> [PTTodaysPrayer] {
+        let locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
+        var todaysPrayer = locationViewModel.todaysPrayer
+        todaysPrayer = todaysPrayer.map { prayer in
+            var updatedPrayer = prayer
+            if let matchingPrayer = prayers.first(where: { $0.id == prayer.id }) {
+                updatedPrayer.isOffered = matchingPrayer.offered
+            }
+            return updatedPrayer
+        }
+        return todaysPrayer
+    }
 }

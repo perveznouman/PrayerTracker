@@ -54,7 +54,7 @@ struct PTMarkPrayerView: View {
                         }
                         
                         List($locationViewModel.todaysPrayer) { $prayer in
-                            PTPrayerListCellView(timings: $prayer, selectedDate: $selectedDate, viewModel: viewModel)
+                             PTPrayerListCellView(timings: $prayer, selectedDate: $selectedDate)
                                 .frame(height:40)
                         }
                         .scrollDisabled(true)
@@ -94,6 +94,7 @@ struct PTMarkPrayerView: View {
                 }
             }.onAppear(perform: {
                 viewModel.fetchPrayers(for: selectedDate, withContext: modelContext)
+                locationViewModel.todaysPrayer = viewModel.sortedData
             })
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
@@ -152,7 +153,8 @@ struct PTDatePickerView: View {
     
     @Binding var currentSelectedDate: Date
     @Binding var shouldShowPicker: Bool
-    
+    @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
+
     var body: some View {
         @Bindable var viewModel = viewModel
 
@@ -176,6 +178,7 @@ struct PTDatePickerView: View {
                     PTPrayerTimeViewModel().prayerTime(date: newValue)
                     shouldShowPicker.toggle()
                     viewModel.fetchPrayers(for: currentSelectedDate, withContext: modelContext)
+                    locationViewModel.todaysPrayer = viewModel.sortedData
                 }
                 .preferredColorScheme(.dark)
                 // .tint(.red)
