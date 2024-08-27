@@ -13,11 +13,11 @@ class PTDailyPrayerViewModel: ObservableObject {
     
     let locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     
-    @Published var prayers: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: "--", date:                                                      .now),
-                                                     PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: true, time: "--", date: .now),
-                                                     PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: "--", date: .now),
-                                                     PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: true, time: "--", date: .now),
-                                                     PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: true, time: "--", date: .now)]
+    @Published var prayers: [PTTodaysPrayer] = [PTTodaysPrayer(name: "fajr", isOffered: false, time: "--", date:.now),
+                                                PTTodaysPrayer(name: "zuhar", isOffered: false, time: "--", date: .now),
+                                                PTTodaysPrayer(name: "asar", isOffered: false, time: "--", date: .now),
+                                                PTTodaysPrayer(name: "maghrib", isOffered: false, time: "--", date: .now),
+                                                PTTodaysPrayer(name: "esha", isOffered: false, time: "--", date: .now)]
 
     
     var aggregatedData: [PTTodaysPrayerAggregatedData] {
@@ -45,11 +45,11 @@ class PTDailyPrayerViewModel: ObservableObject {
     }
     
     func defaultPrayerTime(_ previousDate: Date) {
-        self.prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, isEnabled: true, time: "--", date: previousDate),
-                        PTTodaysPrayer(name: "zuhar", isOffered: false, isEnabled: true, time: "--", date: previousDate),
-                        PTTodaysPrayer(name: "asar", isOffered: false, isEnabled: true, time: "--", date: previousDate),
-                        PTTodaysPrayer(name: "maghrib", isOffered: false, isEnabled: true, time: "--", date: previousDate),
-                        PTTodaysPrayer(name: "esha", isOffered: false, isEnabled: true, time: "--", date: previousDate)]
+        self.prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, time: "--", date: previousDate),
+                        PTTodaysPrayer(name: "zuhar", isOffered: false, time: "--", date: previousDate),
+                        PTTodaysPrayer(name: "asar", isOffered: false, time: "--", date: previousDate),
+                        PTTodaysPrayer(name: "maghrib", isOffered: false, time: "--", date: previousDate),
+                        PTTodaysPrayer(name: "esha", isOffered: false, time: "--", date: previousDate)]
     }
     
     func loadPrayerTime(date pickedDated: Date) {

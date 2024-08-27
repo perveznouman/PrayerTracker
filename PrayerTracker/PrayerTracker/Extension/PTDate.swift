@@ -35,6 +35,23 @@ extension Date {
         return numDays
     }
 
+    func isPassedTime(_ time: String) -> Bool {
+        let formatter = DateFormatter()
+        formatter.timeZone = .current
+        formatter.dateFormat = "HH:mm"
+
+        if let timeToCompare = formatter.date(from: time) {
+            let currentTimeString = formatter.string(from: .now)
+            if let currentTime = formatter.date(from: currentTimeString) {
+                if currentTime > timeToCompare {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        return true
+    }
     
     var BHDate: String {
         let dateFormatter = DateFormatter()

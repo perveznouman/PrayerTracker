@@ -15,11 +15,11 @@ struct PTTodaysPrayer: Identifiable {
     var time: String
     var date: String
     
-    init(id: String = "", name: String, isOffered: Bool, isEnabled: Bool, time: String, date: Date) {
+    init(id: String = "", name: String, isOffered: Bool, isEnabled: Bool = true, time: String, date: Date) {
         self.id = date.BHLocalStorageFormat + "-" + name
         self.name = name
         self.isOffered = isOffered
-        self.isEnabled = isEnabled
+        self.isEnabled = Date().isPassedTime(time)
         self.time = time
         self.date = date.BHLocalStorageFormat
     }
