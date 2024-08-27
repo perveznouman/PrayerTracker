@@ -66,10 +66,13 @@ class PTDailyPrayerViewModel: ObservableObject {
        
         self.prayers = self.prayers.map { prayer in
             var updatedPrayer = prayer
-            if let matchingPrayer = prayers.first(where: { $0.id == prayer.id }) {
-                updatedPrayer.isOffered = matchingPrayer.offered
+            if prayer.isEnabled {
+                if let matchingPrayer = prayers.first(where: { $0.id == prayer.id }) {
+                    updatedPrayer.isOffered = matchingPrayer.offered
+                }
+                return updatedPrayer
             }
-            return updatedPrayer
+            return prayer
         }
         return self.prayers
     }
