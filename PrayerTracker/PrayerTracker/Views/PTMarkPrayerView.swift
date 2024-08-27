@@ -256,6 +256,7 @@ struct PTPrayerListCellView: View {
     @Binding var timings: PTTodaysPrayer
     @Binding var selectedDate: Date
     
+    @Environment(PTSwiftDataManager.self) private var dataManager
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {
@@ -269,8 +270,9 @@ struct PTPrayerListCellView: View {
             }
             Toggle("", isOn: $timings.isOffered)
                 .onChange(of: timings.isOffered) { oldValue, newValue in
-                    let p = PTDailyPrayerData(name: timings.name, offered: newValue, date: selectedDate)
-                    modelContext.insert(p)
+                    dataManager.insert(
+                        PTDailyPrayerData(name: timings.name, offered: newValue, date: selectedDate),
+                        withContext: modelContext)
                 }
                 .disabled(!timings.isEnabled)
                 .tint(.PTAccentColor)

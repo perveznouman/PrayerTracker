@@ -25,4 +25,8 @@ class PTSwiftDataManager {
             print("Error fetching prayers: \(error)")
         }
     }
+    
+    func insert(_ pryerData: PTDailyPrayerData, withContext context: ModelContext) {
+        context.insert(pryerData)
+    }
 }
