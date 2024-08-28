@@ -16,10 +16,10 @@ struct PTRootView: View {
     var body: some View {
         TabView {
             PTMarkPrayerView().tabItem {
-                Label(LocalizedStringKey("newEntry"), image: "add-entry")
+                Label(LocalizedStringKey("newEntry"), systemImage: "calendar.badge.plus")
             }
             PTStatsView().tabItem {
-                Label(LocalizedStringKey("statistics"), image: "stats")
+                Label(LocalizedStringKey("statistics"), systemImage: "chart.bar.xaxis.ascending.badge.clock")
             }
 //            TempView().tabItem {
 //                Label("More", systemImage: "ellipsis")
