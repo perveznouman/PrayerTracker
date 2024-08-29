@@ -86,8 +86,9 @@ struct PTBarChartView: View {
         
         Chart {
             ForEach(prayerData.xAxis.indices, id: \.self) { index in
-                BarMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
-//                    .foregroundStyle(by: .value("Day", weekdays[index]))
+                LineMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
+                PointMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
+
                     .annotation {
                         Text("\(prayerData.offered[index])")
                             .foregroundColor(.PTWhite)
@@ -95,10 +96,47 @@ struct PTBarChartView: View {
             }
         }
         .chartYAxis{
-            AxisMarks(position: .leading, values: prayerData.yValues)
+            AxisMarks(position: .leading, values: prayerData.yValues) {
+                AxisTick()
+                AxisValueLabel()
+                    .foregroundStyle(Color.PTWhite)
+            }
+        }
+        .chartXAxis {
+            AxisMarks(position: .bottom, values: prayerData.xAxis) {
+                AxisTick()
+                AxisValueLabel()
+                    .foregroundStyle(Color.PTWhite)
+            }
+
         }
         .frame(maxHeight: 300)
+        .chartOverlay { proxy in
+                            
+
+        }
         .padding(.horizontal)
+        
+        // Legend
+        HStack {
+            Rectangle()
+                .fill(Color.PTRed)
+                .frame(width: 10, height: 10)
+            Text(LocalizedStringKey("legands"))
+                .foregroundColor(Color.PTAccentColor)
+                .font(.PTGraphLegand)
+                .padding(.horizontal, 4)
+        }
+        .padding(.top, 16)
+    }
+    
+    func barChart () {
+        //                BarMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
+        ////                    .foregroundStyle(by: .value("Day", weekdays[index]))
+        //                    .annotation {
+        //                        Text("\(prayerData.offered[index])")
+        //                            .foregroundColor(.PTWhite)
+        //                }
     }
 }
 

@@ -27,20 +27,20 @@ class PTWeeklyViewModel {
             
         case .monthly:
             let days = Date().currentMonthDays()
-            xAxis = Array(stride(from: 1, to: days, by: 1)).map { String($0) }
+            xAxis = ["Week1", "Week2", "Week3", "Week4"]
             offered.removeAll()
             while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...17))
+                offered.append(Int.random(in: 0...35))
             }
-            yValues = stride(from: 0, to: 18, by: 1).map { $0 }
+            yValues = stride(from: 0, to: 40, by: 5).map { $0 }
 
         case .yearly:
             xAxis = Calendar.current.shortMonthSymbols
             offered.removeAll()
             while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...510))
+                offered.append(Int.random(in: 0...180))
             }
-            yValues = stride(from: 0, to: 520, by: 30).map { $0 }
+            yValues = stride(from: 0, to: 190, by: 10).map { $0 }
         }
     }
 }
