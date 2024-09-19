@@ -45,15 +45,17 @@ class PTWeeklyViewModel: ObservableObject {
         }
     }
     
-    func setupWeeklyData(dateCount: [String:Int]) {
+    func setupWeeklyData(dataCount: [String:Int]) {
         
         xAxis = Calendar.current.shortWeekdaySymbols
         offered = [ 0, 0, 0, 0, 0, 0, 0]
         yValues = stride(from: 0, to: 6, by: 1).map { $0 }
         
-        for (index, element) in xAxis.enumerated() {
-            if let matchingPrayer = dateCount.first(where: { $0.key == element }) {
-                offered[index] = matchingPrayer.value
+        if !dataCount.isEmpty {
+            for (index, element) in xAxis.enumerated() {
+                if let matchingPrayer = dataCount.first(where: { $0.key == element }) {
+                    offered[index] = matchingPrayer.value
+                }
             }
         }
     }
@@ -62,7 +64,7 @@ class PTWeeklyViewModel: ObservableObject {
 
 class PTStatsViewModel {
         
-    func mapWeeklyOfferedPrayer(prayers: [PTDailyPrayerData]) -> [String: Int] {
+    func mapWeeklyOfferedPrayer(prayers: [PTUserPrayerData]) -> [String: Int] {
         
         let groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
             prayer.date.toDate()?.weekdayName() ?? "Unknown"

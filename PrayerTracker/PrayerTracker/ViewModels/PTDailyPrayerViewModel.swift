@@ -62,7 +62,7 @@ class PTDailyPrayerViewModel: ObservableObject {
         }
     }
     
-    func mapOfferedPrayer(prayers: [PTDailyPrayerData]) -> [PTTodaysPrayer] {
+    func mapOfferedPrayer(prayers: [PTUserPrayerData]) -> [PTTodaysPrayer] {
        
         self.prayers = self.prayers.map { prayer in
             var updatedPrayer = prayer

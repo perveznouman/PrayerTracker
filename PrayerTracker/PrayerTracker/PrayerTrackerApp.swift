@@ -18,11 +18,10 @@ struct PrayerTrackerApp: App {
             PTRootView()
                 .environment(dataManager)
         }
-        .modelContainer(for: [PTDailyPrayerData.self])
+        .modelContainer(for: [PTUserPrayerData.self])
     }
     
     init() {
-        guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last else { return }
-        print(appSupportDir)
+        guard let _ = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last else { return }
     }
 }

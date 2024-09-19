@@ -75,8 +75,8 @@ struct PTBarChartView: View {
         
         @Bindable var dataManager = dataManager
         let _: [String: Color] = [ "Offered": .PTRed,
-                                              "Not Offered": .PTRed,
-                                              "Wait": .PTGray]
+                                   "Not Offered": .PTRed,
+                                   "Wait": .PTGray]
         
         ZStack {
             VStack {
@@ -127,7 +127,7 @@ struct PTBarChartView: View {
         }
         .onAppear(perform: {
            let statsData = dataManager.fetchWeeklyPrayers(forContext: modelContext)
-            prayerData.setupWeeklyData(dateCount: statsData)
+            prayerData.setupWeeklyData(dataCount: statsData)
         })
         
     }

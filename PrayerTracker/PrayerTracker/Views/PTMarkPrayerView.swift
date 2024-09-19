@@ -269,7 +269,7 @@ struct PTPrayerListCellView: View {
             Toggle("", isOn: $timings.isOffered)
                 .onChange(of: timings.isOffered) { oldValue, newValue in
                     dataManager.insert(
-                        PTDailyPrayerData(name: timings.name, offered: newValue, date: selectedDate),
+                        PTUserPrayerData(name: timings.name, offered: newValue, date: selectedDate),
                         withContext: modelContext)
                 }
                 .disabled(!timings.isEnabled)

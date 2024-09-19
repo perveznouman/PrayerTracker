@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class PTDailyPrayerData {
+class PTUserPrayerData {
     
     @Attribute(.unique) let id: String!
     let name: String
@@ -23,19 +23,19 @@ class PTDailyPrayerData {
         self.date = date.BHLocalStorageFormat
     }
     
-    static func makeDatePredicate(for date: Date) -> Predicate<PTDailyPrayerData> {
+    static func makeDatePredicate(for date: Date) -> Predicate<PTUserPrayerData> {
         let dateString = date.BHLocalStorageFormat
-        return #Predicate<PTDailyPrayerData> { dailyData in
+        return #Predicate<PTUserPrayerData> { dailyData in
             dailyData.date == dateString && dailyData.offered == true
         }
     }
-    static func makeWeekPredicate() -> Predicate<PTDailyPrayerData> {
+    static func makeWeekPredicate() -> Predicate<PTUserPrayerData> {
         
         let startDate =  Date().startOfWeek
         let endDate =  Date()
         let startingDateString = startDate!.BHLocalStorageFormat
         let endingDateString = endDate.BHLocalStorageFormat
-        return #Predicate<PTDailyPrayerData> {
+        return #Predicate<PTUserPrayerData> {
             ($0.date >= startingDateString && $0.date <= endingDateString) && ($0.offered == true)
         }
     }
