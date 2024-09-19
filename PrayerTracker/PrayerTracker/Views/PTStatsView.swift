@@ -8,15 +8,6 @@
 import SwiftUI
 import Charts
 
-//enum Stats: String, CaseIterable, Identifiable {
-//    var id: String {
-//        UUID().uuidString
-//    }
-//    case weekly
-//    case monthly
-//    case yearly
-//}
-
 enum PTStats: String, CaseIterable, Equatable {
     
     case weekly = "weekly"
@@ -40,11 +31,8 @@ struct PTStatsView: View {
     }
     
     @State private var selectedParameter: PTStats = .weekly
-//    @Environment(PTSwiftDataManager.self) private var dataManager
-//    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-//        @Bindable var dataManager = dataManager
 
         NavigationStack {
             ZStack {
@@ -66,9 +54,6 @@ struct PTStatsView: View {
                 //
                 //                }
             }
-//            .onAppear(perform: {
-//                dataManager.fetchWeeklyPrayers(forContext: modelContext)
-//            })
             .navigationTitle(LocalizedStringKey("statistics"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)

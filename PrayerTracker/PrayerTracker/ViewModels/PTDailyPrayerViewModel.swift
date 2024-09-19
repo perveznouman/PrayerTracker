@@ -77,27 +77,6 @@ class PTDailyPrayerViewModel: ObservableObject {
         return self.prayers
     }
     
-//    func mapWeeklyOfferedPrayer(prayers: [PTDailyPrayerData])  {
-//        
-//        let groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
-//            prayer.date.toDate()?.weekdayName() ?? "Unknown"
-//        })
-//        let dateCount = groupedPrayers.mapValues { $0.count }
-//    }
-    
-//    func mapWeeklyOfferedPrayer(prayers: [PTDailyPrayerData]) {
-//        
-//        var pr: [PTTodaysPrayer] = []
-//        
-//        let _ = prayers.map { prayer in
-//            if let matchingPrayer = prayers.first(where: { $0.id == prayer.id }) {
-//                let p = PTTodaysPrayer(name: prayer.name, isOffered: prayer.offered, time: "__", date: prayer.date)
-//                pr.append(p)
-//            }
-//        }
-//        print(pr)
-//    }
-    
     private init() {}
 
 }

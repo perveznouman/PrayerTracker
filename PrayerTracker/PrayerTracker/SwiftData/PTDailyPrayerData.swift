@@ -32,9 +32,9 @@ class PTDailyPrayerData {
     static func makeWeekPredicate() -> Predicate<PTDailyPrayerData> {
         
         let startDate =  Date().startOfWeek
-        let endDate =  Date().endOfWeek
+        let endDate =  Date()
         let startingDateString = startDate!.BHLocalStorageFormat
-        let endingDateString = endDate!.BHLocalStorageFormat
+        let endingDateString = endDate.BHLocalStorageFormat
         return #Predicate<PTDailyPrayerData> {
             ($0.date >= startingDateString && $0.date <= endingDateString) && ($0.offered == true)
         }

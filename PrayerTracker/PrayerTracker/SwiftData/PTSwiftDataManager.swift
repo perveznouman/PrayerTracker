@@ -39,7 +39,6 @@ class PTSwiftDataManager {
             var prayersData: [PTDailyPrayerData] = []
             prayersData = try context.fetch(request)
             weeklyData = PTStatsViewModel().mapWeeklyOfferedPrayer(prayers: prayersData)
-//            PTDailyPrayerViewModel.shared.mapWeeklyOfferedPrayer(prayers: prayersData)
         } catch {
             print("Error fetching prayers: \(error)")
         }
