@@ -86,6 +86,27 @@ extension Date {
         formatter.dateFormat = "MM-dd-yyyy"
         return formatter.string(from: self)
     }
+    
+    // https://stackoverflow.com/questions/46402684/how-to-get-start-and-end-of-the-week-in-swift
+    var startOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+        else { return nil }
+        return gregorian.date(byAdding: .day, value: 0, to: sunday)
+    }
+    
+    var endOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) 
+        else { return nil }
+        return gregorian.date(byAdding: .day, value: 6, to: sunday)
+    }
+
+    func weekdayName() -> String {
+        let calendar = Calendar.current
+        let weekdayIndex = calendar.component(.weekday, from: self) - 1
+        return calendar.shortStandaloneWeekdaySymbols[weekdayIndex]
+    }
 
 
     

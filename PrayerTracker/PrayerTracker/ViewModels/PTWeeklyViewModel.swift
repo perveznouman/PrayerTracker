@@ -7,12 +7,13 @@
 
 import Foundation
 
-class PTWeeklyViewModel {
+class PTWeeklyViewModel: ObservableObject {
     
     var xAxis: [String] = Calendar.current.shortWeekdaySymbols
-    var offered: [Int] = [ 3, 5, 1, 0, 2, 4, 5]
-    var yValues: [Int] = stride(from: 0, to: 6, by: 1).map { $0 }
+    @Published var offered: [Int] = [ 3, 5, 1, 0, 2, 4, 5]
+    private(set) var yValues: [Int] = stride(from: 0, to: 6, by: 1).map { $0 }
 
+    init() {}
     
     init(_ statsType: PTStats) {
         
@@ -42,5 +43,32 @@ class PTWeeklyViewModel {
             }
             yValues = stride(from: 0, to: 190, by: 10).map { $0 }
         }
+    }
+    
+    func setupWeeklyData(dateCount: [String:Int]) {
+        
+        xAxis = Calendar.current.shortWeekdaySymbols
+        offered = [ 0, 0, 0, 0, 0, 0, 0]
+        yValues = stride(from: 0, to: 6, by: 1).map { $0 }
+        
+        for (index, element) in xAxis.enumerated() {
+            if let matchingPrayer = dateCount.first(where: { $0.key == element }) {
+                offered[index] = matchingPrayer.value
+            }
+        }
+    }
+}
+
+
+class PTStatsViewModel {
+        
+    func mapWeeklyOfferedPrayer(prayers: [PTDailyPrayerData]) -> [String: Int] {
+        
+        let groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
+            prayer.date.toDate()?.weekdayName() ?? "Unknown"
+        })
+        
+        let groupCount = groupedPrayers.mapValues { $0.count }
+        return groupCount
     }
 }

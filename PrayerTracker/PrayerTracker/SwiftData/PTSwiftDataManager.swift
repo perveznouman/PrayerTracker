@@ -13,7 +13,7 @@ class PTSwiftDataManager {
         
     var sortedData: [PTTodaysPrayer] = []
 
-    func fetchPrayers(for date: Date, withContext context: ModelContext) {
+    func fetchDailyPrayers(for date: Date, withContext context: ModelContext) {
         var prayersData: [PTDailyPrayerData] = []
         let predicate = PTDailyPrayerData.makeDatePredicate(for: date)
         let request = FetchDescriptor<PTDailyPrayerData>(predicate: predicate)
@@ -28,5 +28,22 @@ class PTSwiftDataManager {
     
     func insert(_ pryerData: PTDailyPrayerData, withContext context: ModelContext) {
         context.insert(pryerData)
+    }
+    
+    func fetchWeeklyPrayers(forContext context: ModelContext) -> [String: Int] {
+                
+        let predicate = PTDailyPrayerData.makeWeekPredicate()
+        let request = FetchDescriptor<PTDailyPrayerData>(predicate: predicate)
+        var weeklyData:[String: Int] = [:]
+        do {
+            var prayersData: [PTDailyPrayerData] = []
+            prayersData = try context.fetch(request)
+            weeklyData = PTStatsViewModel().mapWeeklyOfferedPrayer(prayers: prayersData)
+//            PTDailyPrayerViewModel.shared.mapWeeklyOfferedPrayer(prayers: prayersData)
+        } catch {
+            print("Error fetching prayers: \(error)")
+        }
+        return weeklyData
+
     }
 }

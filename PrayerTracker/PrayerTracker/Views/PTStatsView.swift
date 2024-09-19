@@ -40,9 +40,12 @@ struct PTStatsView: View {
     }
     
     @State private var selectedParameter: PTStats = .weekly
-    
+//    @Environment(PTSwiftDataManager.self) private var dataManager
+//    @Environment(\.modelContext) private var modelContext
+
     var body: some View {
-        
+//        @Bindable var dataManager = dataManager
+
         NavigationStack {
             ZStack {
                 Color.PTViewBackgroundColor
@@ -63,6 +66,9 @@ struct PTStatsView: View {
                 //
                 //                }
             }
+//            .onAppear(perform: {
+//                dataManager.fetchWeeklyPrayers(forContext: modelContext)
+//            })
             .navigationTitle(LocalizedStringKey("statistics"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
@@ -76,58 +82,69 @@ struct PTStatsView: View {
 
 struct PTBarChartView: View {
     @Binding var selectedSegment: PTStats
+    @Environment(PTSwiftDataManager.self) private var dataManager
+    @Environment(\.modelContext) private var modelContext
+    @StateObject var prayerData = PTWeeklyViewModel()
 
     var body: some View {
         
+        @Bindable var dataManager = dataManager
         let _: [String: Color] = [ "Offered": .PTRed,
                                               "Not Offered": .PTRed,
                                               "Wait": .PTGray]
-        let prayerData = PTWeeklyViewModel(selectedSegment)
         
-        Chart {
-            ForEach(prayerData.xAxis.indices, id: \.self) { index in
-                LineMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
-                PointMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
-
-                    .annotation {
-                        Text("\(prayerData.offered[index])")
-                            .foregroundColor(.PTWhite)
+        ZStack {
+            VStack {
+                Chart {
+                    ForEach(prayerData.xAxis.indices, id: \.self) { index in
+                        LineMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
+                        PointMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
+                            .annotation {
+                                Text("\(prayerData.offered[index])")
+                                    .foregroundColor(.PTWhite)
+                        }
+                    }
                 }
-            }
-        }
-        .chartYAxis{
-            AxisMarks(position: .leading, values: prayerData.yValues) {
-                AxisTick()
-                AxisValueLabel()
-                    .foregroundStyle(Color.PTWhite)
-            }
-        }
-        .chartXAxis {
-            AxisMarks(position: .bottom, values: prayerData.xAxis) {
-                AxisTick()
-                AxisValueLabel()
-                    .foregroundStyle(Color.PTWhite)
-            }
+                .chartYAxis{
+                    AxisMarks(position: .leading, values: prayerData.yValues) {
+                        AxisTick()
+                        AxisValueLabel()
+                            .foregroundStyle(Color.PTWhite)
+                    }
+                }
+                .chartXAxis {
+                    AxisMarks(position: .bottom, values: prayerData.xAxis) {
+                        AxisTick()
+                        AxisValueLabel()
+                            .foregroundStyle(Color.PTWhite)
+                    }
 
-        }
-        .frame(maxHeight: 300)
-        .chartOverlay { proxy in
-                            
+                }
+                .frame(maxHeight: 300)
+                .chartOverlay { proxy in
+                                    
 
+                }
+                .padding(.horizontal)
+                
+                // Legend
+                HStack {
+                    Rectangle()
+                        .fill(Color.PTRed)
+                        .frame(width: 10, height: 10)
+                    Text(LocalizedStringKey("legands"))
+                        .foregroundColor(Color.PTAccentColor)
+                        .font(.PTGraphLegand)
+                        .padding(.horizontal, 4)
+                }
+                .padding(.top, 16)
+            }
         }
-        .padding(.horizontal)
+        .onAppear(perform: {
+           let statsData = dataManager.fetchWeeklyPrayers(forContext: modelContext)
+            prayerData.setupWeeklyData(dateCount: statsData)
+        })
         
-        // Legend
-        HStack {
-            Rectangle()
-                .fill(Color.PTRed)
-                .frame(width: 10, height: 10)
-            Text(LocalizedStringKey("legands"))
-                .foregroundColor(Color.PTAccentColor)
-                .font(.PTGraphLegand)
-                .padding(.horizontal, 4)
-        }
-        .padding(.top, 16)
     }
     
     func barChart () {

@@ -20,4 +20,9 @@ struct PrayerTrackerApp: App {
         }
         .modelContainer(for: [PTDailyPrayerData.self])
     }
+    
+    init() {
+        guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last else { return }
+        print(appSupportDir)
+    }
 }

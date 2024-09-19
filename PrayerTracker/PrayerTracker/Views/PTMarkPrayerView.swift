@@ -90,7 +90,7 @@ struct PTMarkPrayerView: View {
                     .controlSize(.small)
                 }
             }.onAppear(perform: {
-                dataManager.fetchPrayers(for: selectedDate, withContext: modelContext)
+                dataManager.fetchDailyPrayers(for: selectedDate, withContext: modelContext)
                 prayerVM.prayers = dataManager.sortedData
             })
             .navigationBarTitleDisplayMode(.inline)
@@ -170,11 +170,9 @@ struct PTDatePickerView: View {
                     displayedComponents: .date
                 )
                 .onChange(of: currentSelectedDate) { oldValue, newValue in
-                    print(oldValue)
-                    print(newValue)
                     prayerVM.loadPrayerTime(date: newValue)
                     shouldShowPicker.toggle()
-                    dataManager.fetchPrayers(for: currentSelectedDate, withContext: modelContext)
+                    dataManager.fetchDailyPrayers(for: currentSelectedDate, withContext: modelContext)
                     prayerVM.prayers = dataManager.sortedData
                 }
                 .preferredColorScheme(.dark)
