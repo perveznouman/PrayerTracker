@@ -31,8 +31,12 @@ struct PTStatsView: View {
     }
     
     @State private var selectedParameter: PTStats = .weekly
+    @StateObject var prayerData = PTWeeklyViewModel()
+    @Environment(PTSwiftDataManager.self) private var dataManager
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
+        @Bindable var dataManager = dataManager
 
         NavigationStack {
             ZStack {
@@ -59,24 +63,29 @@ struct PTStatsView: View {
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
+        .onAppear(perform: {
+            selectedParameter = .weekly
+            let statsData = dataManager.fetchPrayerStats(forContext: modelContext)
+             prayerData.setupStatsData(dataCount: statsData)
+        })
         .accentColor(.PTAccentColor)
         .edgesIgnoringSafeArea(.bottom)
+        .environmentObject(prayerData)
     }
 }
 
 
 struct PTBarChartView: View {
+    
+    @EnvironmentObject var prayerData: PTWeeklyViewModel
     @Binding var selectedSegment: PTStats
-    @Environment(PTSwiftDataManager.self) private var dataManager
-    @Environment(\.modelContext) private var modelContext
-    @StateObject var prayerData = PTWeeklyViewModel()
 
     var body: some View {
         
-        @Bindable var dataManager = dataManager
         let _: [String: Color] = [ "Offered": .PTRed,
                                    "Not Offered": .PTRed,
                                    "Wait": .PTGray]
+        let xAxisFontSize: CGFloat = selectedSegment == .monthly ? 6 : 10
         
         ZStack {
             VStack {
@@ -85,8 +94,10 @@ struct PTBarChartView: View {
                         LineMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
                         PointMark(x: .value("Day", prayerData.xAxis[index]), y: .value("offered", prayerData.offered[index]))
                             .annotation {
-                                Text("\(prayerData.offered[index])")
-                                    .foregroundColor(.PTWhite)
+                                if(prayerData.offered[index] > 0) {
+                                    Text("\(prayerData.offered[index])")
+                                        .foregroundColor(.PTWhite)
+                                }
                         }
                     }
                 }
@@ -102,6 +113,7 @@ struct PTBarChartView: View {
                         AxisTick()
                         AxisValueLabel()
                             .foregroundStyle(Color.PTWhite)
+                            .font(.system(size: xAxisFontSize))
                     }
 
                 }
@@ -125,11 +137,6 @@ struct PTBarChartView: View {
                 .padding(.top, 16)
             }
         }
-        .onAppear(perform: {
-           let statsData = dataManager.fetchWeeklyPrayers(forContext: modelContext)
-            prayerData.setupWeeklyData(dataCount: statsData)
-        })
-        
     }
     
     func barChart () {
@@ -145,6 +152,10 @@ struct PTBarChartView: View {
 struct PTStatsPickerView: View {
     
     @Binding var selectedSegment: PTStats
+    @Environment(PTSwiftDataManager.self) private var dataManager
+    @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var prayerData: PTWeeklyViewModel
+
     var body: some View {
         Picker("", selection: $selectedSegment) {
             ForEach(PTStats.allCases, id: \.self) { stats in
@@ -153,8 +164,9 @@ struct PTStatsPickerView: View {
             }
         }
         .onChange(of: selectedSegment, { oldValue, newValue in
-            print(oldValue)
-            print(newValue)
+            let statsData = dataManager.fetchPrayerStats(newValue, forContext: modelContext)
+             prayerData.setupStatsData(dataCount: statsData, stats: newValue)
+
         })
         .tint(.PTAccentColor)
         .pickerStyle(.segmented)

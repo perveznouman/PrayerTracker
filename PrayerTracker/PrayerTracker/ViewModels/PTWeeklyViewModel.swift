@@ -28,12 +28,12 @@ class PTWeeklyViewModel: ObservableObject {
             
         case .monthly:
             let days = Date().currentMonthDays()
-            xAxis = ["Week1", "Week2", "Week3", "Week4"]
+            xAxis = Array(stride(from: 1, to: days, by: 1)).map { String($0) }
             offered.removeAll()
             while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...35))
+                offered.append(Int.random(in: 0...5))
             }
-            yValues = stride(from: 0, to: 40, by: 5).map { $0 }
+            yValues = stride(from: 0, to: 6, by: 1).map { $0 }
 
         case .yearly:
             xAxis = Calendar.current.shortMonthSymbols
@@ -45,10 +45,42 @@ class PTWeeklyViewModel: ObservableObject {
         }
     }
     
-    func setupWeeklyData(dataCount: [String:Int]) {
+    func setupStatsData(dataCount: [String:Int], stats:PTStats = .weekly) {
+        switch stats {
+        case .weekly:
+            setupWeeklyData(dataCount: dataCount)
+        case .monthly:
+            setupMonthlyData(dataCount: dataCount)
+        case .yearly:
+            setupWeeklyData(dataCount: dataCount)
+        }
+    }
+    
+    private func setupWeeklyData(dataCount: [String:Int]) {
         
         xAxis = Calendar.current.shortWeekdaySymbols
-        offered = [ 0, 0, 0, 0, 0, 0, 0]
+        while (offered.count < xAxis.count) {
+            offered.append(0)
+        }
+        yValues = stride(from: 0, to: 6, by: 1).map { $0 }
+        
+        if !dataCount.isEmpty {
+            for (index, element) in xAxis.enumerated() {
+                if let matchingPrayer = dataCount.first(where: { $0.key == element }) {
+                    offered[index] = matchingPrayer.value
+                }
+            }
+        }
+    }
+    
+    private func setupMonthlyData(dataCount: [String:Int]) {
+        
+        let days = Date().currentMonthDays()
+        xAxis = Array(stride(from: 1, to: days + 1, by: 1)).map { String($0) }
+        offered.removeAll()
+        while (offered.count < xAxis.count) {
+            offered.append(0)
+        }
         yValues = stride(from: 0, to: 6, by: 1).map { $0 }
         
         if !dataCount.isEmpty {
@@ -64,11 +96,24 @@ class PTWeeklyViewModel: ObservableObject {
 
 class PTStatsViewModel {
         
-    func mapWeeklyOfferedPrayer(prayers: [PTUserPrayerData]) -> [String: Int] {
+    func mapOfferedPrayerWithxAxis(prayers: [PTUserPrayerData], stats: PTStats) -> [String: Int] {
         
-        let groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
-            prayer.date.toDate()?.weekdayName() ?? "Unknown"
-        })
+        var groupedPrayers: [String: [PTUserPrayerData]] 
+
+        switch stats {
+        case .weekly:
+            groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
+                prayer.date.toDate()?.weekdayName() ?? "Unknown"
+            })
+        case .monthly:
+            groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
+                prayer.date.toDate()?.BHDateGraph ?? "--"
+            })
+        case .yearly:
+            groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
+                prayer.date.toDate()?.weekdayName() ?? "Unknown"
+            })
+        }
         
         let groupCount = groupedPrayers.mapValues { $0.count }
         return groupCount

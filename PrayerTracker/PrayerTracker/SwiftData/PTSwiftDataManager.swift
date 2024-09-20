@@ -30,15 +30,25 @@ class PTSwiftDataManager {
         context.insert(pryerData)
     }
     
-    func fetchWeeklyPrayers(forContext context: ModelContext) -> [String: Int] {
+    func fetchPrayerStats(_ stats: PTStats = .weekly, forContext context: ModelContext) -> [String: Int] {
                 
-        let predicate = PTUserPrayerData.makeWeekPredicate()
+        var predicate: Predicate<PTUserPrayerData>
+        
+        switch stats {
+            case .weekly:
+                predicate = PTUserPrayerData.makeWeekPredicate()
+            case .monthly:
+                predicate = PTUserPrayerData.makeMonthPredicate()
+            case .yearly:
+                predicate = PTUserPrayerData.makeWeekPredicate()
+        }
+        
         let request = FetchDescriptor<PTUserPrayerData>(predicate: predicate)
         var weeklyData:[String: Int] = [:]
         do {
             var prayersData: [PTUserPrayerData] = []
             prayersData = try context.fetch(request)
-            weeklyData = PTStatsViewModel().mapWeeklyOfferedPrayer(prayers: prayersData)
+            weeklyData = PTStatsViewModel().mapOfferedPrayerWithxAxis(prayers: prayersData, stats: stats)
         } catch {
             print("Error fetching prayers: \(error)")
         }
