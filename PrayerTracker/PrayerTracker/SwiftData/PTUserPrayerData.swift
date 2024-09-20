@@ -50,4 +50,15 @@ class PTUserPrayerData {
             ($0.date >= startingDateString && $0.date <= endingDateString) && ($0.offered == true)
         }
     }
+    
+    static func makeYearPredicate() -> Predicate<PTUserPrayerData> {
+        
+        let startDate =  Date().startOfYear()
+        let endDate =  Date()
+        let startingDateString = startDate.BHLocalStorageFormat
+        let endingDateString = endDate.BHLocalStorageFormat
+        return #Predicate<PTUserPrayerData> {
+            ($0.date >= startingDateString && $0.date <= endingDateString) && ($0.offered == true)
+        }
+    }
 }

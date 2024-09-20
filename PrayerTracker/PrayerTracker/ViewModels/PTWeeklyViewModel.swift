@@ -52,13 +52,14 @@ class PTWeeklyViewModel: ObservableObject {
         case .monthly:
             setupMonthlyData(dataCount: dataCount)
         case .yearly:
-            setupWeeklyData(dataCount: dataCount)
+            setupYearlyData(dataCount: dataCount)
         }
     }
     
     private func setupWeeklyData(dataCount: [String:Int]) {
         
         xAxis = Calendar.current.shortWeekdaySymbols
+        offered.removeAll()
         while (offered.count < xAxis.count) {
             offered.append(0)
         }
@@ -91,6 +92,25 @@ class PTWeeklyViewModel: ObservableObject {
             }
         }
     }
+    
+    private func setupYearlyData(dataCount: [String:Int]) {
+        
+        xAxis = Calendar.current.shortMonthSymbols
+        offered.removeAll()
+        while (offered.count < xAxis.count) {
+            offered.append(0)
+//            offered.append(Int.random(in: 0...155))
+        }
+        yValues = stride(from: 0, to: 165, by: 10).map { $0 }
+        
+        if !dataCount.isEmpty {
+            for (index, element) in xAxis.enumerated() {
+                if let matchingPrayer = dataCount.first(where: { $0.key == element }) {
+                    offered[index] = matchingPrayer.value
+                }
+            }
+        }
+    }
 }
 
 
@@ -111,7 +131,7 @@ class PTStatsViewModel {
             })
         case .yearly:
             groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
-                prayer.date.toDate()?.weekdayName() ?? "Unknown"
+                prayer.date.toDate()?.monthName() ?? "Unknown"
             })
         }
         

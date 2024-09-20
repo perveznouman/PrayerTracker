@@ -113,6 +113,12 @@ extension Date {
         let weekdayIndex = calendar.component(.weekday, from: self) - 1
         return calendar.shortStandaloneWeekdaySymbols[weekdayIndex]
     }
+    
+    func monthName() -> String {
+        let calendar = Calendar.current
+        let weekdayIndex = calendar.component(.month, from: self) - 1
+        return calendar.shortMonthSymbols[weekdayIndex]
+    }
 
     func startOfMonth() -> Date {
         return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
@@ -122,6 +128,13 @@ extension Date {
         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
     }
 
+    func startOfYear() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func endOfYear() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(year: 1, day: -1), to: self.startOfYear())!
+    }
     
     /*
    static func dayDifference(from date: Date) -> Int {

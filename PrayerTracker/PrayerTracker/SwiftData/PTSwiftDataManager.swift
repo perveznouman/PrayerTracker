@@ -40,19 +40,19 @@ class PTSwiftDataManager {
             case .monthly:
                 predicate = PTUserPrayerData.makeMonthPredicate()
             case .yearly:
-                predicate = PTUserPrayerData.makeWeekPredicate()
+                predicate = PTUserPrayerData.makeYearPredicate()
         }
         
         let request = FetchDescriptor<PTUserPrayerData>(predicate: predicate)
-        var weeklyData:[String: Int] = [:]
+        var statsData:[String: Int] = [:]
         do {
             var prayersData: [PTUserPrayerData] = []
             prayersData = try context.fetch(request)
-            weeklyData = PTStatsViewModel().mapOfferedPrayerWithxAxis(prayers: prayersData, stats: stats)
+            statsData = PTStatsViewModel().mapOfferedPrayerWithxAxis(prayers: prayersData, stats: stats)
         } catch {
             print("Error fetching prayers: \(error)")
         }
-        return weeklyData
+        return statsData
 
     }
 }

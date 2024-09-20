@@ -64,9 +64,8 @@ struct PTStatsView: View {
             .toolbarBackground(.visible, for: .navigationBar)
         }
         .onAppear(perform: {
-            selectedParameter = .weekly
-            let statsData = dataManager.fetchPrayerStats(forContext: modelContext)
-             prayerData.setupStatsData(dataCount: statsData)
+            let statsData = dataManager.fetchPrayerStats(selectedParameter, forContext: modelContext)
+             prayerData.setupStatsData(dataCount: statsData, stats: selectedParameter)
         })
         .accentColor(.PTAccentColor)
         .edgesIgnoringSafeArea(.bottom)
