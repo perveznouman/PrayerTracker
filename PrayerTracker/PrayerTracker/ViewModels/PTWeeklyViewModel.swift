@@ -10,40 +10,10 @@ import Foundation
 class PTWeeklyViewModel: ObservableObject {
     
     var xAxis: [String] = Calendar.current.shortWeekdaySymbols
-    @Published var offered: [Int] = [ 3, 5, 1, 0, 2, 4, 5]
+    @Published var offered: [Int] = [ 0, 0, 0, 0, 0, 0, 0]
     private(set) var yValues: [Int] = stride(from: 0, to: 6, by: 1).map { $0 }
 
     init() {}
-    
-    init(_ statsType: PTStats) {
-        
-        switch statsType {
-        case .weekly:
-            xAxis = Calendar.current.shortStandaloneWeekdaySymbols
-            offered.removeAll()
-            while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...5))
-            }
-            yValues = stride(from: 0, to: 6, by: 1).map { $0 }
-            
-        case .monthly:
-            let days = Date().currentMonthDays()
-            xAxis = Array(stride(from: 1, to: days, by: 1)).map { String($0) }
-            offered.removeAll()
-            while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...5))
-            }
-            yValues = stride(from: 0, to: 6, by: 1).map { $0 }
-
-        case .yearly:
-            xAxis = Calendar.current.shortMonthSymbols
-            offered.removeAll()
-            while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...180))
-            }
-            yValues = stride(from: 0, to: 190, by: 10).map { $0 }
-        }
-    }
     
     func setupStatsData(dataCount: [String:Int], stats:PTStats = .weekly) {
         switch stats {
