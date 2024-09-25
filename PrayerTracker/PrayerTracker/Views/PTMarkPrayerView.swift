@@ -29,6 +29,8 @@ struct PTMarkPrayerView: View {
     //SwiftData
     @Environment(PTSwiftDataManager.self) private var dataManager
     @Environment(\.modelContext) private var modelContext
+    
+    let notificationManager = PTNotificationManager()
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
