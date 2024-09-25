@@ -30,3 +30,6 @@
 "Wait" = "انتظار";
 "legands" = "نمازوں کی تعداد کی بنیاد پر دکھایا گیا ہے نہ کہ رکعتوں کی بنیاد پر";
 "unknown" = "نامعلوم";
+
+"addEntryReminderTitle" = "یاد دہانی";
+"addEntryReminderMessage" = "آج کی نماز کو نشان زد کریں";

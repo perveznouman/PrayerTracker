@@ -30,3 +30,6 @@
 "Wait" = "Wait";
 "legands" = "Shown based on number of Prayers not Rakaths";
 "unknown" = "Unknown";
+
+"addEntryReminderTitle" = "Reminder";
+"addEntryReminderMessage" = "Mark today's offered prayer";
