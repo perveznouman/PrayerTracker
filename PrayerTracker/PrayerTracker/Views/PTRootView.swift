@@ -21,9 +21,9 @@ struct PTRootView: View {
             PTStatsView().tabItem {
                 Label(LocalizedStringKey("statistics"), systemImage: "chart.bar.xaxis.ascending.badge.clock")
             }
-//            TempView().tabItem {
-//                Label("More", systemImage: "ellipsis")
-//            }
+            PTMoreView().tabItem {
+                Label(LocalizedStringKey("more"), systemImage: "ellipsis")
+            }
         }
 //        .font(Font.custom("Mukta-ExtraBold", size:18))
         .accentColor(.PTAccentColor)
