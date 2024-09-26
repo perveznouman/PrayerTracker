@@ -30,7 +30,7 @@ struct PTMarkPrayerView: View {
     @Environment(PTSwiftDataManager.self) private var dataManager
     @Environment(\.modelContext) private var modelContext
     
-    let notificationManager = PTNotificationManager()
+    let notificationManager = PTNotificationManager(notification: PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: 01, min: 00, repeats: true))
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]

@@ -15,6 +15,7 @@
 		802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABA2C33D39E00187AB6 /* PTObservable.swift */; };
 		802EAABD2C33E92200187AB6 /* PTLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */; };
 		80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80312B082BF77E9E0097A4C4 /* TempView.swift */; };
+		8039FE682CA5DFC7005C336C /* PTNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039FE672CA5DFC7005C336C /* PTNotification.swift */; };
 		803BDA972BFBC57E001A47F8 /* Mukta-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA902BFBC57E001A47F8 /* Mukta-Regular.ttf */; };
 		803BDA982BFBC57E001A47F8 /* Mukta-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA912BFBC57E001A47F8 /* Mukta-Light.ttf */; };
 		803BDA992BFBC57E001A47F8 /* Mukta-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 803BDA922BFBC57E001A47F8 /* Mukta-ExtraLight.ttf */; };
@@ -62,6 +63,7 @@
 		802EAABA2C33D39E00187AB6 /* PTObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTObservable.swift; sourceTree = "<group>"; };
 		802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationViewModel.swift; sourceTree = "<group>"; };
 		80312B082BF77E9E0097A4C4 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
+		8039FE672CA5DFC7005C336C /* PTNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNotification.swift; sourceTree = "<group>"; };
 		803BDA8F2BFBC442001A47F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		803BDA902BFBC57E001A47F8 /* Mukta-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Regular.ttf"; sourceTree = "<group>"; };
 		803BDA912BFBC57E001A47F8 /* Mukta-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mukta-Light.ttf"; sourceTree = "<group>"; };
@@ -78,7 +80,7 @@
 		8044E8502BED61D200CD186F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8044E8522BED61D900CD186F /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8044E8532BED61E000CD186F /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/Localizable.strings; sourceTree = "<group>"; };
-		8069C0DB2CA408EA0069FA66 /* PTNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNotificationManager.swift; sourceTree = "<group>"; };
+		8069C0DB2CA408EA0069FA66 /* PTNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PTNotificationManager.swift; path = ../Model/PTNotificationManager.swift; sourceTree = "<group>"; };
 		807398DA2BFBC25400310623 /* PTColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTColor.swift; sourceTree = "<group>"; };
 		807EDFB52C1B17BC005552C8 /* PTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTFont.swift; sourceTree = "<group>"; };
 		808909A62C539B9200C2038C /* TempTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempTodo.swift; sourceTree = "<group>"; };
@@ -125,7 +127,7 @@
 				800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */,
 				80B2746B2C32895400BBA0C7 /* PTLocation.swift */,
 				800293AA2C53F29800860D27 /* PTPrayerTimeResponse.swift */,
-				8069C0DB2CA408EA0069FA66 /* PTNotificationManager.swift */,
+				8039FE672CA5DFC7005C336C /* PTNotification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,6 +183,7 @@
 				800AAF042C4EE8E700CCA454 /* PTLocationConfirmer.swift */,
 				80B110C22C2F3CDC006D449A /* PTLocationManager.swift */,
 				80B2746D2C3289B100BBA0C7 /* PTLocationSearchManager.swift */,
+				8069C0DB2CA408EA0069FA66 /* PTNotificationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			files = (
 				807EDFB62C1B17BC005552C8 /* PTFont.swift in Sources */,
 				80B2746E2C3289B100BBA0C7 /* PTLocationSearchManager.swift in Sources */,
+				8039FE682CA5DFC7005C336C /* PTNotification.swift in Sources */,
 				80B110CC2C2F596A006D449A /* PTUserDefaults.swift in Sources */,
 				80B1866E2B99D46E0077683D /* PrayerTracker.xcdatamodeld in Sources */,
 				80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */,

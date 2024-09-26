@@ -10,4 +10,6 @@ import Foundation
 struct PTConstantKey {
     
     static let location: String = "com.prayerTracker.location"
+    
+    static let dailyReminderNotification = "com.prayerTracker.notification.dailyReminder"
 }
