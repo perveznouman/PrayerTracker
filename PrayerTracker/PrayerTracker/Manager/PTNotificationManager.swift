@@ -10,36 +10,33 @@ import UserNotifications
 
 class PTNotificationManager {
     
-    init() {
+    init(_ notification: PTNotification) {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-               if granted {
-                   print("Permission granted")
-               } else if let error = error {
-                   print(error.localizedDescription)
-               }
-           }
-
-           // 2. Create the content for the notification
-           let content = UNMutableNotificationContent()
-           content.title = "Reminder"
-           content.body = "Don't forget to check the app!"
-           content.sound = UNNotificationSound.default
-
-           // 3. Set up a trigger for the notification
-           // For example, 10 seconds from now
-           let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (10), repeats: false)
-
-           // 4. Create the request
-           let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-           // 5. Add the request to the notification center
-           UNUserNotificationCenter.current().add(request) { error in
-               if let error = error {
-                   print(error.localizedDescription)
-               } else {
-                   print("Notification scheduled")
-               }
-           }
+            if granted {
+                print("Permission granted")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
+        var date = DateComponents()
+        date.hour = Int(notification.hour)
+        date.minute = Int(notification.min)
+        
+        let content = UNMutableNotificationContent()
+        content.title = notification.title //NSLocalizedString("addEntryReminderTitle", comment: "")
+        content.body =  notification.content //NSLocalizedString("addEntryReminderMessage", comment: "")
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: notification.repeats)
+        let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Notification scheduled")
+            }
+        }
     }
 }
