@@ -14,6 +14,8 @@
 "statistics" = "اعداد و شمار";
 "newEntry" = "روزانہ";
 "makeNewEntry" = "ایک نئی اندراج کو نشان زد کریں";
+"more" = "مزید";
+
 "today" = "آج";
 "tomorrow" = "کل";
 "yesterday" = "کل";
@@ -30,6 +32,8 @@
 "Wait" = "انتظار";
 "legands" = "نمازوں کی تعداد کی بنیاد پر دکھایا گیا ہے نہ کہ رکعتوں کی بنیاد پر";
 "unknown" = "نامعلوم";
+"notification" = "اطلاع";
+"reminder" = "یاد دہانی";
 
 "addEntryReminderTitle" = "یاد دہانی";
 "addEntryReminderMessage" = "آج کی نماز کو نشان زد کریں";

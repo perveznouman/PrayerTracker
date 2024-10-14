@@ -12,6 +12,9 @@
 		8002D1712C24AA690018E2C8 /* PTDailyPrayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8002D1702C24AA690018E2C8 /* PTDailyPrayerViewModel.swift */; };
 		800AAF052C4EE8E700CCA454 /* PTLocationConfirmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800AAF042C4EE8E700CCA454 /* PTLocationConfirmer.swift */; };
 		800E599E2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */; };
+		8018838B2CBDA08300B9E451 /* PTMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018838A2CBDA08300B9E451 /* PTMoreView.swift */; };
+		8018838D2CBDA2DA00B9E451 /* PTNotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018838C2CBDA2CC00B9E451 /* PTNotificationSettings.swift */; };
+		8018838F2CBDA62900B9E451 /* PTNotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018838E2CBDA61000B9E451 /* PTNotificationSettingsViewModel.swift */; };
 		802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABA2C33D39E00187AB6 /* PTObservable.swift */; };
 		802EAABD2C33E92200187AB6 /* PTLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */; };
 		80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80312B082BF77E9E0097A4C4 /* TempView.swift */; };
@@ -60,6 +63,9 @@
 		8002D1702C24AA690018E2C8 /* PTDailyPrayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDailyPrayerViewModel.swift; sourceTree = "<group>"; };
 		800AAF042C4EE8E700CCA454 /* PTLocationConfirmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationConfirmer.swift; sourceTree = "<group>"; };
 		800E599D2C2D5CA100C4FFD8 /* PTWeeksPrayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTWeeksPrayer.swift; sourceTree = "<group>"; };
+		8018838A2CBDA08300B9E451 /* PTMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTMoreView.swift; sourceTree = "<group>"; };
+		8018838C2CBDA2CC00B9E451 /* PTNotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNotificationSettings.swift; sourceTree = "<group>"; };
+		8018838E2CBDA61000B9E451 /* PTNotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNotificationSettingsViewModel.swift; sourceTree = "<group>"; };
 		802EAABA2C33D39E00187AB6 /* PTObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTObservable.swift; sourceTree = "<group>"; };
 		802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationViewModel.swift; sourceTree = "<group>"; };
 		80312B082BF77E9E0097A4C4 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
@@ -128,6 +134,7 @@
 				80B2746B2C32895400BBA0C7 /* PTLocation.swift */,
 				800293AA2C53F29800860D27 /* PTPrayerTimeResponse.swift */,
 				80C429962CB8608A00EA189B /* PTNotification.swift */,
+				8018838C2CBDA2CC00B9E451 /* PTNotificationSettings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,6 +146,7 @@
 				80B274692C3288E800BBA0C7 /* PTWeeklyViewModel.swift */,
 				802EAABC2C33E92200187AB6 /* PTLocationViewModel.swift */,
 				808909A82C53B60800C2038C /* PTPrayerTimeResponseViewModel.swift */,
+				8018838E2CBDA61000B9E451 /* PTNotificationSettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -242,6 +250,7 @@
 				8044E8462BED5B5500CD186F /* PTRootView.swift */,
 				8044E8482BED5C6700CD186F /* PTStatsView.swift */,
 				8044E84A2BED5D1800CD186F /* PTMarkPrayerView.swift */,
+				8018838A2CBDA08300B9E451 /* PTMoreView.swift */,
 				80312B082BF77E9E0097A4C4 /* TempView.swift */,
 			);
 			path = Views;
@@ -379,11 +388,14 @@
 				80B2746E2C3289B100BBA0C7 /* PTLocationSearchManager.swift in Sources */,
 				80C429972CB8608A00EA189B /* PTNotification.swift in Sources */,
 				80B110CC2C2F596A006D449A /* PTUserDefaults.swift in Sources */,
+				8018838F2CBDA62900B9E451 /* PTNotificationSettingsViewModel.swift in Sources */,
 				80B1866E2B99D46E0077683D /* PrayerTracker.xcdatamodeld in Sources */,
 				80312B092BF77E9E0097A4C4 /* TempView.swift in Sources */,
 				8044E8472BED5B5500CD186F /* PTRootView.swift in Sources */,
+				8018838D2CBDA2DA00B9E451 /* PTNotificationSettings.swift in Sources */,
 				80B110C32C2F3CDC006D449A /* PTLocationManager.swift in Sources */,
 				80EE9F9E2C3C790400D25CBF /* PTCustomAlert.swift in Sources */,
+				8018838B2CBDA08300B9E451 /* PTMoreView.swift in Sources */,
 				802EAABB2C33D39E00187AB6 /* PTObservable.swift in Sources */,
 				8044E8492BED5C6700CD186F /* PTStatsView.swift in Sources */,
 				80446E762C6BE4A40082937A /* PTUserPrayerData.swift in Sources */,

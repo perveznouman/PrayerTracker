@@ -21,6 +21,10 @@ struct PTRootView: View {
             PTStatsView().tabItem {
                 Label(LocalizedStringKey("statistics"), systemImage: "chart.bar.xaxis.ascending.badge.clock")
             }
+            PTMoreView().tabItem {
+                Label(LocalizedStringKey("more"), systemImage: "ellipsis")
+            }
+
 //            TempView().tabItem {
 //                Label("More", systemImage: "ellipsis")
 //            }
