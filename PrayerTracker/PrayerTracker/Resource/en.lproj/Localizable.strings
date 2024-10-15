@@ -24,6 +24,7 @@
 "asar" = "Asar";
 "maghrib" = "Maghrib";
 "esha" = "Esha";
+
 "weekly" = "Weekly";
 "monthly" = "Monthly";
 "yearly" = "Yearly";
@@ -32,8 +33,11 @@
 "Wait" = "Wait";
 "legands" = "Shown based on number of Prayers not Rakaths";
 "unknown" = "Unknown";
+
 "notification" = "Notification";
 "reminder" = "Reminder";
-
 "addEntryReminderTitle" = "Reminder";
-"addEntryReminderMessage" = "Mark today's offered prayer";
+"addEntryReminderMessage" = "Mark today's offered Salah";
+"notificationDescription" = "App will remind you for opted Salah";
+"reminderDescription" = "App will remind you to mark offered Salah";
+

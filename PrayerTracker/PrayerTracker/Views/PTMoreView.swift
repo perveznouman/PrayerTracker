@@ -21,7 +21,8 @@ struct PTMoreView: View {
     @ObservedObject var notificationVM = PTNotificationSettingsViewModel()
     @State var isNotificationSecOpen = false
     @State var isReminderSecOpen = false
-    
+    @State private var showTimePicker = false
+
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
@@ -36,8 +37,9 @@ struct PTMoreView: View {
                 List {
 
                     Section(
-                        header: SectionHeader(
+                        header: PTMoreSectionHeader(
                             title: NSLocalizedString("notification", comment: ""),
+                            description: NSLocalizedString("notificationDescription", comment: ""),
                             isOn: $isNotificationSecOpen, otherSection: $isReminderSecOpen,
                             openImage: "chevron.up",
                             closeImage: "chevron.down"
@@ -48,25 +50,33 @@ struct PTMoreView: View {
                                 PTPrayerReminderCellView(reminder: $reminder)
                             }
                         }
-                    }
+                    }.textCase(.none)
                     
                     Section(
-                        header: SectionHeader(
+                        header: PTMoreSectionHeader(
                             title: NSLocalizedString("reminder", comment: ""),
+                            description: NSLocalizedString("reminderDescription", comment: ""),
                             isOn: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
                             openImage: "chevron.up",
                             closeImage: "chevron.down"
                         )
                     ) {
                         if isReminderSecOpen {
-                            ForEach($notificationVM.reminders) { $reminder in
-                                PTPrayerReminderCellView(reminder: $reminder)
-                            }
+                            PTReminderView(shouldShowPicker: $showTimePicker)
+//                            ForEach($notificationVM.reminders) { $reminder in
+//                                PTPrayerReminderCellView(reminder: $reminder)
+//                            }
                         }
-                    }
+                    }.textCase(.none)
                 }
                 .padding(.bottom, 35)
                 .colorMultiply(Color.PTWhite)
+            }
+            .onAppear {
+                UIDatePicker.appearance().minuteInterval = 15
+            }
+            .onDisappear {
+                UIDatePicker.appearance().minuteInterval = 1
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
@@ -74,6 +84,33 @@ struct PTMoreView: View {
             .accentColor(.PTAccentColor)
             .edgesIgnoringSafeArea(.bottom)
             .navigationTitle(LocalizedStringKey("more"))
+        }
+    }
+}
+
+struct PTReminderView: View {
+    @State var selectedHour = Date()
+    @Binding var shouldShowPicker: Bool
+    
+    var body: some View {
+        
+        ZStack {
+            Color.PTViewBackgroundColor
+                .ignoresSafeArea()
+                .onTapGesture {
+                    shouldShowPicker.toggle()
+                }
+            VStack {
+                Spacer()
+                DatePicker("", selection: $selectedHour, displayedComponents: .hourAndMinute)
+                    .onChange(of: selectedHour) { oldValue, newValue in
+                    }
+                    .preferredColorScheme(.dark)
+                    .colorMultiply(.PTWhite)
+                    .labelsHidden()
+                    .datePickerStyle(.wheel)
+                    .frame(maxHeight: 400)
+            }
         }
     }
 }
@@ -100,9 +137,10 @@ struct PTPrayerReminderCellView: View {
     }
 }
 
-struct SectionHeader: View {
+struct PTMoreSectionHeader: View {
     
     @State var title: String
+    @State var description: String
     @Binding var isOn: Bool
     @Binding var otherSection: Bool
     @State var openImage: String
@@ -110,36 +148,42 @@ struct SectionHeader: View {
     
     var body: some View {
         
-        HStack {
-            
-            Button(action: {
-                withAnimation {
-                    isOn.toggle()
-                }
-            }, label: {
-                Text(title)
-            })
-            .foregroundColor(.PTWhite)
-            .font(.PTPrayerCell)
-            .foregroundColor(.accentColor)
-            .frame(alignment: .leading)
-            
-            Spacer()
-            
-            Button(action: {
-                withAnimation {
-                    isOn.toggle()
-                    otherSection = false
-                }
-            }, label: {
-                if isOn {
-                    Image(systemName: openImage)
-                } else {
-                    Image(systemName: closeImage)
-                }
-            })
-            .foregroundColor(.accentColor)
-            .frame(alignment: .trailing)
+        VStack(alignment:.leading, spacing: 0) {
+            HStack {
+                
+                Button(action: {
+                    withAnimation {
+                        isOn.toggle()
+                    }
+                }, label: {
+                    Text(title)
+                })
+                .foregroundColor(.PTWhite)
+                .font(.PTPrayerCell)
+                .frame(alignment: .leading)
+                
+                Spacer()
+                
+                Button(action: {
+                    withAnimation {
+                        isOn.toggle()
+                        otherSection = false
+                    }
+                }, label: {
+                    if isOn {
+                        Image(systemName: openImage)
+                    } else {
+                        Image(systemName: closeImage)
+                    }
+                })
+                .foregroundColor(.accentColor)
+                .frame(alignment: .trailing)
+            }
+   
+            Text(description)
+                .foregroundColor(.PTGray)
+                .font(.PTCellDetailedText)
+
         }
     }
 }

@@ -24,6 +24,7 @@
 "asar" = "عصر";
 "maghrib" = "مغرب";
 "esha" = "عشاء";
+
 "weekly" = "ہفتہ وار";
 "monthly" = "ماہانہ";
 "yearly" = "سالانہ";
@@ -32,8 +33,10 @@
 "Wait" = "انتظار";
 "legands" = "نمازوں کی تعداد کی بنیاد پر دکھایا گیا ہے نہ کہ رکعتوں کی بنیاد پر";
 "unknown" = "نامعلوم";
+
 "notification" = "اطلاع";
 "reminder" = "یاد دہانی";
-
 "addEntryReminderTitle" = "یاد دہانی";
 "addEntryReminderMessage" = "آج کی نماز کو نشان زد کریں";
+"notificationDescription" = "ایپ آپ کو منتخب شدہ نماز کی یاد دلائے گی۔";
+"reminderDescription" = "ایپ آپ کو پیش کردہ نماز کو نشان زد کرنے کی یاد دلائے گی۔";
