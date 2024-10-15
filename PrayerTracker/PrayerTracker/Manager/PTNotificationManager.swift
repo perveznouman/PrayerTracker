@@ -25,8 +25,8 @@ class PTNotificationManager {
         date.minute = Int(notification.min)
         
         let content = UNMutableNotificationContent()
-        content.title = notification.title //NSLocalizedString("addEntryReminderTitle", comment: "")
-        content.body =  notification.content //NSLocalizedString("addEntryReminderMessage", comment: "")
+        content.title = NSLocalizedString(notification.title, comment: "")
+        content.body =  NSLocalizedString(notification.content, comment: "")
         content.sound = UNNotificationSound.default
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: notification.repeats)

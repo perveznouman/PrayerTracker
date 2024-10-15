@@ -92,7 +92,10 @@ struct PTMarkPrayerView: View {
             }.onAppear(perform: {
                 dataManager.fetchDailyPrayers(for: selectedDate, withContext: modelContext)
                 prayerVM.prayers = dataManager.sortedData
-                let _ = PTNotificationManager(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: 1, min: 10, repeats: true))
+                
+                #warning("call this in an appropriate class")
+                let hourMin = PTNotificationSettingsViewModel().getReminderTime()
+                let _ = PTNotificationManager(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
 
             })
             .navigationBarTitleDisplayMode(.inline)

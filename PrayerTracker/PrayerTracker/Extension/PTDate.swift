@@ -93,6 +93,12 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    var BHReminderStorageFormat: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
+    }
+    
     // https://stackoverflow.com/questions/46402684/how-to-get-start-and-end-of-the-week-in-swift
     var startOfWeek: Date? {
         let gregorian = Calendar(identifier: .gregorian)

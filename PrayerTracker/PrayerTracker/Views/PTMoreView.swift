@@ -9,14 +9,6 @@ import SwiftUI
 
 struct PTMoreView: View {
     
-    let notifications = [
-        "Fajr",
-        "Dohar",
-        "Asar",
-        "Maghrib",
-        "Isha"
-    ]
-    
     
     @ObservedObject var notificationVM = PTNotificationSettingsViewModel()
     @State var isNotificationSecOpen = false
@@ -63,9 +55,6 @@ struct PTMoreView: View {
                     ) {
                         if isReminderSecOpen {
                             PTReminderView(shouldShowPicker: $showTimePicker)
-//                            ForEach($notificationVM.reminders) { $reminder in
-//                                PTPrayerReminderCellView(reminder: $reminder)
-//                            }
                         }
                     }.textCase(.none)
                 }
@@ -104,6 +93,7 @@ struct PTReminderView: View {
                 Spacer()
                 DatePicker("", selection: $selectedHour, displayedComponents: .hourAndMinute)
                     .onChange(of: selectedHour) { oldValue, newValue in
+                        PTNotificationSettingsViewModel().updateReminderTime(newValue)
                     }
                     .preferredColorScheme(.dark)
                     .colorMultiply(.PTWhite)
@@ -139,6 +129,9 @@ struct PTPrayerReminderCellView: View {
 
 struct PTMoreSectionHeader: View {
     
+    var id: String {
+        return title
+    }
     @State var title: String
     @State var description: String
     @Binding var isOn: Bool
@@ -154,6 +147,7 @@ struct PTMoreSectionHeader: View {
                 Button(action: {
                     withAnimation {
                         isOn.toggle()
+                        otherSection = false
                     }
                 }, label: {
                     Text(title)
@@ -179,11 +173,18 @@ struct PTMoreSectionHeader: View {
                 .foregroundColor(.accentColor)
                 .frame(alignment: .trailing)
             }
-   
-            Text(description)
-                .foregroundColor(.PTGray)
-                .font(.PTCellDetailedText)
-
+            
+            Button(action: {
+                withAnimation {
+                    isOn.toggle()
+                    otherSection = false
+                }
+            }, label: {
+                Text(description)
+            })
+            .foregroundColor(.PTGray)
+            .font(.PTCellDetailedText)
+            
         }
     }
 }
