@@ -68,6 +68,7 @@ extension Date {
     var BHMonth: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"
+        dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: self)
     }
     
@@ -80,6 +81,7 @@ extension Date {
     var BHYear: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY"
+        dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: self)
     }
     
@@ -96,6 +98,7 @@ extension Date {
     var BHReminderStorageFormat: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
+        formatter.locale = Locale(identifier: "en_US")
         return formatter.string(from: self)
     }
     

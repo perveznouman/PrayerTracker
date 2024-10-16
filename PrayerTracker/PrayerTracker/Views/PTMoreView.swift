@@ -29,10 +29,10 @@ struct PTMoreView: View {
                 List {
 
                     Section(
-                        header: PTMoreSectionHeader(
+                        header: PTNotificationSectionHeader(
                             title: NSLocalizedString("notification", comment: ""),
                             description: NSLocalizedString("notificationDescription", comment: ""),
-                            isOn: $isNotificationSecOpen, otherSection: $isReminderSecOpen,
+                            isExpanded: $isNotificationSecOpen, otherSection: $isReminderSecOpen,
                             openImage: "chevron.up",
                             closeImage: "chevron.down"
                         )
@@ -45,16 +45,16 @@ struct PTMoreView: View {
                     }.textCase(.none)
                     
                     Section(
-                        header: PTMoreSectionHeader(
+                        header: PTReminderSectionHeader(
                             title: NSLocalizedString("reminder", comment: ""),
                             description: NSLocalizedString("reminderDescription", comment: ""),
-                            isOn: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
-                            openImage: "chevron.up",
-                            closeImage: "chevron.down"
+                            isExpanded: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
+                            toggleON: $showTimePicker
                         )
                     ) {
-                        if isReminderSecOpen {
-                            PTReminderView(shouldShowPicker: $showTimePicker)
+                        if showTimePicker {
+                            PTReminderView()
+//                            PTReminderView(shouldShowPicker: $isReminderSecOpen)
                         }
                     }.textCase(.none)
                 }
@@ -79,7 +79,7 @@ struct PTMoreView: View {
 
 struct PTReminderView: View {
     @State var selectedHour = Date()
-    @Binding var shouldShowPicker: Bool
+//    @Binding var shouldShowPicker: Bool
     
     var body: some View {
         
@@ -87,7 +87,7 @@ struct PTReminderView: View {
             Color.PTViewBackgroundColor
                 .ignoresSafeArea()
                 .onTapGesture {
-                    shouldShowPicker.toggle()
+//                    shouldShowPicker.toggle()
                 }
             VStack {
                 Spacer()
@@ -127,14 +127,63 @@ struct PTPrayerReminderCellView: View {
     }
 }
 
-struct PTMoreSectionHeader: View {
+struct PTReminderSectionHeader: View {
     
     var id: String {
         return title
     }
     @State var title: String
     @State var description: String
-    @Binding var isOn: Bool
+    @Binding var isExpanded: Bool
+    @Binding var otherSection: Bool
+    @Binding var toggleON: Bool
+    
+    var body: some View {
+        
+        VStack(alignment:.leading, spacing: 0) {
+            HStack {
+                
+                Button(action: {}, label: {
+                    Text(title)
+                })
+                .foregroundColor(.PTWhite)
+                .font(.PTPrayerCell)
+                .frame(alignment: .leading)
+                
+                Spacer()
+                
+                Toggle("", isOn: $toggleON)
+                    .onChange(of: toggleON) { oldValue, newValue in
+                        if(newValue) {
+                            isExpanded = true
+                            otherSection = false
+                        }
+                        else {
+                            isExpanded = false
+//                            otherSection = true
+                        }
+                    }
+                    .tint(.PTAccentColor)
+            }
+            
+            Button(action: {}, label: {
+                Text(description)
+            })
+            .foregroundColor(.PTGray)
+            .font(.PTCellDetailedText)
+            
+        }
+    }
+}
+
+struct PTNotificationSectionHeader: View {
+    
+    var id: String {
+        return title
+    }
+    @State var title: String
+    @State var description: String
+    @Binding var isExpanded: Bool
     @Binding var otherSection: Bool
     @State var openImage: String
     @State var closeImage: String
@@ -146,7 +195,7 @@ struct PTMoreSectionHeader: View {
                 
                 Button(action: {
                     withAnimation {
-                        isOn.toggle()
+                        isExpanded.toggle()
                         otherSection = false
                     }
                 }, label: {
@@ -160,11 +209,11 @@ struct PTMoreSectionHeader: View {
                 
                 Button(action: {
                     withAnimation {
-                        isOn.toggle()
+                        isExpanded.toggle()
                         otherSection = false
                     }
                 }, label: {
-                    if isOn {
+                    if isExpanded {
                         Image(systemName: openImage)
                     } else {
                         Image(systemName: closeImage)
@@ -176,7 +225,7 @@ struct PTMoreSectionHeader: View {
             
             Button(action: {
                 withAnimation {
-                    isOn.toggle()
+                    isExpanded.toggle()
                     otherSection = false
                 }
             }, label: {
