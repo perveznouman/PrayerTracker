@@ -52,9 +52,8 @@ struct PTMoreView: View {
                             toggleON: $showTimePicker
                         )
                     ) {
-                        if showTimePicker {
+                        if (showTimePicker && !isNotificationSecOpen) {
                             PTReminderView()
-//                            PTReminderView(shouldShowPicker: $isReminderSecOpen)
                         }
                     }.textCase(.none)
                 }
@@ -79,16 +78,13 @@ struct PTMoreView: View {
 
 struct PTReminderView: View {
     @State var selectedHour = Date()
-//    @Binding var shouldShowPicker: Bool
     
     var body: some View {
         
         ZStack {
             Color.PTViewBackgroundColor
                 .ignoresSafeArea()
-                .onTapGesture {
-//                    shouldShowPicker.toggle()
-                }
+               
             VStack {
                 Spacer()
                 DatePicker("", selection: $selectedHour, displayedComponents: .hourAndMinute)
@@ -160,7 +156,6 @@ struct PTReminderSectionHeader: View {
                         }
                         else {
                             isExpanded = false
-//                            otherSection = true
                         }
                     }
                     .tint(.PTAccentColor)
