@@ -22,6 +22,9 @@ struct PrayerTrackerApp: App {
     }
     
     init() {
+        
+        let _ = PTLocationManager()
+        PTNotificationSettingsViewModel().scheduleReminderNotification()
         guard let _ = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last else { return }
     }
 }

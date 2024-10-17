@@ -6,6 +6,7 @@
 //
 import Foundation
 
+@MainActor
 class PTNotificationSettingsViewModel: ObservableObject {
     
     @Published var prayerReminder: [PTNotificationSettings] = [PTNotificationSettings(title: "fajr", isON: true),
@@ -13,15 +14,29 @@ class PTNotificationSettingsViewModel: ObservableObject {
                                                     PTNotificationSettings(title: "asar", isON: true),
                                                     PTNotificationSettings(title: "maghrib", isON: true),
                                                     PTNotificationSettings(title: "esha", isON: true)]
+    @Published var isAuthorized: Bool = false
     
     func updateReminderTime(_ time: Date) {
         let formattedTime = time.BHReminderStorageFormat
         UserDefaults.standard.save(customObject: formattedTime, inKey: PTConstantKey.dailyReminderNotification)
+        self.scheduleReminderNotification()
     }
     
     func getReminderTime() -> [String] {
         let time = UserDefaults.standard.retrieve(object: String.self, fromKey: PTConstantKey.dailyReminderNotification)
         let hourMin = time?.components(separatedBy: ":") ?? ["21", "30"]
         return hourMin
+    }
+    
+    func scheduleReminderNotification() {
+        
+        let hourMin = self.getReminderTime()
+        let _ = PTNotificationManager(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
+    }
+    
+    func isNotificationAuthorized() {
+        PTNotificationManager().isPermitted(completion: { isAuthorized in
+            self.isAuthorized = isAuthorized
+        })
     }
 }

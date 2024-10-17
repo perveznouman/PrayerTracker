@@ -10,12 +10,12 @@ import UserNotifications
 
 class PTNotificationManager {
     
+    init() {}
+    
     init(_ notification: PTNotification) {
         
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if granted {
-                print("Permission granted")
-            } else if let error = error {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in            
+            if let error = error {
                 print(error.localizedDescription)
             }
         }
@@ -36,6 +36,17 @@ class PTNotificationManager {
                 print(error.localizedDescription)
             } else {
                 print("Notification scheduled")
+            }
+        }
+    }
+    
+    func isPermitted(completion: @escaping (_ isAuthorized: Bool) -> Void) {
+        
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if(settings.alertSetting == .enabled) {
+                completion(true)
+            }else{
+                completion(false)
             }
         }
     }

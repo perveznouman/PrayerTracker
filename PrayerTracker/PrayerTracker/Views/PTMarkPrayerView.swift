@@ -20,7 +20,6 @@ struct PTMarkPrayerView: View {
     @ObservedObject private var prayerVM: PTDailyPrayerViewModel = PTDailyPrayerViewModel.shared
 
     // Location
-    let location = PTLocationManager() // To initialize location service
     @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     var userCity: String {
         return locationViewModel.location?.city ?? String(localized: "unknown")
@@ -92,10 +91,6 @@ struct PTMarkPrayerView: View {
             }.onAppear(perform: {
                 dataManager.fetchDailyPrayers(for: selectedDate, withContext: modelContext)
                 prayerVM.prayers = dataManager.sortedData
-                
-                #warning("call this in an appropriate class")
-                let hourMin = PTNotificationSettingsViewModel().getReminderTime()
-                let _ = PTNotificationManager(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
 
             })
             .navigationBarTitleDisplayMode(.inline)

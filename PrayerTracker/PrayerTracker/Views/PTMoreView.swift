@@ -12,8 +12,7 @@ struct PTMoreView: View {
     
     @ObservedObject var notificationVM = PTNotificationSettingsViewModel()
     @State var isNotificationSecOpen = false
-    @State var isReminderSecOpen = false
-    @State private var showTimePicker = false
+    @State var isReminderSecOpen = true
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
@@ -49,10 +48,10 @@ struct PTMoreView: View {
                             title: NSLocalizedString("reminder", comment: ""),
                             description: NSLocalizedString("reminderDescription", comment: ""),
                             isExpanded: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
-                            toggleON: $showTimePicker
+                            toggleON: $notificationVM.isAuthorized
                         )
                     ) {
-                        if (showTimePicker && !isNotificationSecOpen) {
+                        if (notificationVM.isAuthorized && !isNotificationSecOpen) {
                             PTReminderView()
                         }
                     }.textCase(.none)
@@ -61,6 +60,7 @@ struct PTMoreView: View {
                 .colorMultiply(Color.PTWhite)
             }
             .onAppear {
+                notificationVM.isNotificationAuthorized()
                 UIDatePicker.appearance().minuteInterval = 15
             }
             .onDisappear {
