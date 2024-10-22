@@ -35,9 +35,25 @@ class PTNotificationManager {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                print("Notification scheduled")
+                print(notification.id + "Notification scheduled at - " + "\(notification.hour) : \(notification.min)")
             }
         }
+    }
+    
+    func removeUpcomingNotification(for id: String) {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+           var identifiers: [String] = []
+           for notification:UNNotificationRequest in notificationRequests {
+               if notification.identifier == id {
+                  identifiers.append(notification.identifier)
+               }
+           }
+           UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
+    }
+    
+    func clearNotifications() {
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     func isPermitted(completion: @escaping (_ isAuthorized: Bool) -> Void) {

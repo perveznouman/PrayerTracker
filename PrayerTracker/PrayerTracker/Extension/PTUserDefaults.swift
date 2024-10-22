@@ -27,7 +27,7 @@ extension UserDefaults {
                 return nil
             }
         }else {
-            print("Couldnt find key")
+            print("Couldnt find key \(key)")
             return nil
         }
     }

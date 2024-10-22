@@ -34,12 +34,12 @@ class PTNotificationSettingsViewModel: ObservableObject {
             self.scheduleReminderNotification()
         }
         else {
-            #warning("Remove scheduled notifications")
+            PTNotificationManager().removeUpcomingNotification(for: PTConstantKey.dailyReminderNotification)
         }
     }
     
     func getReminderPermission() -> Bool {
-        let isEnabled = UserDefaults.standard.retrieve(object: Bool.self, fromKey: PTConstantKey.dailyReminderEnabled) ?? false
+        let isEnabled = UserDefaults.standard.retrieve(object: Bool.self, fromKey: PTConstantKey.dailyReminderEnabled) ?? true
         return isEnabled
     }
     
@@ -53,7 +53,10 @@ class PTNotificationSettingsViewModel: ObservableObject {
                 let _ = notificationMgr.schedule(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
             }
         }
-
+    }
+    
+    func clearNotification() {
+        PTNotificationManager().clearNotifications()
     }
     
     func isNotificationAuthorized(completion: @escaping (Bool) -> Void) {
