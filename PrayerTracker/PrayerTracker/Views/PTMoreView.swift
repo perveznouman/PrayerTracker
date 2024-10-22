@@ -13,6 +13,8 @@ struct PTMoreView: View {
     @ObservedObject var notificationVM = PTNotificationSettingsViewModel()
     @State var isNotificationSecOpen = false
     @State var isReminderSecOpen = true
+    @State var isReminderToggleON = false
+    @State var isNotificationEnabled = false
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
@@ -48,10 +50,10 @@ struct PTMoreView: View {
                             title: NSLocalizedString("reminder", comment: ""),
                             description: NSLocalizedString("reminderDescription", comment: ""),
                             isExpanded: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
-                            toggleON: $notificationVM.isAuthorized
+                            toggleON: $isReminderToggleON, isLocationEnabled: $isNotificationEnabled
                         )
                     ) {
-                        if (notificationVM.isAuthorized && !isNotificationSecOpen) {
+                        if (isReminderToggleON && !isNotificationSecOpen) {
                             PTReminderView()
                         }
                     }.textCase(.none)
@@ -60,8 +62,11 @@ struct PTMoreView: View {
                 .colorMultiply(Color.PTWhite)
             }
             .onAppear {
-                notificationVM.isNotificationAuthorized()
-                UIDatePicker.appearance().minuteInterval = 15
+                notificationVM.isNotificationAuthorized { authorized in
+                    isNotificationEnabled = authorized
+                    isReminderToggleON = authorized && notificationVM.getReminderPermission()
+                }
+//                UIDatePicker.appearance().minuteInterval = 15
             }
             .onDisappear {
                 UIDatePicker.appearance().minuteInterval = 1
@@ -133,6 +138,7 @@ struct PTReminderSectionHeader: View {
     @Binding var isExpanded: Bool
     @Binding var otherSection: Bool
     @Binding var toggleON: Bool
+    @Binding var isLocationEnabled: Bool
     
     var body: some View {
         
@@ -150,6 +156,7 @@ struct PTReminderSectionHeader: View {
                 
                 Toggle("", isOn: $toggleON)
                     .onChange(of: toggleON) { oldValue, newValue in
+                        PTNotificationSettingsViewModel().updateReminderPermission(newValue)
                         if(newValue) {
                             isExpanded = true
                             otherSection = false
@@ -158,6 +165,7 @@ struct PTReminderSectionHeader: View {
                             isExpanded = false
                         }
                     }
+                    .disabled(!isLocationEnabled)
                     .tint(.PTAccentColor)
             }
             

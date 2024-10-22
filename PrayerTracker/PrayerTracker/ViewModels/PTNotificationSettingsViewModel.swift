@@ -28,15 +28,40 @@ class PTNotificationSettingsViewModel: ObservableObject {
         return hourMin
     }
     
+    func updateReminderPermission(_ enabled: Bool) {
+        UserDefaults.standard.save(customObject: enabled, inKey: PTConstantKey.dailyReminderEnabled)
+        if enabled {
+            self.scheduleReminderNotification()
+        }
+        else {
+            #warning("Remove scheduled notifications")
+        }
+    }
+    
+    func getReminderPermission() -> Bool {
+        let isEnabled = UserDefaults.standard.retrieve(object: Bool.self, fromKey: PTConstantKey.dailyReminderEnabled) ?? false
+        return isEnabled
+    }
+    
+    
     func scheduleReminderNotification() {
         
         let hourMin = self.getReminderTime()
-        let _ = PTNotificationManager(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
+        let notificationMgr = PTNotificationManager()
+        self.isNotificationAuthorized { authorized in
+            if self.getReminderPermission() && authorized {
+                let _ = notificationMgr.schedule(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
+            }
+        }
+
     }
     
-    func isNotificationAuthorized() {
+    func isNotificationAuthorized(completion: @escaping (Bool) -> Void) {
         PTNotificationManager().isPermitted(completion: { isAuthorized in
-            self.isAuthorized = isAuthorized
+            DispatchQueue.main.async {
+                self.isAuthorized = isAuthorized
+                completion(isAuthorized)
+            }
         })
     }
 }

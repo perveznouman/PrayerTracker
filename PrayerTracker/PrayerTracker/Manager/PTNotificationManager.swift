@@ -10,15 +10,15 @@ import UserNotifications
 
 class PTNotificationManager {
     
-    init() {}
-    
-    init(_ notification: PTNotification) {
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in            
+    init() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if let error = error {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func schedule (_ notification: PTNotification) {
         
         var date = DateComponents()
         date.hour = Int(notification.hour)
