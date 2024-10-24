@@ -8,10 +8,13 @@
 import Foundation
 import UserNotifications
 
-class PTNotificationManager {
+class PTNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
-    init() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+    let notificationCenter = UNUserNotificationCenter.current()
+    
+    override init() {
+        super.init()
+        notificationCenter.requestAuthorization(options: [.alert, .sound]) { granted, error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -31,7 +34,8 @@ class PTNotificationManager {
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: notification.repeats)
         let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request) { error in
+        self.notificationCenter.delegate = self
+        notificationCenter.add(request) { error in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -41,29 +45,35 @@ class PTNotificationManager {
     }
     
     func removeUpcomingNotification(for id: String) {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
-           var identifiers: [String] = []
-           for notification:UNNotificationRequest in notificationRequests {
-               if notification.identifier == id {
-                  identifiers.append(notification.identifier)
-               }
-           }
-           UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        self.notificationCenter.delegate = self
+        notificationCenter.getPendingNotificationRequests { (notificationRequests) in
+            var identifiers: [String] = []
+            for notification:UNNotificationRequest in notificationRequests {
+                if notification.identifier == id {
+                    identifiers.append(notification.identifier)
+                }
+            }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+            print("Removing notification for \(id)")
         }
     }
     
     func clearNotifications() {
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        notificationCenter.removeAllDeliveredNotifications()
     }
     
     func isPermitted(completion: @escaping (_ isAuthorized: Bool) -> Void) {
-        
-        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+        self.notificationCenter.delegate = self
+        notificationCenter.getNotificationSettings { (settings) in
             if(settings.alertSetting == .enabled) {
                 completion(true)
             }else{
                 completion(false)
             }
         }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.banner)
     }
 }

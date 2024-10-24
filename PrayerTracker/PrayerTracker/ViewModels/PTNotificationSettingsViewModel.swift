@@ -16,6 +16,8 @@ class PTNotificationSettingsViewModel: ObservableObject {
                                                     PTNotificationSettings(title: "esha", isON: true)]
     @Published var isAuthorized: Bool = false
     
+    private var notificationMgr: PTNotificationManager = .init()
+    
     func updateReminderTime(_ time: Date) {
         let formattedTime = time.BHReminderStorageFormat
         UserDefaults.standard.save(customObject: formattedTime, inKey: PTConstantKey.dailyReminderNotification)
@@ -34,7 +36,7 @@ class PTNotificationSettingsViewModel: ObservableObject {
             self.scheduleReminderNotification()
         }
         else {
-            PTNotificationManager().removeUpcomingNotification(for: PTConstantKey.dailyReminderNotification)
+            notificationMgr.removeUpcomingNotification(for: PTConstantKey.dailyReminderNotification)
         }
     }
     
@@ -47,24 +49,25 @@ class PTNotificationSettingsViewModel: ObservableObject {
     func scheduleReminderNotification() {
         
         let hourMin = self.getReminderTime()
-        let notificationMgr = PTNotificationManager()
         self.isNotificationAuthorized { authorized in
             if self.getReminderPermission() && authorized {
-                let _ = notificationMgr.schedule(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
+                let _ = self.notificationMgr.schedule(PTNotification(id: PTConstantKey.dailyReminderNotification, title: NSLocalizedString("addEntryReminderTitle", comment: ""), content: NSLocalizedString("addEntryReminderMessage", comment: ""), subTitle: nil, hour: Int(hourMin[0])!, min: Int(hourMin[1])!, repeats: true))
             }
         }
     }
     
     func clearNotification() {
-        PTNotificationManager().clearNotifications()
+        notificationMgr.clearNotifications()
     }
     
     func isNotificationAuthorized(completion: @escaping (Bool) -> Void) {
-        PTNotificationManager().isPermitted(completion: { isAuthorized in
+        notificationMgr.isPermitted(completion: { isAuthorized in
             DispatchQueue.main.async {
                 self.isAuthorized = isAuthorized
                 completion(isAuthorized)
             }
         })
     }
+    
+    init() {}
 }

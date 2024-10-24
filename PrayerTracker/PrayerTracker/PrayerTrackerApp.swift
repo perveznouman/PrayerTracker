@@ -35,13 +35,13 @@ struct PrayerTrackerApp: App {
     }
     
     private func notificationsAndLocation() {
-        let _ = PTLocationManager()
         let notificationVM = PTNotificationSettingsViewModel()
         notificationVM.clearNotification()
         notificationVM.scheduleReminderNotification()
     }
     
     init() {
+        let _ = PTLocationManager()
         guard let _ = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).last else { return }
     }
 }

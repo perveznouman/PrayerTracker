@@ -10,7 +10,7 @@ import SwiftUI
 struct PTMoreView: View {
     
     
-    @ObservedObject var notificationVM = PTNotificationSettingsViewModel()
+    @ObservedObject var notificationVM: PTNotificationSettingsViewModel = .init()
     @State var isNotificationSecOpen = false
     @State var isReminderSecOpen = true
     @State var isReminderToggleON = false
@@ -54,23 +54,23 @@ struct PTMoreView: View {
                         )
                     ) {
                         if (isReminderToggleON && !isNotificationSecOpen) {
-                            PTReminderView()
+                            PTReminderView(reminderTime: notificationVM.getReminderTime())
                         }
                     }.textCase(.none)
                 }
                 .padding(.bottom, 35)
                 .colorMultiply(Color.PTWhite)
             }
-            .onAppear {
-                notificationVM.isNotificationAuthorized { authorized in
+            .onDisappear {
+                UIDatePicker.appearance().minuteInterval = 1
+            }
+            .onAppear(perform: { notificationVM.isNotificationAuthorized { authorized in
                     isNotificationEnabled = authorized
                     isReminderToggleON = authorized && notificationVM.getReminderPermission()
                 }
 //                UIDatePicker.appearance().minuteInterval = 15
-            }
-            .onDisappear {
-                UIDatePicker.appearance().minuteInterval = 1
-            }
+            })
+            .environmentObject(notificationVM)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
@@ -82,7 +82,10 @@ struct PTMoreView: View {
 }
 
 struct PTReminderView: View {
+    
+    var reminderTime: [String]
     @State var selectedHour = Date()
+    @EnvironmentObject var notificationVM: PTNotificationSettingsViewModel
     
     var body: some View {
         
@@ -94,13 +97,19 @@ struct PTReminderView: View {
                 Spacer()
                 DatePicker("", selection: $selectedHour, displayedComponents: .hourAndMinute)
                     .onChange(of: selectedHour) { oldValue, newValue in
-                        PTNotificationSettingsViewModel().updateReminderTime(newValue)
+                        notificationVM.updateReminderTime(newValue)
                     }
                     .preferredColorScheme(.dark)
                     .colorMultiply(.PTWhite)
                     .labelsHidden()
                     .datePickerStyle(.wheel)
                     .frame(maxHeight: 400)
+            }
+        }.onAppear {
+            let calendar = Calendar(identifier: .gregorian)
+            let components = DateComponents(hour: Int(reminderTime[0])!, minute: Int(reminderTime[1])!)
+            if let customDate = calendar.date(from: components) {
+                self.selectedHour = customDate
             }
         }
     }
@@ -139,6 +148,8 @@ struct PTReminderSectionHeader: View {
     @Binding var otherSection: Bool
     @Binding var toggleON: Bool
     @Binding var isLocationEnabled: Bool
+    @EnvironmentObject var notificationVM: PTNotificationSettingsViewModel
+
     
     var body: some View {
         
@@ -156,7 +167,7 @@ struct PTReminderSectionHeader: View {
                 
                 Toggle("", isOn: $toggleON)
                     .onChange(of: toggleON) { oldValue, newValue in
-                        PTNotificationSettingsViewModel().updateReminderPermission(newValue)
+                        notificationVM.updateReminderPermission(newValue)
                         if(newValue) {
                             isExpanded = true
                             otherSection = false
