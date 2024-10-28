@@ -30,20 +30,7 @@ struct PTMoreView: View {
                 VStack {
                     
                     if (!isNotificationEnabled) {
-                        HStack {
-                            Text(NSLocalizedString("notificationDisabledMessage", comment: ""))
-                                .underline()
-                                .foregroundColor(.PTBlack)
-                                .font(.PTNotificationDisabledBanner)
-                                .multilineTextAlignment(.center)
-                        }
-                        .onTapGesture {
-                            if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
-                                UIApplication.shared.open(url)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 25)
-                        .background(Color.PTBannerYellow)
+                        PTHeaderView(message: "notificationDisabledMessage")
                     }
                     
                     List {
