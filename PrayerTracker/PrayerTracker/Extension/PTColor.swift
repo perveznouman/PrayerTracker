@@ -80,6 +80,10 @@ extension Color {
         return Color.white
     }
     
+    public static var PTBlack: Color {
+        return Color.black
+    }
+    
     public static var PTRed: Color {
         return Color(UIColor(red: 227/255.0, green: 11/255.0, blue: 92/255.0, alpha: 1.0))
     }
@@ -87,5 +91,10 @@ extension Color {
     public static var PTGray: Color {
         return Color.gray
     }
+    
+    public static var PTBannerYellow: Color {
+        return Color(UIColor(red: 255/255.0, green: 214/255.0, blue: 153/255.0, alpha: 1.0))
+    }
+    
     static let PTAlmond = Color(hex: "EADBC8")
 }

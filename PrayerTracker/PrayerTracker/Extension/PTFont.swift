@@ -60,6 +60,7 @@ extension Font {
     public static let PTLocationButton = Font.custom("Mukta-Bold", size: 15, relativeTo: .title)
     public static let PTCellDetailedText = Font.custom("Mukta-Medium", size: 15, relativeTo: .subheadline)
     public static let PTAlertText = Font.custom("Mukta-Bold", size: 18, relativeTo: .headline)
+    public static let PTNotificationDisabledBanner = Font.custom("Mukta-Bold", size: 12, relativeTo: .subheadline)
 
 //    public static let titleCustom = Font.custom("Lobster-Regular", size: 28, relativeTo: .title)
 //    public static let title2Custom = Font.custom("Lobster-Regular", size: 22, relativeTo: .title2)

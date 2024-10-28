@@ -40,3 +40,4 @@
 "addEntryReminderMessage" = "Mark today's offered Salah";
 "notificationDescription" = "App will remind you for opted Salah";
 "reminderDescription" = "App will remind you to mark offered Salah";
+"notificationDisabledMessage" = "Notification is disabled. Enable Notification in Settings";

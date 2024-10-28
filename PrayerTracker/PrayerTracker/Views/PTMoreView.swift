@@ -14,7 +14,7 @@ struct PTMoreView: View {
     @State var isNotificationSecOpen = false
     @State var isReminderSecOpen = true
     @State var isReminderToggleON = false
-    @State var isNotificationEnabled = false
+    @State var isNotificationEnabled = true
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
@@ -27,39 +27,59 @@ struct PTMoreView: View {
                 Color.PTViewBackgroundColor
                     .ignoresSafeArea()
                 
-                List {
-
-                    Section(
-                        header: PTNotificationSectionHeader(
-                            title: NSLocalizedString("notification", comment: ""),
-                            description: NSLocalizedString("notificationDescription", comment: ""),
-                            isExpanded: $isNotificationSecOpen, otherSection: $isReminderSecOpen,
-                            openImage: "chevron.up",
-                            closeImage: "chevron.down"
-                        )
-                    ) {
-                        if isNotificationSecOpen {
-                            ForEach($notificationVM.prayerReminder) { $reminder in
-                                PTPrayerReminderCellView(reminder: $reminder)
+                VStack {
+                    
+                    if (!isNotificationEnabled) {
+                        HStack {
+                            Text(NSLocalizedString("notificationDisabledMessage", comment: ""))
+                                .underline()
+                                .foregroundColor(.PTBlack)
+                                .font(.PTNotificationDisabledBanner)
+                                .multilineTextAlignment(.center)
+                        }
+                        .onTapGesture {
+                            if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                                UIApplication.shared.open(url)
                             }
                         }
-                    }.textCase(.none)
+                        .frame(maxWidth: .infinity, minHeight: 25)
+                        .background(Color.PTBannerYellow)
+                    }
                     
-                    Section(
-                        header: PTReminderSectionHeader(
-                            title: NSLocalizedString("reminder", comment: ""),
-                            description: NSLocalizedString("reminderDescription", comment: ""),
-                            isExpanded: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
-                            toggleON: $isReminderToggleON, isLocationEnabled: $isNotificationEnabled
-                        )
-                    ) {
-                        if (isReminderToggleON && !isNotificationSecOpen) {
-                            PTReminderView(reminderTime: notificationVM.getReminderTime())
-                        }
-                    }.textCase(.none)
+                    List {
+
+                        Section(
+                            header: PTNotificationSectionHeader(
+                                title: NSLocalizedString("notification", comment: ""),
+                                description: NSLocalizedString("notificationDescription", comment: ""),
+                                isExpanded: $isNotificationSecOpen, otherSection: $isReminderSecOpen,
+                                openImage: "chevron.up",
+                                closeImage: "chevron.down"
+                            )
+                        ) {
+                            if isNotificationSecOpen {
+                                ForEach($notificationVM.prayerReminder) { $reminder in
+                                    PTPrayerReminderCellView(reminder: $reminder)
+                                }
+                            }
+                        }.textCase(.none)
+                        
+                        Section(
+                            header: PTReminderSectionHeader(
+                                title: NSLocalizedString("reminder", comment: ""),
+                                description: NSLocalizedString("reminderDescription", comment: ""),
+                                isExpanded: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
+                                toggleON: $isReminderToggleON, isLocationEnabled: $isNotificationEnabled
+                            )
+                        ) {
+                            if (isReminderToggleON && !isNotificationSecOpen) {
+                                PTReminderView(reminderTime: notificationVM.getReminderTime())
+                            }
+                        }.textCase(.none)
+                    }
+                    .padding(.bottom, 35)
+                    .colorMultiply(Color.PTWhite)
                 }
-                .padding(.bottom, 35)
-                .colorMultiply(Color.PTWhite)
             }
             .onDisappear {
                 UIDatePicker.appearance().minuteInterval = 1
@@ -68,7 +88,7 @@ struct PTMoreView: View {
                     isNotificationEnabled = authorized
                     isReminderToggleON = authorized && notificationVM.getReminderPermission()
                 }
-//                UIDatePicker.appearance().minuteInterval = 15
+                UIDatePicker.appearance().minuteInterval = 15
             })
             .environmentObject(notificationVM)
             .navigationBarTitleDisplayMode(.inline)
@@ -252,6 +272,38 @@ struct PTNotificationSectionHeader: View {
     }
 }
 
+/*
+struct PTNotificationBanner: View {
+
+  @State private var showView: Bool = false
+
+  var body: some View {
+    ZStack(alignment: .top) {
+
+      VStack {
+        Spacer()
+        Button("Show Alert") {
+          withAnimation { showView.toggle() }
+        }
+        Spacer()
+      }
+
+      if showView {
+        RoundedRectangle(cornerRadius: 15)
+          .fill(Color.blue)
+          .frame(
+            width: UIScreen.main.bounds.width * 0.9,
+            height: UIScreen.main.bounds.height * 0.1
+          )
+          .transition(.asymmetric(
+            insertion: .move(edge: .top),
+            removal: .move(edge: .top)
+          ))
+      }
+    }
+  }
+}
+*/
 
 #Preview {
     PTMoreView()

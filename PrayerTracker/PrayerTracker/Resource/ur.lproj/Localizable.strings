@@ -38,5 +38,6 @@
 "reminder" = "یاد دہانی";
 "addEntryReminderTitle" = "یاد دہانی";
 "addEntryReminderMessage" = "آج کی نماز کو نشان زد کریں";
-"notificationDescription" = "ایپ آپ کو منتخب شدہ نماز کی یاد دلائے گی۔";
-"reminderDescription" = "ایپ آپ کو پیش کردہ نماز کو نشان زد کرنے کی یاد دلائے گی۔";
+"notificationDescription" = "ایپ آپ کو منتخب شدہ نماز کی یاد دلائے گا۔";
+"reminderDescription" = "ایپ آپ کو ادا کردہ نماز کو نشان زد کرنے کی یاد دلائے گا۔";
+"notificationDisabledMessage" = "نوٹیفکیشن بند ہے۔ سیٹنگز میں نوٹیفکیشن کو آن کریں۔";
