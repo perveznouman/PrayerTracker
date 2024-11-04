@@ -11,8 +11,8 @@ struct PTMoreView: View {
     
     
     @ObservedObject var notificationVM: PTNotificationSettingsViewModel = .init()
-    @State var isNotificationSecOpen = false
-    @State var isReminderSecOpen = true
+    @State var isPrayerSecOpen = false
+    @State var isReminderSecOpen = false
     @State var isReminderToggleON = false
     @State var isNotificationEnabled = true
 
@@ -34,35 +34,36 @@ struct PTMoreView: View {
                     }
                     
                     List {
+                        
+                        Section(
+                            header: PTReminderSectionHeader(
+                                title: NSLocalizedString("reminder", comment: ""),
+                                description: NSLocalizedString("reminderDescription", comment: ""),
+                                isExpanded: $isReminderSecOpen, otherSection: $isPrayerSecOpen,
+                                toggleON: $isReminderToggleON, isLocationEnabled: $isNotificationEnabled
+                            )
+                        ) {
+                            if (isReminderToggleON && !isPrayerSecOpen) {
+                                PTReminderView(reminderTime: notificationVM.getReminderTime())
+                            }
+                        }.textCase(.none)
 
                         Section(
                             header: PTNotificationSectionHeader(
                                 title: NSLocalizedString("notification", comment: ""),
                                 description: NSLocalizedString("notificationDescription", comment: ""),
-                                isExpanded: $isNotificationSecOpen, otherSection: $isReminderSecOpen,
+                                isExpanded: $isPrayerSecOpen, otherSection: $isReminderSecOpen,
                                 openImage: "chevron.up",
                                 closeImage: "chevron.down"
                             )
                         ) {
-                            if isNotificationSecOpen {
+                            if isPrayerSecOpen {
                                 ForEach($notificationVM.prayerReminder) { $reminder in
                                     PTPrayerReminderCellView(reminder: $reminder)
                                 }
                             }
                         }.textCase(.none)
                         
-                        Section(
-                            header: PTReminderSectionHeader(
-                                title: NSLocalizedString("reminder", comment: ""),
-                                description: NSLocalizedString("reminderDescription", comment: ""),
-                                isExpanded: $isReminderSecOpen, otherSection: $isNotificationSecOpen,
-                                toggleON: $isReminderToggleON, isLocationEnabled: $isNotificationEnabled
-                            )
-                        ) {
-                            if (isReminderToggleON && !isNotificationSecOpen) {
-                                PTReminderView(reminderTime: notificationVM.getReminderTime())
-                            }
-                        }.textCase(.none)
                     }
                     .padding(.bottom, 35)
                     .colorMultiply(Color.PTWhite)

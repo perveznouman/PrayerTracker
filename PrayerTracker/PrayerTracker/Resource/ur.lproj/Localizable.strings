@@ -34,7 +34,7 @@
 "legands" = "نمازوں کی تعداد کی بنیاد پر دکھایا گیا ہے نہ کہ رکعتوں کی بنیاد پر";
 "unknown" = "نامعلوم";
 
-"notification" = "اطلاع";
+"notification" = "نمازوں کی نوٹیفکیشن";
 "reminder" = "یاد دہانی";
 "addEntryReminderTitle" = "یاد دہانی";
 "addEntryReminderMessage" = "آج کی نماز کو نشان زد کریں";

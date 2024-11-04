@@ -34,7 +34,7 @@
 "legands" = "Shown based on number of Prayers not Rakaths";
 "unknown" = "Unknown";
 
-"notification" = "Notification";
+"notification" = "Daily Prayer Notification";
 "reminder" = "Reminder";
 "addEntryReminderTitle" = "Reminder";
 "addEntryReminderMessage" = "Mark today's offered Salah";
