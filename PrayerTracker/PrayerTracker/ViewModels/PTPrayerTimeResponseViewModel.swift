@@ -31,11 +31,11 @@ class PTTodaysTimingsViewModel {
     var prayers: [PTTodaysPrayer]?
     
     init(_ timings: PTTimings) {
-        prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, time: timings.fajr.replaceString(" (IST)", by: ""), date: .now),
-                   PTTodaysPrayer(name: "zuhar", isOffered: false, time: timings.dhuhr.replaceString(" (IST)", by: ""), date: .now),
-                   PTTodaysPrayer(name: "asar", isOffered: false, time: timings.asr.replaceString(" (IST)", by: ""), date: .now),
-                   PTTodaysPrayer(name: "maghrib", isOffered: false, time: timings.maghrib.replaceString(" (IST)", by: ""), date: .now),
-                   PTTodaysPrayer(name: "esha", isOffered: false, time: timings.isha.replaceString(" (IST)", by: ""), date: .now)]
+        prayers = [PTTodaysPrayer(name: "fajr", isOffered: false, time: timings.fajr.replacingOccurrences(of: #"\(.*\)"#, with: "", options: .regularExpression).trimmingCharacters(in: .whitespaces), date: .now),
+                   PTTodaysPrayer(name: "zuhar", isOffered: false, time: timings.dhuhr.replacingOccurrences(of: #"\(.*\)"#, with: "", options: .regularExpression).trimmingCharacters(in: .whitespaces), date: .now),
+                   PTTodaysPrayer(name: "asar", isOffered: false, time: timings.asr.replacingOccurrences(of: #"\(.*\)"#, with: "", options: .regularExpression).trimmingCharacters(in: .whitespaces), date: .now),
+                   PTTodaysPrayer(name: "maghrib", isOffered: false, time: timings.maghrib.replacingOccurrences(of: #"\(.*\)"#, with: "", options: .regularExpression).trimmingCharacters(in: .whitespaces), date: .now),
+                   PTTodaysPrayer(name: "esha", isOffered: false, time: timings.isha.replacingOccurrences(of: #"\(.*\)"#, with: "", options: .regularExpression).trimmingCharacters(in: .whitespaces), date: .now)]
     }
 
 }
