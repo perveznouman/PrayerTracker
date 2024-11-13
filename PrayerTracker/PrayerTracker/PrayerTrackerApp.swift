@@ -37,7 +37,7 @@ struct PrayerTrackerApp: App {
     private func notificationsAndLocation() {
         let notificationVM = PTNotificationSettingsViewModel()
         notificationVM.clearNotification()
-        notificationVM.scheduleReminderNotification()
+        notificationVM.scheduleReminderNotification(type: Notifications.allCases)
     }
     
     init() {

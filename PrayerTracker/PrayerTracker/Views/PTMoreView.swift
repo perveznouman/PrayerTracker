@@ -49,7 +49,7 @@ struct PTMoreView: View {
                         }.textCase(.none)
 
                         Section(
-                            header: PTNotificationSectionHeader(
+                            header: PTPrayerNotificationSectionHeader(
                                 title: NSLocalizedString("notification", comment: ""),
                                 description: NSLocalizedString("notificationDescription", comment: ""),
                                 isExpanded: $isPrayerSecOpen, otherSection: $isReminderSecOpen,
@@ -126,7 +126,8 @@ struct PTReminderView: View {
 struct PTPrayerReminderCellView: View {
     
     @Binding var reminder: PTNotificationSettings
-    
+    @EnvironmentObject var notificationVM: PTNotificationSettingsViewModel
+
     var body: some View {
         HStack {
             VStack(alignment:.leading, spacing: 0) {
@@ -136,7 +137,7 @@ struct PTPrayerReminderCellView: View {
             }
             Toggle("", isOn: $reminder.isON)
                 .onChange(of: reminder.isON) { oldValue, newValue in
-                    
+                    notificationVM.updateReminderPermission(newValue, ofType: Notifications(rawValue: reminder.title)!)
                 }
                 .tint(.PTAccentColor)
 
@@ -198,7 +199,7 @@ struct PTReminderSectionHeader: View {
     }
 }
 
-struct PTNotificationSectionHeader: View {
+struct PTPrayerNotificationSectionHeader: View {
     
     var id: String {
         return title
@@ -260,38 +261,6 @@ struct PTNotificationSectionHeader: View {
     }
 }
 
-/*
-struct PTNotificationBanner: View {
-
-  @State private var showView: Bool = false
-
-  var body: some View {
-    ZStack(alignment: .top) {
-
-      VStack {
-        Spacer()
-        Button("Show Alert") {
-          withAnimation { showView.toggle() }
-        }
-        Spacer()
-      }
-
-      if showView {
-        RoundedRectangle(cornerRadius: 15)
-          .fill(Color.blue)
-          .frame(
-            width: UIScreen.main.bounds.width * 0.9,
-            height: UIScreen.main.bounds.height * 0.1
-          )
-          .transition(.asymmetric(
-            insertion: .move(edge: .top),
-            removal: .move(edge: .top)
-          ))
-      }
-    }
-  }
-}
-*/
 
 #Preview {
     PTMoreView()

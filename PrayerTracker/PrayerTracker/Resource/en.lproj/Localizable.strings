@@ -41,4 +41,9 @@
 "notificationDescription" = "App will remind you for opted Salah";
 "reminderDescription" = "App will remind you to mark offered Salah";
 "notificationDisabledMessage" = "Notification is disabled. Enable Notification in Settings";
+"fajrReminder" = "Fajr Salah's time starts now";
+"zuharReminder" = "Zuhar Salah's time starts now";
+"asarReminder" = "Asar Salah's time starts now";
+"maghribReminder" = "Maghrib Salah's time starts now";
+"eshaReminder" = "Esha Salah's time starts now";
 
