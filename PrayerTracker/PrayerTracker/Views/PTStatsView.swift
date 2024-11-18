@@ -58,7 +58,7 @@ struct PTStatsView: View {
                 //
                 //                }
             }
-            .navigationTitle(LocalizedStringKey("statistics"))
+            .navigationTitle(LocalizedStringKey("history"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)

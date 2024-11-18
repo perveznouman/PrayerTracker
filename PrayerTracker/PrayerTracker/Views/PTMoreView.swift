@@ -7,15 +7,23 @@
 
 import SwiftUI
 
+enum PTMoreViewSectionHeader {
+    case reminder
+    case prayer
+    case fique
+    case about
+}
+
 struct PTMoreView: View {
     
     
     @ObservedObject var notificationVM: PTNotificationSettingsViewModel = .init()
-    @State var isPrayerSecOpen = false
-    @State var isReminderSecOpen = false
+//    @State var isPrayerSecOpen = false
+//    @State var isReminderSecOpen = false
     @State var isReminderToggleON = false
     @State var isNotificationEnabled = true
-
+    @State var selectedSection: PTMoreViewSectionHeader = .about
+    
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
@@ -36,14 +44,19 @@ struct PTMoreView: View {
                     List {
                         
                         Section(
+                            header: PTFiqueSectionHeader()
+                        ) {}.textCase(.none)
+                        
+                        
+                        Section(
                             header: PTReminderSectionHeader(
                                 title: NSLocalizedString("reminder", comment: ""),
                                 description: NSLocalizedString("reminderDescription", comment: ""),
-                                isExpanded: $isReminderSecOpen, otherSection: $isPrayerSecOpen,
+                                expandedSection: $selectedSection,
                                 toggleON: $isReminderToggleON, isLocationEnabled: $isNotificationEnabled
                             )
                         ) {
-                            if (isReminderToggleON && !isPrayerSecOpen) {
+                            if (isReminderToggleON && (selectedSection != .prayer && selectedSection != .fique)) {
                                 PTReminderView(reminderTime: notificationVM.getReminderTime())
                             }
                         }.textCase(.none)
@@ -52,17 +65,33 @@ struct PTMoreView: View {
                             header: PTPrayerNotificationSectionHeader(
                                 title: NSLocalizedString("notification", comment: ""),
                                 description: NSLocalizedString("notificationDescription", comment: ""),
-                                isExpanded: $isPrayerSecOpen, otherSection: $isReminderSecOpen,
+                                expandedSection: $selectedSection,
                                 openImage: "chevron.up",
                                 closeImage: "chevron.down"
                             )
                         ) {
-                            if isPrayerSecOpen {
+                            if selectedSection == .prayer {
                                 ForEach($notificationVM.prayerReminder) { $reminder in
                                     PTPrayerReminderCellView(reminder: $reminder)
                                 }
                             }
                         }.textCase(.none)
+                        
+//                        Section(
+//                            header: PTFiqueSectionHeader(
+//                                title: NSLocalizedString("fique", comment: ""),
+//                                description: NSLocalizedString("fiqueMessage", comment: ""),
+//                                expandedSection: $selectedSection,
+//                                openImage: "chevron.up",
+//                                closeImage: "chevron.down"
+//                            )
+//                        ) {
+//                            if selectedSection == .fique {
+//                                ForEach($notificationVM.prayerReminder) { $reminder in
+//                                    PTPrayerReminderCellView(reminder: $reminder)
+//                                }
+//                            }
+//                        }.textCase(.none)
                         
                     }
                     .padding(.bottom, 35)
@@ -146,6 +175,60 @@ struct PTPrayerReminderCellView: View {
     }
 }
 
+struct PTFiqueSectionHeader: View {
+    
+    @State var showingDetail = false
+
+    var body: some View {
+        
+        VStack(alignment:.leading, spacing: 0) {
+            HStack {
+                
+                Button(action: {
+                    showingDetail.toggle()
+                }, label: {
+                    Text(NSLocalizedString("fique", comment: ""))
+                }).sheet(isPresented: $showingDetail, content: {
+                    FiqueSettingsView()
+                })
+                .foregroundColor(.PTWhite)
+                .font(.PTPrayerCell)
+                .frame(alignment: .leading)
+                
+                Spacer()
+                
+                Button(action: {
+                    showingDetail.toggle()
+                }, label: {
+                    Image(systemName: "chevron.right")
+                }).sheet(isPresented: $showingDetail, content: {
+                    FiqueSettingsView()
+                })
+                .foregroundColor(.accentColor)
+                .frame(alignment: .trailing)
+            }.contentShape(Rectangle())
+            .onTapGesture {
+                showingDetail.toggle()
+            }.sheet(isPresented: $showingDetail, content: {
+                FiqueSettingsView()
+            })
+            
+            Button(action: {
+                showingDetail.toggle()
+            }, label: {
+                Text(NSLocalizedString("fiqueMessage", comment: ""))
+            }).sheet(isPresented: $showingDetail, content: {
+                TempView()
+            })
+            .foregroundColor(.PTGray)
+            .font(.PTCellDetailedText)
+        }
+    }
+}
+
+
+
+
 struct PTReminderSectionHeader: View {
     
     var id: String {
@@ -153,8 +236,7 @@ struct PTReminderSectionHeader: View {
     }
     @State var title: String
     @State var description: String
-    @Binding var isExpanded: Bool
-    @Binding var otherSection: Bool
+    @Binding var expandedSection: PTMoreViewSectionHeader
     @Binding var toggleON: Bool
     @Binding var isLocationEnabled: Bool
     @EnvironmentObject var notificationVM: PTNotificationSettingsViewModel
@@ -178,12 +260,11 @@ struct PTReminderSectionHeader: View {
                     .onChange(of: toggleON) { oldValue, newValue in
                         notificationVM.updateReminderPermission(newValue)
                         if(newValue) {
-                            isExpanded = true
-                            otherSection = false
+                            expandedSection = .reminder
                         }
-                        else {
-                            isExpanded = false
-                        }
+//                        else {
+//                            isExpanded = false
+//                        }
                     }
                     .disabled(!isLocationEnabled)
                     .tint(.PTAccentColor)
@@ -206,8 +287,7 @@ struct PTPrayerNotificationSectionHeader: View {
     }
     @State var title: String
     @State var description: String
-    @Binding var isExpanded: Bool
-    @Binding var otherSection: Bool
+    @Binding var expandedSection: PTMoreViewSectionHeader
     @State var openImage: String
     @State var closeImage: String
     
@@ -218,8 +298,12 @@ struct PTPrayerNotificationSectionHeader: View {
                 
                 Button(action: {
                     withAnimation {
-                        isExpanded.toggle()
-                        otherSection = false
+                        if expandedSection == .prayer {
+                            expandedSection = .reminder
+                        }
+                        else {
+                            expandedSection = .prayer
+                        }
                     }
                 }, label: {
                     Text(title)
@@ -232,11 +316,15 @@ struct PTPrayerNotificationSectionHeader: View {
                 
                 Button(action: {
                     withAnimation {
-                        isExpanded.toggle()
-                        otherSection = false
+                        if expandedSection == .prayer {
+                            expandedSection = .reminder
+                        }
+                        else {
+                            expandedSection = .prayer
+                        }
                     }
                 }, label: {
-                    if isExpanded {
+                    if expandedSection == .prayer {
                         Image(systemName: openImage)
                     } else {
                         Image(systemName: closeImage)
@@ -248,18 +336,84 @@ struct PTPrayerNotificationSectionHeader: View {
             
             Button(action: {
                 withAnimation {
-                    isExpanded.toggle()
-                    otherSection = false
+                    expandedSection = .prayer
                 }
             }, label: {
                 Text(description)
             })
             .foregroundColor(.PTGray)
             .font(.PTCellDetailedText)
-            
         }
     }
 }
+
+
+//struct PTAboutSectionHeader: View {
+//
+//    var id: String {
+//        return title
+//    }
+//    @State var title: String
+//    @State var description: String
+//    @Binding var expandedSection: PTMoreViewSectionHeader
+//    @State var openImage: String
+//    @State var closeImage: String
+//
+//    var body: some View {
+//
+//        VStack(alignment:.leading, spacing: 0) {
+//            HStack {
+//
+//                Button(action: {
+//                    withAnimation {
+//                        if expandedSection == .fique {
+//                            expandedSection = .reminder
+//                        }
+//                        else {
+//                            expandedSection = .fique
+//                        }
+//                    }
+//                }, label: {
+//                    Text(title)
+//                })
+//                .foregroundColor(.PTWhite)
+//                .font(.PTPrayerCell)
+//                .frame(alignment: .leading)
+//
+//                Spacer()
+//
+//                Button(action: {
+//                    withAnimation {
+//                        if expandedSection == .fique {
+//                            expandedSection = .reminder
+//                        }
+//                        else {
+//                            expandedSection = .fique
+//                        }
+//                    }
+//                }, label: {
+//                    if expandedSection == .fique {
+//                        Image(systemName: openImage)
+//                    } else {
+//                        Image(systemName: closeImage)
+//                    }
+//                })
+//                .foregroundColor(.accentColor)
+//                .frame(alignment: .trailing)
+//            }
+//
+//            Button(action: {
+//                withAnimation {
+//                    expandedSection = .prayer
+//                }
+//            }, label: {
+//                Text(description)
+//            })
+//            .foregroundColor(.PTGray)
+//            .font(.PTCellDetailedText)
+//        }
+//    }
+//}
 
 
 #Preview {

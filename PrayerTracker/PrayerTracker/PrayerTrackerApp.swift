@@ -22,10 +22,9 @@ struct PrayerTrackerApp: App {
         .onChange(of: scenePhase, { oldValue, newValue in
             switch newValue {
             case .active:
+                print("active")
                 notificationsAndLocation()
-            case .background:
-                print("background")
-            case .inactive:
+            case .background, .inactive:
                 print("inactive")
             @unknown default:
                 print("None")

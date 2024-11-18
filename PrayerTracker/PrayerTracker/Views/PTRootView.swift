@@ -19,7 +19,7 @@ struct PTRootView: View {
                 Label(LocalizedStringKey("newEntry"), systemImage: "calendar.badge.plus")
             }
             PTStatsView().tabItem {
-                Label(LocalizedStringKey("statistics"), systemImage: "chart.bar.xaxis.ascending.badge.clock")
+                Label(LocalizedStringKey("history"), systemImage: "chart.bar.xaxis.ascending.badge.clock")
             }
             PTMoreView().tabItem {
                 Label(LocalizedStringKey("more"), systemImage: "ellipsis")
