@@ -13,15 +13,16 @@ class PTPrayerTimingRequester {
         
 //    https://api.aladhan.com/v1/timings/17-07-2007?latitude=12.6825&longitude=-78.6167&method=1
 //    https://api.aladhan.com/v1/calendar/2024/08?latitude=51.508515&longitude=-0.1254872&method=2
+        //https://aladhan.com/prayer-times-api#tag/Daily-Prayer-Times/paths/~1v1~1timings~1%7Bdate%7D/get
         var url: URL
         let month = Date().BHMonth
         let year = Date().BHYear
-        
-            url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())\(month.escaped())?latitude=\(lat)&longitude=\(longs)&method=1")!
+        let method = UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3
+        url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())\(month.escaped())?latitude=\(lat)&longitude=\(longs)&method=\(method)")!
             
             let prayerTimeResource = Resource<PTPrayerTimeResponse>(url: url) { data in
                 
-                let prayerTimeResponse = try! JSONDecoder().decode(PTPrayerTimeResponse.self, from: data)
+                let prayerTimeResponse = try? JSONDecoder().decode(PTPrayerTimeResponse.self, from: data)
                 return prayerTimeResponse
             }
             

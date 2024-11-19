@@ -40,18 +40,16 @@ enum PTFique: Int, CaseIterable, Equatable, Identifiable {
     var title: String {
         return String(describing: self)
     }
-}
-
-
-class PTFiqueSettings: Identifiable {
     
-    let id: Int
-    let title: String
-    var isON: Bool
+//    var isSelected: Bool {
+//        return self.id == UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3
+//    }
     
-    init(_ fique: PTFique) {
-        self.id = fique.rawValue
-        self.title = String(describing: fique)
-        self.isON = true
-    }
+//    func updateFique(_ selectedId: Int) {
+//        UserDefaults.standard.save(customObject: selectedId, inKey: PTConstantKey.selectedFique)
+//    }
+    
+//    func selectedItem () -> Int {
+//        return UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3
+//    }
 }

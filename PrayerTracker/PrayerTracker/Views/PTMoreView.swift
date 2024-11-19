@@ -18,8 +18,6 @@ struct PTMoreView: View {
     
     
     @ObservedObject var notificationVM: PTNotificationSettingsViewModel = .init()
-//    @State var isPrayerSecOpen = false
-//    @State var isReminderSecOpen = false
     @State var isReminderToggleON = false
     @State var isNotificationEnabled = true
     @State var selectedSection: PTMoreViewSectionHeader = .about
@@ -76,22 +74,6 @@ struct PTMoreView: View {
                                 }
                             }
                         }.textCase(.none)
-                        
-//                        Section(
-//                            header: PTFiqueSectionHeader(
-//                                title: NSLocalizedString("fique", comment: ""),
-//                                description: NSLocalizedString("fiqueMessage", comment: ""),
-//                                expandedSection: $selectedSection,
-//                                openImage: "chevron.up",
-//                                closeImage: "chevron.down"
-//                            )
-//                        ) {
-//                            if selectedSection == .fique {
-//                                ForEach($notificationVM.prayerReminder) { $reminder in
-//                                    PTPrayerReminderCellView(reminder: $reminder)
-//                                }
-//                            }
-//                        }.textCase(.none)
                         
                     }
                     .padding(.bottom, 35)
@@ -262,9 +244,6 @@ struct PTReminderSectionHeader: View {
                         if(newValue) {
                             expandedSection = .reminder
                         }
-//                        else {
-//                            isExpanded = false
-//                        }
                     }
                     .disabled(!isLocationEnabled)
                     .tint(.PTAccentColor)
@@ -346,74 +325,6 @@ struct PTPrayerNotificationSectionHeader: View {
         }
     }
 }
-
-
-//struct PTAboutSectionHeader: View {
-//
-//    var id: String {
-//        return title
-//    }
-//    @State var title: String
-//    @State var description: String
-//    @Binding var expandedSection: PTMoreViewSectionHeader
-//    @State var openImage: String
-//    @State var closeImage: String
-//
-//    var body: some View {
-//
-//        VStack(alignment:.leading, spacing: 0) {
-//            HStack {
-//
-//                Button(action: {
-//                    withAnimation {
-//                        if expandedSection == .fique {
-//                            expandedSection = .reminder
-//                        }
-//                        else {
-//                            expandedSection = .fique
-//                        }
-//                    }
-//                }, label: {
-//                    Text(title)
-//                })
-//                .foregroundColor(.PTWhite)
-//                .font(.PTPrayerCell)
-//                .frame(alignment: .leading)
-//
-//                Spacer()
-//
-//                Button(action: {
-//                    withAnimation {
-//                        if expandedSection == .fique {
-//                            expandedSection = .reminder
-//                        }
-//                        else {
-//                            expandedSection = .fique
-//                        }
-//                    }
-//                }, label: {
-//                    if expandedSection == .fique {
-//                        Image(systemName: openImage)
-//                    } else {
-//                        Image(systemName: closeImage)
-//                    }
-//                })
-//                .foregroundColor(.accentColor)
-//                .frame(alignment: .trailing)
-//            }
-//
-//            Button(action: {
-//                withAnimation {
-//                    expandedSection = .prayer
-//                }
-//            }, label: {
-//                Text(description)
-//            })
-//            .foregroundColor(.PTGray)
-//            .font(.PTCellDetailedText)
-//        }
-//    }
-//}
 
 
 #Preview {
