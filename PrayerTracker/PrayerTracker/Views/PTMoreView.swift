@@ -45,7 +45,6 @@ struct PTMoreView: View {
                             header: PTFiqueSectionHeader()
                         ) {}.textCase(.none)
                         
-                        
                         Section(
                             header: PTReminderSectionHeader(
                                 title: NSLocalizedString("reminder", comment: ""),
@@ -74,6 +73,10 @@ struct PTMoreView: View {
                                 }
                             }
                         }.textCase(.none)
+                        
+                        Section(
+                            header: PTAboutSectionHeader()
+                        ) {}.textCase(.none)
                         
                     }
                     .padding(.bottom, 35)
@@ -130,6 +133,46 @@ struct PTReminderView: View {
             if let customDate = calendar.date(from: components) {
                 self.selectedHour = customDate
             }
+        }
+    }
+}
+
+struct PTAboutSectionHeader: View {
+    
+    var body: some View {
+        
+        VStack(alignment:.leading, spacing: 0) {
+            HStack {
+                
+                Button(action: {}, label: {
+                    Text(NSLocalizedString("contactUs", comment: ""))
+                })
+                .foregroundColor(.PTWhite)
+                .font(.PTPrayerCell)
+                .frame(alignment: .leading)
+                
+                Spacer()
+
+            }.contentShape(Rectangle())
+         
+            
+            Button(action: {
+                openMail(emailTo: "hibrisenouman@gmail.com",
+                             subject: "App feedback",
+                             body: "Hi")
+            }, label: {
+                Text("hibrisenouman@gmail.com")
+            })
+            .foregroundColor(.PTGray)
+            .font(.PTCellDetailedText)
+        }
+    }
+    
+    func openMail(emailTo:String, subject: String, body: String) {
+        if let url = URL(string: "mailto:\(emailTo)?subject=\(subject)&body=\(body)"),
+           UIApplication.shared.canOpenURL(url)
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }
@@ -200,7 +243,7 @@ struct PTFiqueSectionHeader: View {
             }, label: {
                 Text(NSLocalizedString("fiqueMessage", comment: ""))
             }).sheet(isPresented: $showingDetail, content: {
-                TempView()
+                FiqueSettingsView()
             })
             .foregroundColor(.PTGray)
             .font(.PTCellDetailedText)
