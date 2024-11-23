@@ -26,6 +26,12 @@ struct PTMoreView: View {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
     
+    func openShareSheet() {
+        guard let urlShare = URL(string: PTConstantKey.appUrl) else { return }
+        let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: nil)
+    }
+    
     var body: some View {
         
         NavigationStack {
@@ -99,6 +105,21 @@ struct PTMoreView: View {
             .accentColor(.PTAccentColor)
             .edgesIgnoringSafeArea(.bottom)
             .navigationTitle(LocalizedStringKey("more"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        openShareSheet()
+                    }) {
+                        HStack(spacing:0) {
+                            Image(systemName: "square.and.arrow.up.fill")
+                                .font(.system(size: 15))
+                        }
+                        .frame(maxWidth:150)
+                    }
+                    .foregroundColor(.PTWhite)
+                    .controlSize(.small)
+                }
+            }
         }
     }
 }
@@ -170,8 +191,7 @@ struct PTAboutSectionHeader: View {
     
     func openMail(emailTo:String, subject: String, body: String) {
         if let url = URL(string: "mailto:\(emailTo)?subject=\(subject)&body=\(body)"),
-           UIApplication.shared.canOpenURL(url)
-        {
+           UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }

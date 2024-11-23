@@ -37,6 +37,7 @@
 		808909A72C539B9200C2038C /* TempTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808909A62C539B9200C2038C /* TempTodo.swift */; };
 		808909A92C53B60800C2038C /* PTPrayerTimeResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808909A82C53B60800C2038C /* PTPrayerTimeResponseViewModel.swift */; };
 		80992FD02CE9F3EE0059E3AE /* FiqueSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80992FCF2CE9F3EE0059E3AE /* FiqueSettingsView.swift */; };
+		80ACB7922CF2687D00E204AF /* PTApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ACB7912CF2687600E204AF /* PTApplication.swift */; };
 		80B110C32C2F3CDC006D449A /* PTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C22C2F3CDC006D449A /* PTLocationManager.swift */; };
 		80B110C82C2F531E006D449A /* PTConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110C72C2F531E006D449A /* PTConstant.swift */; };
 		80B110CC2C2F596A006D449A /* PTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B110CB2C2F596A006D449A /* PTUserDefaults.swift */; };
@@ -93,6 +94,7 @@
 		808909A62C539B9200C2038C /* TempTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempTodo.swift; sourceTree = "<group>"; };
 		808909A82C53B60800C2038C /* PTPrayerTimeResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPrayerTimeResponseViewModel.swift; sourceTree = "<group>"; };
 		80992FCF2CE9F3EE0059E3AE /* FiqueSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiqueSettingsView.swift; sourceTree = "<group>"; };
+		80ACB7912CF2687600E204AF /* PTApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTApplication.swift; sourceTree = "<group>"; };
 		80B110C22C2F3CDC006D449A /* PTLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLocationManager.swift; sourceTree = "<group>"; };
 		80B110C42C2F4F13006D449A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		80B110C72C2F531E006D449A /* PTConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConstant.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				80B110CB2C2F596A006D449A /* PTUserDefaults.swift */,
 				802EAABA2C33D39E00187AB6 /* PTObservable.swift */,
 				80DA25552C4AADD100B99AF3 /* PTString.swift */,
+				80ACB7912CF2687600E204AF /* PTApplication.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				808909A72C539B9200C2038C /* TempTodo.swift in Sources */,
 				80BF17162C47086500458B1F /* PTPrayerTimingRequester.swift in Sources */,
 				8044E84B2BED5D1800CD186F /* PTMarkPrayerView.swift in Sources */,
+				80ACB7922CF2687D00E204AF /* PTApplication.swift in Sources */,
 				803ABAB42CD00DF600F00D6E /* PTHeaderView.swift in Sources */,
 				8002D1712C24AA690018E2C8 /* PTDailyPrayerViewModel.swift in Sources */,
 				80446E782C6BFBE00082937A /* PTSwiftDataManager.swift in Sources */,

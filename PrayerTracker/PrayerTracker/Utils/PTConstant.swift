@@ -9,6 +9,8 @@ import Foundation
 
 struct PTConstantKey {
     
+    static let appUrl: String = "https:www.google.com"
+    
     static let location: String = "com.prayerTracker.location"
     
     static let dailyReminderEnabled = "com.prayerTracker.notification.dailyReminderEnabled"
