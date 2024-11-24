@@ -38,10 +38,15 @@ class PTDailyPrayerViewModel: ObservableObject {
     
     func retrievePrayerTime() -> [PTTodaysPrayer] {
         let pData = UserDefaults.standard.retrieve(object: PTPrayerTimeResponse.self, fromKey: locationViewModel.location?.city ?? "")
+        var prayerTime: [PTTodaysPrayer] = []
         if (pData != nil) {
-            self.prayers = PTPrayerTimeResponseViewModel(prayerTimeResponse: pData!).timings?.prayers ?? []
+            prayerTime = PTPrayerTimeResponseViewModel(prayerTimeResponse: pData!).timings?.prayers ?? []
         }
-        return self.prayers
+        return prayerTime
+    }
+    
+    func setPrayers() {
+        self.prayers = retrievePrayerTime()
     }
     
     func defaultPrayerTime(_ previousDate: Date) {
@@ -58,7 +63,7 @@ class PTDailyPrayerViewModel: ObservableObject {
             self.defaultPrayerTime(pickedDated)
         }
         else {
-           let _ = self.retrievePrayerTime()
+            let _ = self.setPrayers()
         }
     }
     

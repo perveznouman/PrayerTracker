@@ -27,7 +27,14 @@ class PTSwiftDataManager {
     }
     
     func insert(_ pryerData: PTUserPrayerData, withContext context: ModelContext) {
+        print(#function, pryerData.id!)
         context.insert(pryerData)
+        do {
+            try context.save()
+        }
+        catch {
+            print(#file, #function, #line, "failed to insert into db")
+        }
     }
     
     func fetchPrayerStats(_ stats: PTStats = .weekly, forContext context: ModelContext) -> [String: Int] {

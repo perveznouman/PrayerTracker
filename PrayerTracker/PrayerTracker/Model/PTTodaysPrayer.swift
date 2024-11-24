@@ -25,18 +25,6 @@ struct PTTodaysPrayer: Identifiable {
     }
 }
 
-//extension PTTodaysPrayer {
-//    
-//    init(id: String = "", name: String, isOffered: Bool, isEnabled: Bool = true, time: String, date: String) {
-//        self.id = date + "-" + name
-//        self.name = name
-//        self.isOffered = isOffered
-//        self.isEnabled = Date().isPassedTime(time)
-//        self.time = time
-//        self.date = date
-//    }
-//}
-
 struct PTTodaysPrayerAggregatedData: Identifiable {
     var id = UUID()
     var category: String
