@@ -32,7 +32,8 @@ class PTDailyPrayerViewModel: ObservableObject {
     }
     
     func savePrayerTime(_ response: PTPrayerTimeResponse) {
-        self.prayers = PTPrayerTimeResponseViewModel(prayerTimeResponse: response).timings?.prayers ?? []
+        let updatedTimings = PTPrayerTimeResponseViewModel(prayerTimeResponse: response).timings?.prayers ?? []
+        mapUpdatedPrayerWithOfferedPrayer(updatedTimings)
         UserDefaults.standard.save(customObject: response, inKey: locationViewModel.location?.city ?? "")
     }
     
@@ -80,6 +81,18 @@ class PTDailyPrayerViewModel: ObservableObject {
             return prayer
         }
         return self.prayers
+    }
+    
+    private func mapUpdatedPrayerWithOfferedPrayer(_ updatedPrayer: [PTTodaysPrayer]) {
+        self.prayers = updatedPrayer.map { bItem in
+            if let matchingItem = self.prayers.first(where: { $0.id == bItem.id }) {
+                var updatedBItem = bItem
+                updatedBItem.isOffered = matchingItem.isOffered
+                return updatedBItem
+            }
+            return bItem
+        }
+        print(self.prayers)
     }
     
     private init() {}

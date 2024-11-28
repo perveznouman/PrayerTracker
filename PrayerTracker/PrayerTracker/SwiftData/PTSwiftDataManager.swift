@@ -26,9 +26,8 @@ class PTSwiftDataManager {
         }
     }
     
-    func insert(_ pryerData: PTUserPrayerData, withContext context: ModelContext) {
-        print(#function, pryerData.id!)
-        context.insert(pryerData)
+    func insert(_ prayerData: PTUserPrayerData, withContext context: ModelContext) {
+        context.insert(prayerData)
         do {
             try context.save()
         }
