@@ -92,7 +92,6 @@ class PTDailyPrayerViewModel: ObservableObject {
             }
             return bItem
         }
-        print(self.prayers)
     }
     
     private init() {}

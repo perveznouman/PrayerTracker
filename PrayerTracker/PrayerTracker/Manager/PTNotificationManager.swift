@@ -39,7 +39,7 @@ class PTNotificationManager: NSObject, UNUserNotificationCenterDelegate {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                print(notification.id + "Notification scheduled at - " + "\(notification.hour) : \(notification.min)")
+//                print(notification.id + "Notification scheduled at - " + "\(notification.hour) : \(notification.min)")
             }
         }
     }
