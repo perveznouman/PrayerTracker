@@ -7,33 +7,33 @@
 
 import Foundation
 
-
-enum PTAnalyticsConstant: String {
+enum PTAnalyticsConstant: String, Equatable, CaseIterable {
     
-    case selectContent = "Select content"
-    
-    case nPermission = "N Permission"
 
-    case notificationPermission = "Notification Permission"
-    case locationPermission = "Location Permission"
-    case serviceResponse = "Service Response"
+    case notificationPermission = "Notification_Permission" ///Int
+    case locationPermission = "Location_Permission" ///Int
+    case serviceResponse = "Service_Response"
 
-    case dateButton = "Date Selected"
-    case prayerMarked = "Prayer Marked"
-    case locationUpdate = "Location Updated"
+    case dateButton = "Date_Selected" ///String
+    case prayerMarked = "Prayer_Marked" ///Int
+    case locationUpdate = "Location_Updated" ///String
 
-    case weeklyTab = "Weekly Tab"
-    case monthlyTab = "Montly Tab"
-    case yearlyTab = "Yearly Tab"
+    case historyTab = "History_Tab" ///String
+    case weeklyTab = "Weekly"
+    case monthlyTab = "Montly"
+    case yearlyTab = "Yearly"
 
-    case share = "Share Pressed"
-    case fiqueSetting = "Fique Setting"
-    case reminder = "Reminder Switch"
-    case reminderTime = "Reminder Time"
-    case prayerNotification = "Prayer Notification"
-    case contact = "Contact Pressed"
+    case share = "Share_Pressed" ///String
+    case fiqueSetting = "Fique_Setting" ///Int
+    case reminder = "Reminder_Switch" ///String
+    case reminderTime = "Reminder_Time"
+    case prayerNotification = "Prayer_Notification" ///Int
+    case contact = "Contact_Pressed"
 
     case on = "ON"
     case off = "OFF"
 
+    case NA = "NA"
+    
+    var caseValue: String { String(rawValue.replaceString(" ", by: "_")) }
 }

@@ -15,9 +15,12 @@ class PTNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     override init() {
         super.init()
         notificationCenter.requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if let error = error {
-                print(error.localizedDescription)
+            if let _ = error {
+                PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.notificationPermission.rawValue, parameter: [PTAnalyticsConstant.notificationPermission.caseValue: 0])
+                return
             }
+            PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.notificationPermission.rawValue, parameter: [PTAnalyticsConstant.notificationPermission.caseValue: 1])
+
         }
     }
     

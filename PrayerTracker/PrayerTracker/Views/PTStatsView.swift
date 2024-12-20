@@ -165,6 +165,7 @@ struct PTStatsPickerView: View {
         .onChange(of: selectedSegment, { oldValue, newValue in
             let statsData = dataManager.fetchPrayerStats(newValue, forContext: modelContext)
              prayerData.setupStatsData(dataCount: statsData, stats: newValue)
+            PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.historyTab.caseValue, parameter: [PTAnalyticsConstant.historyTab.caseValue: newValue.localizedName])
 
         })
         .tint(.PTAccentColor)

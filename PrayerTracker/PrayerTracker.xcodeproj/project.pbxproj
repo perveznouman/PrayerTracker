@@ -11,6 +11,7 @@
 		8002D16E2C2435370018E2C8 /* PTTodaysPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8002D16D2C2435370018E2C8 /* PTTodaysPrayer.swift */; };
 		8002D1712C24AA690018E2C8 /* PTDailyPrayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8002D1702C24AA690018E2C8 /* PTDailyPrayerViewModel.swift */; };
 		800AAF052C4EE8E700CCA454 /* PTLocationConfirmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800AAF042C4EE8E700CCA454 /* PTLocationConfirmer.swift */; };
+		801002D62D01939B004EEBB8 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 801002D52D01939B004EEBB8 /* FirebaseRemoteConfig */; };
 		8018838B2CBDA08300B9E451 /* PTMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018838A2CBDA08300B9E451 /* PTMoreView.swift */; };
 		8018838D2CBDA2DA00B9E451 /* PTNotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018838C2CBDA2CC00B9E451 /* PTNotificationSettings.swift */; };
 		8018838F2CBDA62900B9E451 /* PTNotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018838E2CBDA61000B9E451 /* PTNotificationSettingsViewModel.swift */; };
@@ -141,6 +142,7 @@
 				8079ED872CFDBB30005720B3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				80FA0E102CFF93F600570242 /* FirebaseCore in Frameworks */,
 				8079ED892CFDBB30005720B3 /* FirebaseCrashlytics in Frameworks */,
+				801002D62D01939B004EEBB8 /* FirebaseRemoteConfig in Frameworks */,
 				80FA0E122CFF93F600570242 /* FirebaseCrashlytics in Frameworks */,
 				80FA0E0C2CFF93F600570242 /* FirebaseAnalytics in Frameworks */,
 				80FA0E0E2CFF93F600570242 /* FirebaseAuth in Frameworks */,
@@ -173,6 +175,13 @@
 				8018838E2CBDA61000B9E451 /* PTNotificationSettingsViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		801002D42D01939B004EEBB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		803BDA462BFBC3CE001A47F8 /* Fonts */ = {
@@ -233,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				80B186602B99D46D0077683D /* PrayerTracker */,
+				801002D42D01939B004EEBB8 /* Frameworks */,
 				80B1865F2B99D46D0077683D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -747,6 +757,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		801002D52D01939B004EEBB8 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80FA0E0A2CFF93F600570242 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
 		8079ED862CFDBB30005720B3 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8079ED852CFDBB30005720B3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

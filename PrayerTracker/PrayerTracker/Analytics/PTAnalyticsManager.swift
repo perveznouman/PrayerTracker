@@ -10,7 +10,9 @@ import Firebase
 
 class PTAnalyticsManager {
     
-    class func logEvent(eventName name: String = AnalyticsEventSelectItem, parameter prams: Dictionary<String, Any>) {
+    class func logEvent(eventName name: String = AnalyticsEventSelectContent, parameter prams: Dictionary<String, Any>) {
         Analytics.logEvent(name, parameters: prams)
     }
+    
+    private init() {}
 }

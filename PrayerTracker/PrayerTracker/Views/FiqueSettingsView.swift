@@ -34,6 +34,7 @@ struct FiqueSettingsView: View {
             if(existingItem != selectedItem) {
                 UserDefaults.standard.save(customObject: selectedItem?.rawValue, inKey: PTConstantKey.selectedFique)
                 PTLocationManager().callPrayerTimingAPI()
+                PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.fiqueSetting.caseValue, parameter: [PTAnalyticsConstant.fiqueSetting.caseValue: selectedItem?.id ?? 3])
             }
         }
     }

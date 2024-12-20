@@ -27,6 +27,7 @@ struct PTMoreView: View {
     }
     
     func openShareSheet() {
+        PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.share.caseValue, parameter: [PTAnalyticsConstant.share.caseValue: ""])
         guard let urlShare = URL(string: PTConstantKey.appUrl) else { return }
         let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
         UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: nil)
@@ -56,7 +57,7 @@ struct PTMoreView: View {
                                 title: NSLocalizedString("reminder", comment: ""),
                                 description: NSLocalizedString("reminderDescription", comment: ""),
                                 expandedSection: $selectedSection,
-                                toggleON: $isReminderToggleON, isLocationEnabled: $isNotificationEnabled
+                                toggleON: $isReminderToggleON, notificationEnabled: $isNotificationEnabled
                             )
                         ) {
                             if (isReminderToggleON && (selectedSection != .prayer && selectedSection != .fique)) {
@@ -149,10 +150,8 @@ struct PTReminderView: View {
                     .frame(maxHeight: 400)
             }
         }.onAppear {
-            let calendar = Calendar(identifier: .gregorian)
-            let components = DateComponents(hour: Int(reminderTime[0])!, minute: Int(reminderTime[1])!)
-            if let customDate = calendar.date(from: components) {
-                self.selectedHour = customDate
+            if let time = notificationVM.readableReminderTime(reminderTime) {
+                self.selectedHour = time
             }
         }
     }
@@ -181,6 +180,8 @@ struct PTAboutSectionHeader: View {
                 openMail(emailTo: "hibrisenouman@gmail.com",
                              subject: "App feedback",
                              body: "Hi")
+                PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.contact.caseValue, parameter: [PTAnalyticsConstant.contact.caseValue: ""])
+
             }, label: {
                 Text("hibrisenouman@gmail.com")
             })
@@ -212,6 +213,8 @@ struct PTPrayerReminderCellView: View {
             Toggle("", isOn: $reminder.isON)
                 .onChange(of: reminder.isON) { oldValue, newValue in
                     notificationVM.updateReminderPermission(newValue, ofType: Notifications(rawValue: reminder.title)!)
+                    
+                    PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.prayerNotification.caseValue, parameter: [reminder.title: newValue ? 1 : 0])
                 }
                 .tint(.PTAccentColor)
 
@@ -283,7 +286,7 @@ struct PTReminderSectionHeader: View {
     @State var description: String
     @Binding var expandedSection: PTMoreViewSectionHeader
     @Binding var toggleON: Bool
-    @Binding var isLocationEnabled: Bool
+    @Binding var notificationEnabled: Bool
     @EnvironmentObject var notificationVM: PTNotificationSettingsViewModel
 
     
@@ -306,9 +309,15 @@ struct PTReminderSectionHeader: View {
                         notificationVM.updateReminderPermission(newValue)
                         if(newValue) {
                             expandedSection = .reminder
+                            if let time = notificationVM.readableReminderTime(notificationVM.getReminderTime()) {
+                                PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.reminder.caseValue, parameter: [PTAnalyticsConstant.on.caseValue: time.BHReminderStorageFormat])
+                            }
+                        }
+                        else {
+                            PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.reminder.caseValue, parameter: [PTAnalyticsConstant.off.caseValue: PTAnalyticsConstant.NA.caseValue])
                         }
                     }
-                    .disabled(!isLocationEnabled)
+                    .disabled(!notificationEnabled)
                     .tint(.PTAccentColor)
             }
             

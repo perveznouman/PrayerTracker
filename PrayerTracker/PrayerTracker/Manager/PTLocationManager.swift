@@ -48,10 +48,10 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         locationStatus = status
         if status == .denied || status == .restricted {
-            PTAnalyticsManager.logEvent(parameter: [PTAnalyticsConstant.nPermission.rawValue: 0])
+            PTAnalyticsManager.logEvent(eventName: PTAnalyticsConstant.locationPermission.rawValue, parameter: [PTAnalyticsConstant.locationPermission.caseValue: 0])
         }
         else if status == .authorizedWhenInUse || status == .authorizedAlways {
-            PTAnalyticsManager.logEvent(parameter: [PTAnalyticsConstant.nPermission.rawValue: 1])
+            PTAnalyticsManager.logEvent(eventName: PTAnalyticsConstant.locationPermission.rawValue, parameter: [PTAnalyticsConstant.locationPermission.caseValue: 1])
         }
 //        if status == .notDetermined || status == .denied {
 //            let storedLocation = locationViewModel.retrieve()

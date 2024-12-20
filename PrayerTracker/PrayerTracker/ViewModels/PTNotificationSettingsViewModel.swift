@@ -51,6 +51,15 @@ class PTNotificationSettingsViewModel: ObservableObject {
         return hourMin
     }
     
+    func readableReminderTime(_ reminderTime: [String]) -> Date? {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = DateComponents(hour: Int(reminderTime[0])!, minute: Int(reminderTime[1])!)
+        if let time = calendar.date(from: components) {
+            return time
+        }
+        return nil
+    }
+    
     func updateReminderPermission(_ enabled: Bool, ofType type: Notifications = .reminder) {
         
         switch type {

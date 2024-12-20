@@ -174,6 +174,7 @@ struct PTDatePickerView: View {
                     shouldShowPicker.toggle()
                     dataManager.fetchDailyPrayers(for: currentSelectedDate, withContext: modelContext)
                     prayerVM.prayers = dataManager.sortedData
+                    PTAnalyticsManager.logEvent(eventName: PTAnalyticsConstant.dateButton.caseValue, parameter: [PTAnalyticsConstant.dateButton.caseValue : newValue.BHLocalStorageFormat])
                 }
                 .preferredColorScheme(.dark)
                 // .tint(.red)
@@ -271,6 +272,7 @@ struct PTPrayerListCellView: View {
                     dataManager.insert(
                         PTUserPrayerData(name: timings.name, offered: newValue, date: selectedDate),
                         withContext: modelContext)
+                    PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.prayerMarked.caseValue, parameter: [timings.name: newValue ? 1 : 0])
                 }
                 .disabled(!timings.isEnabled)
                 .tint(.PTAccentColor)
