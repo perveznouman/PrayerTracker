@@ -15,7 +15,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         Analytics.setAnalyticsCollectionEnabled(true)
-        FirebaseConfiguration.shared.setLoggerLevel(.max)
+//        FirebaseConfiguration.shared.setLoggerLevel(.max)
         return true
     }
 }
