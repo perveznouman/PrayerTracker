@@ -109,7 +109,10 @@ class PTNotificationSettingsViewModel: ObservableObject {
     func scheduleReminderNotification(type: [Notifications] = [.reminder]) {
         
         for t in type {
-            let hourMin = self.getPrayerReminderTime(t).components(separatedBy: ":")
+            var hourMin = self.getPrayerReminderTime(t).components(separatedBy: ":")
+            if t == .reminder {
+                hourMin = self.getReminderTime()
+            }
             if hourMin.count > 1 {
                 self.isNotificationAuthorized { authorized in
                     if self.getReminderPermission(type: [t]) && authorized {
