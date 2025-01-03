@@ -11,15 +11,10 @@ class PTPrayerTimingRequester {
     
     func getPrayerTimings(_ lat: Double, _ longs: Double, completion: @escaping (PTPrayerTimeResponse) -> Void) {
         
-//    https://api.aladhan.com/v1/timings/17-07-2007?latitude=12.6825&longitude=-78.6167&method=1
-//    https://api.aladhan.com/v1/calendar/2024/08?latitude=51.508515&longitude=-0.1254872&method=2
-        //https://aladhan.com/prayer-times-api#tag/Daily-Prayer-Times/paths/~1v1~1timings~1%7Bdate%7D/get
-        var url: URL
         let year = Date().BHYear
         let method = UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3
         let school = UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedSchool) ?? 1
-
-        url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())?latitude=\(lat)&longitude=\(longs)&method=\(method)&school=\(school)")!
+        let url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())?latitude=\(lat)&longitude=\(longs)&method=\(method)&school=\(school)")!
             
             let prayerTimeResource = Resource<PTPrayerTimeResponse>(url: url) { data in
                 

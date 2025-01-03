@@ -9,13 +9,7 @@ import SwiftUI
 
 struct FiqueSettingsView: View {
     
-    @State var fiques = PTFique.allCases
-    @State var selectedFique: PTFique?
-    @State var existingFique: PTFique?
-    
-    @State var schools = PTSchool.allCases
-    @State var selectedSchool: PTSchool?
-    @State var existingSchool: PTSchool?
+    @StateObject var fiqueVM: PTFiqueSettingsViewModel = .init()
     
     var body: some View {
         
@@ -23,14 +17,14 @@ struct FiqueSettingsView: View {
             List {
                 
                 Section(header: Text(NSLocalizedString("school", comment: ""))) {
-                    ForEach($schools) { school in
-                        PTSchoolSettingsRow(school: school, selectedItem: $selectedSchool)
+                    ForEach($fiqueVM.schools) { school in
+                        PTSchoolSettingsRow(school: school, selectedItem: $fiqueVM.selectedSchool)
                     }
                 }
                 
                 Section(header: Text(NSLocalizedString("fique", comment: ""))) {
-                    ForEach($fiques) { fique in
-                        PTFiqueSettingsRow(fique: fique, selectedItem: $selectedFique)
+                    ForEach($fiqueVM.fiques) { fique in
+                        PTFiqueSettingsRow(fique: fique, selectedItem: $fiqueVM.selectedFique)
                     }
                 }
             }
@@ -41,30 +35,8 @@ struct FiqueSettingsView: View {
             .accentColor(.PTAccentColor)
             .edgesIgnoringSafeArea(.bottom)
             .navigationTitle(NSLocalizedString("fiqueSettings", comment: ""))
-        }.onAppear {
-            loadData()
         }.onDisappear {
-            saveData()
-        }
-    }
-    
-    private func loadData() {
-        selectedFique = fiques[UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3]
-        selectedSchool = schools[UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedSchool) ?? 1]
-        existingFique = selectedFique
-        existingSchool = selectedSchool
-    }
-    
-    private func saveData() {
-        if(existingFique != selectedFique) {
-            UserDefaults.standard.save(customObject: selectedFique?.rawValue, inKey: PTConstantKey.selectedFique)
-            PTLocationManager().callPrayerTimingAPI()
-            PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.fiqueSetting.caseValue, parameter: [PTAnalyticsConstant.fiqueSetting.caseValue: selectedFique?.id ?? 3])
-        }
-        if(existingSchool != selectedSchool) {
-            UserDefaults.standard.save(customObject: selectedSchool?.rawValue, inKey: PTConstantKey.selectedSchool)
-            PTLocationManager().callPrayerTimingAPI()
-            PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.schoolSetting.caseValue, parameter: [PTAnalyticsConstant.schoolSetting.caseValue: selectedSchool?.id ?? 1])
+            fiqueVM.saveUserPreference()
         }
     }
 }
