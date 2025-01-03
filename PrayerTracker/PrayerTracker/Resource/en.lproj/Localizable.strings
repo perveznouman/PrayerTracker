@@ -46,10 +46,11 @@
 "asarReminder" = "Asar Salah's time starts now";
 "maghribReminder" = "Maghrib Salah's time starts now";
 "eshaReminder" = "Esha Salah's time starts now";
-"fique" = "Fique Settings";
+"fiqueSettings" = "Fique Settings";
 "fiqueMessage" = "Pick your preferred Fique";
 "contactUs" = "Contact Us";
 
+"fique" = "Fique";
 "shia" = "Jafari / Shia Ithna-Ashari";
 "karachi" = "University of Islamic Sciences, Karachi";
 "america" = "Islamic Society of North America";
@@ -74,3 +75,7 @@
 "lisboa" = "Comunidade Islamica de Lisboa";
 "jordan" = "Islamic Affairs and Holy Places, Jordan";
 
+
+"school" = "School";
+"hanafi" = "Hanafi";
+"shafi" = "Shafi";

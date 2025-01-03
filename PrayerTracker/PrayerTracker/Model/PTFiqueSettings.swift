@@ -7,7 +7,13 @@
 import Foundation
 import SwiftUI
 
-enum PTFique: Int, CaseIterable, Equatable, Identifiable {
+protocol PTFiqueSettingsProtocol {
+    var id: Int { get }
+    var title: String { get }
+}
+
+
+enum PTFique: Int, CaseIterable, Identifiable, PTFiqueSettingsProtocol {
     
     case shia = 0
     case karachi
@@ -52,4 +58,19 @@ enum PTFique: Int, CaseIterable, Equatable, Identifiable {
 //    func selectedItem () -> Int {
 //        return UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3
 //    }
+}
+
+
+enum PTSchool: Int, CaseIterable, Identifiable, PTFiqueSettingsProtocol {
+    
+    case shafi = 0
+    case hanafi
+    
+    var id: Int {
+        return self.rawValue
+    }
+    
+    var title: String {
+        return String(describing: self)
+    }
 }

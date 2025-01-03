@@ -32,5 +32,6 @@ struct PTConstantKey {
     static let eshaPrayerNotification = "com.prayerTracker.notification.eshaPrayer"
 
     static let selectedFique = "com.prayerTracker.settings.selectedFique"
+    static let selectedSchool = "com.prayerTracker.settings.selectedSchool"
 
 }

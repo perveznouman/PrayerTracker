@@ -25,6 +25,7 @@ enum PTAnalyticsConstant: String, Equatable, CaseIterable {
 
     case share = "Share_Pressed" ///String
     case fiqueSetting = "Fique_Setting" ///Int
+    case schoolSetting = "School_Setting" ///Int
     case reminder = "Reminder_Switch" ///String
     case reminderTime = "Reminder_Time"
     case prayerNotification = "Prayer_Notification" ///Int

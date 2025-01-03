@@ -235,7 +235,7 @@ struct PTFiqueSectionHeader: View {
                 Button(action: {
                     showingDetail.toggle()
                 }, label: {
-                    Text(NSLocalizedString("fique", comment: ""))
+                    Text(NSLocalizedString("fiqueSettings", comment: ""))
                 }).sheet(isPresented: $showingDetail, content: {
                     FiqueSettingsView()
                 })

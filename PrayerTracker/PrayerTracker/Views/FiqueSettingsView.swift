@@ -10,32 +10,85 @@ import SwiftUI
 struct FiqueSettingsView: View {
     
     @State var fiques = PTFique.allCases
-    @State var selectedItem: PTFique?
-    @State var existingItem: PTFique?
+    @State var selectedFique: PTFique?
+    @State var existingFique: PTFique?
+    
+    @State var schools = PTSchool.allCases
+    @State var selectedSchool: PTSchool?
+    @State var existingSchool: PTSchool?
     
     var body: some View {
         
         NavigationStack {
-                List(selection: $selectedItem) {
-                    ForEach($fiques) { fique in
-                        PTFiqueSettingsRow(fique: fique, selectedItem: $selectedItem)
+            List {
+                
+                Section(header: Text(NSLocalizedString("school", comment: ""))) {
+                    ForEach($schools) { school in
+                        PTSchoolSettingsRow(school: school, selectedItem: $selectedSchool)
                     }
                 }
+                
+                Section(header: Text(NSLocalizedString("fique", comment: ""))) {
+                    ForEach($fiques) { fique in
+                        PTFiqueSettingsRow(fique: fique, selectedItem: $selectedFique)
+                    }
+                }
+            }
+            
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .accentColor(.PTAccentColor)
             .edgesIgnoringSafeArea(.bottom)
-            .navigationTitle(NSLocalizedString("fique", comment: ""))
+            .navigationTitle(NSLocalizedString("fiqueSettings", comment: ""))
         }.onAppear {
-            selectedItem = fiques[UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3]
-            existingItem = fiques[UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3]
+            loadData()
         }.onDisappear {
-            if(existingItem != selectedItem) {
-                UserDefaults.standard.save(customObject: selectedItem?.rawValue, inKey: PTConstantKey.selectedFique)
-                PTLocationManager().callPrayerTimingAPI()
-                PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.fiqueSetting.caseValue, parameter: [PTAnalyticsConstant.fiqueSetting.caseValue: selectedItem?.id ?? 3])
+            saveData()
+        }
+    }
+    
+    private func loadData() {
+        selectedFique = fiques[UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3]
+        selectedSchool = schools[UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedSchool) ?? 1]
+        existingFique = selectedFique
+        existingSchool = selectedSchool
+    }
+    
+    private func saveData() {
+        if(existingFique != selectedFique) {
+            UserDefaults.standard.save(customObject: selectedFique?.rawValue, inKey: PTConstantKey.selectedFique)
+            PTLocationManager().callPrayerTimingAPI()
+            PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.fiqueSetting.caseValue, parameter: [PTAnalyticsConstant.fiqueSetting.caseValue: selectedFique?.id ?? 3])
+        }
+        if(existingSchool != selectedSchool) {
+            UserDefaults.standard.save(customObject: selectedSchool?.rawValue, inKey: PTConstantKey.selectedSchool)
+            PTLocationManager().callPrayerTimingAPI()
+            PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.schoolSetting.caseValue, parameter: [PTAnalyticsConstant.schoolSetting.caseValue: selectedSchool?.id ?? 1])
+        }
+    }
+}
+
+struct PTSchoolSettingsRow: View {
+    
+    @Binding var school: PTSchool
+    @Binding var selectedItem: PTSchool?
+
+    var body: some View {
+        HStack {
+            Text(NSLocalizedString(school.title, comment: ""))
+                .foregroundColor(.PTWhite)
+                .font(.PTCellDetailedText)
+                .frame(alignment: .leading)
+            Spacer()
+            if (school == selectedItem) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.PTAccentColor)
             }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            selectedItem = school
         }
     }
 }

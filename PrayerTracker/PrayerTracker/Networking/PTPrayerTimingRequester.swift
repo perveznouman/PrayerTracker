@@ -15,10 +15,11 @@ class PTPrayerTimingRequester {
 //    https://api.aladhan.com/v1/calendar/2024/08?latitude=51.508515&longitude=-0.1254872&method=2
         //https://aladhan.com/prayer-times-api#tag/Daily-Prayer-Times/paths/~1v1~1timings~1%7Bdate%7D/get
         var url: URL
-        let month = Date().BHMonth
         let year = Date().BHYear
         let method = UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedFique) ?? 3
-        url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())\(month.escaped())?latitude=\(lat)&longitude=\(longs)&method=\(method)")!
+        let school = UserDefaults.standard.retrieve(object: Int.self, fromKey: PTConstantKey.selectedSchool) ?? 1
+
+        url = URL(string: "https://api.aladhan.com/v1/calendar/\(year.escaped())?latitude=\(lat)&longitude=\(longs)&method=\(method)&school=\(school)")!
             
             let prayerTimeResource = Resource<PTPrayerTimeResponse>(url: url) { data in
                 
