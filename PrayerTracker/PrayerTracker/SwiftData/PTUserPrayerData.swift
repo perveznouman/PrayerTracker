@@ -11,10 +11,10 @@ import SwiftData
 @Model
 class PTUserPrayerData {
     
-    @Attribute(.unique) let id: String!
-    let name: String
-    let offered: Bool
-    let date: String
+    @Attribute(.unique) var id: String!
+    var name: String
+    var offered: Bool
+    var date: String
     
     init(name: String, offered: Bool, date: Date) {
         self.id = date.BHLocalStorageFormat + "-" + name
