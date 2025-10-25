@@ -7,40 +7,105 @@
 
 import Foundation
 
-class PTWeeklyViewModel {
+class PTWeeklyViewModel: ObservableObject {
     
     var xAxis: [String] = Calendar.current.shortWeekdaySymbols
-    var offered: [Int] = [ 3, 5, 1, 0, 2, 4, 5]
-    var yValues: [Int] = stride(from: 0, to: 6, by: 1).map { $0 }
+    @Published var offered: [Int] = [ 0, 0, 0, 0, 0, 0, 0]
+    private(set) var yValues: [Int] = stride(from: 0, to: 6, by: 1).map { $0 }
 
+    init() {}
     
-    init(_ statsType: PTStats) {
-        
-        switch statsType {
+    func setupStatsData(dataCount: [String:Int], stats:PTStats = .weekly) {
+        switch stats {
         case .weekly:
-            xAxis = Calendar.current.shortStandaloneWeekdaySymbols
-            offered.removeAll()
-            while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...5))
-            }
-            yValues = stride(from: 0, to: 6, by: 1).map { $0 }
-            
+            setupWeeklyData(dataCount: dataCount)
         case .monthly:
-            let days = Date().currentMonthDays()
-            xAxis = Array(stride(from: 1, to: days, by: 1)).map { String($0) }
-            offered.removeAll()
-            while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...17))
-            }
-            yValues = stride(from: 0, to: 18, by: 1).map { $0 }
-
+            setupMonthlyData(dataCount: dataCount)
         case .yearly:
-            xAxis = Calendar.current.shortMonthSymbols
-            offered.removeAll()
-            while (offered.count < xAxis.count) {
-                offered.append(Int.random(in: 0...510))
-            }
-            yValues = stride(from: 0, to: 520, by: 30).map { $0 }
+            setupYearlyData(dataCount: dataCount)
         }
+    }
+    
+    private func setupWeeklyData(dataCount: [String:Int]) {
+        
+        xAxis = Calendar.current.shortWeekdaySymbols
+        offered.removeAll()
+        while (offered.count < xAxis.count) {
+            offered.append(0)
+        }
+        yValues = stride(from: 0, to: 6, by: 1).map { $0 }
+        
+        if !dataCount.isEmpty {
+            for (index, element) in xAxis.enumerated() {
+                if let matchingPrayer = dataCount.first(where: { $0.key == element }) {
+                    offered[index] = matchingPrayer.value
+                }
+            }
+        }
+    }
+    
+    private func setupMonthlyData(dataCount: [String:Int]) {
+        
+        let days = Date().currentMonthDays()
+        xAxis = Array(stride(from: 1, to: days + 1, by: 1)).map { String($0) }
+        offered.removeAll()
+        while (offered.count < xAxis.count) {
+            offered.append(0)
+        }
+        yValues = stride(from: 0, to: 6, by: 1).map { $0 }
+        
+        if !dataCount.isEmpty {
+            for (index, element) in xAxis.enumerated() {
+                if let matchingPrayer = dataCount.first(where: { $0.key == element }) {
+                    offered[index] = matchingPrayer.value
+                }
+            }
+        }
+    }
+    
+    private func setupYearlyData(dataCount: [String:Int]) {
+        
+        xAxis = Calendar.current.shortMonthSymbols
+        offered.removeAll()
+        while (offered.count < xAxis.count) {
+            offered.append(0)
+//            offered.append(Int.random(in: 0...155))
+        }
+        yValues = stride(from: 0, to: 165, by: 10).map { $0 }
+        
+        if !dataCount.isEmpty {
+            for (index, element) in xAxis.enumerated() {
+                if let matchingPrayer = dataCount.first(where: { $0.key == element }) {
+                    offered[index] = matchingPrayer.value
+                }
+            }
+        }
+    }
+}
+
+
+class PTStatsViewModel {
+        
+    func mapOfferedPrayerWithxAxis(prayers: [PTUserPrayerData], stats: PTStats) -> [String: Int] {
+        
+        var groupedPrayers: [String: [PTUserPrayerData]] 
+
+        switch stats {
+        case .weekly:
+            groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
+                prayer.date.toDate()?.weekdayName() ?? "Unknown"
+            })
+        case .monthly:
+            groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
+                prayer.date.toDate()?.BHDateGraph ?? "--"
+            })
+        case .yearly:
+            groupedPrayers = Dictionary(grouping: prayers, by: { prayer in
+                prayer.date.toDate()?.monthName() ?? "Unknown"
+            })
+        }
+        
+        let groupCount = groupedPrayers.mapValues { $0.count }
+        return groupCount
     }
 }

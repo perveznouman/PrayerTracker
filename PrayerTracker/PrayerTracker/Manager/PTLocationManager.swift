@@ -36,7 +36,7 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
         self.cityName = storedLocation?.city ?? ""
         self.currentLocation = CLLocation(latitude: storedLocation?.latitude ?? 0.0, longitude: storedLocation?.longitude ?? 0.0)
         self.manuallySavedLocation = storedLocation?.isManualSaved ?? false
-        let _ = dailyPrayerVm.retrievePrayerTime()
+        let _ = dailyPrayerVm.setPrayers()
         if (!self.manuallySavedLocation) {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -47,6 +47,12 @@ class PTLocationManager: PTLocationConfirmer, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         locationStatus = status
+        if status == .denied || status == .restricted {
+            PTAnalyticsManager.logEvent(eventName: PTAnalyticsConstant.locationPermission.rawValue, parameter: [PTAnalyticsConstant.locationPermission.caseValue: 0])
+        }
+        else if status == .authorizedWhenInUse || status == .authorizedAlways {
+            PTAnalyticsManager.logEvent(eventName: PTAnalyticsConstant.locationPermission.rawValue, parameter: [PTAnalyticsConstant.locationPermission.caseValue: 1])
+        }
 //        if status == .notDetermined || status == .denied {
 //            let storedLocation = locationViewModel.retrieve()
 //            self.cityName = storedLocation?.city ?? ""

@@ -20,7 +20,6 @@ struct PTMarkPrayerView: View {
     @ObservedObject private var prayerVM: PTDailyPrayerViewModel = PTDailyPrayerViewModel.shared
 
     // Location
-    let location = PTLocationManager() // To initialize location service
     @ObservedObject var locationViewModel: PTLocationViewModel = PTLocationViewModel.shared
     var userCity: String {
         return locationViewModel.location?.city ?? String(localized: "unknown")
@@ -29,7 +28,7 @@ struct PTMarkPrayerView: View {
     //SwiftData
     @Environment(PTSwiftDataManager.self) private var dataManager
     @Environment(\.modelContext) private var modelContext
-
+    
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.PTAccentColor]
     }
@@ -90,8 +89,9 @@ struct PTMarkPrayerView: View {
                     .controlSize(.small)
                 }
             }.onAppear(perform: {
-                dataManager.fetchPrayers(for: selectedDate, withContext: modelContext)
+                dataManager.fetchDailyPrayers(for: selectedDate, withContext: modelContext)
                 prayerVM.prayers = dataManager.sortedData
+
             })
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.PTAccentColor, for: .navigationBar)
@@ -170,12 +170,11 @@ struct PTDatePickerView: View {
                     displayedComponents: .date
                 )
                 .onChange(of: currentSelectedDate) { oldValue, newValue in
-                    print(oldValue)
-                    print(newValue)
                     prayerVM.loadPrayerTime(date: newValue)
                     shouldShowPicker.toggle()
-                    dataManager.fetchPrayers(for: currentSelectedDate, withContext: modelContext)
+                    dataManager.fetchDailyPrayers(for: currentSelectedDate, withContext: modelContext)
                     prayerVM.prayers = dataManager.sortedData
+                    PTAnalyticsManager.logEvent(eventName: PTAnalyticsConstant.dateButton.caseValue, parameter: [PTAnalyticsConstant.dateButton.caseValue : newValue.BHLocalStorageFormat])
                 }
                 .preferredColorScheme(.dark)
                 // .tint(.red)
@@ -271,8 +270,9 @@ struct PTPrayerListCellView: View {
             Toggle("", isOn: $timings.isOffered)
                 .onChange(of: timings.isOffered) { oldValue, newValue in
                     dataManager.insert(
-                        PTDailyPrayerData(name: timings.name, offered: newValue, date: selectedDate),
+                        PTUserPrayerData(name: timings.name, offered: newValue, date: selectedDate),
                         withContext: modelContext)
+                    PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.prayerMarked.caseValue, parameter: [timings.name: newValue ? 1 : 0])
                 }
                 .disabled(!timings.isEnabled)
                 .tint(.PTAccentColor)

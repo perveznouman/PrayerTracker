@@ -17,4 +17,10 @@ extension String {
         let characterSet = CharacterSet(charactersIn: characters)
         return components(separatedBy: characterSet).joined(separator: separator)
     }
+    
+    func toDate(format: String = "MM-dd-yyyy") -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)
+    }
 }

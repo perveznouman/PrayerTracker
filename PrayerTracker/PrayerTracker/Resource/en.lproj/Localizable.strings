@@ -11,9 +11,11 @@
 "unknownError" = "An unknown error occurred";
 "cancel" = "Cancel";
 
-"statistics" = "Statistics";
+"history" = "History";
 "newEntry" = "Daily";
 "makeNewEntry" = "Mark a new entry";
+"more" = "More";
+
 "today" = "Today";
 "tomorrow" = "Tomorrow";
 "yesterday" = "Yesterday";
@@ -22,10 +24,58 @@
 "asar" = "Asar";
 "maghrib" = "Maghrib";
 "esha" = "Esha";
+
 "weekly" = "Weekly";
 "monthly" = "Monthly";
 "yearly" = "Yearly";
 "Offered" = "Offered";
 "Not Offered" = "Not Offered";
 "Wait" = "Wait";
+"legands" = "Shown based on number of Prayers not Rakaths";
 "unknown" = "Unknown";
+
+"notification" = "Daily Prayer Notification";
+"reminder" = "Reminder";
+"addEntryReminderTitle" = "Reminder";
+"addEntryReminderMessage" = "Mark today's offered Salah";
+"notificationDescription" = "App will remind you for opted Salah";
+"reminderDescription" = "App will remind you to mark offered Salah";
+"notificationDisabledMessage" = "Notification is disabled. Enable Notification in Settings";
+"fajrReminder" = "Fajr Salah's time starts now";
+"zuharReminder" = "Zuhar Salah's time starts now";
+"asarReminder" = "Asar Salah's time starts now";
+"maghribReminder" = "Maghrib Salah's time starts now";
+"eshaReminder" = "Esha Salah's time starts now";
+"fiqueSettings" = "Fique Settings";
+"fiqueMessage" = "Pick your preferred Fique";
+"contactUs" = "Contact Us";
+
+"fique" = "Fique";
+"shia" = "Jafari / Shia Ithna-Ashari";
+"karachi" = "University of Islamic Sciences, Karachi";
+"america" = "Islamic Society of North America";
+"mwl" = "Muslim World League";
+"makkah" = "Umm Al-Qura University, Makkah";
+"egypt" = "Egyptian General Authority of Survey";
+"tehran" = "Institute of Geophysics, University of Tehran";
+"gulf" = "Gulf Region";
+"kuwait" = "Kuwait";
+"qatar" = "Qatar";
+"singapore" = "Majlis Ugama Islam Singapura, Singapore";
+"france" = "Union Organization islamic de France";
+"turkey" = "Diyanet İşleri Başkanlığı, Turkey";
+"russia" = "Spiritual Administration of Muslims of Russia";
+"mcw" = "Moonsighting Committee Worldwide";
+"duabi" = "Dubai";
+"malaysia" = "Jabatan Kemajuan Islam Malaysia";
+"tunisia" = "Tunisia";
+"algeria" = "Algeria";
+"indonesia" = "Kementerian Agama Republik Indonesia";
+"morocco" = "Morocco";
+"lisboa" = "Comunidade Islamica de Lisboa";
+"jordan" = "Islamic Affairs and Holy Places, Jordan";
+
+
+"school" = "School";
+"hanafi" = "Hanafi";
+"shafi" = "Shafi";

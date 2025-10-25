@@ -59,9 +59,16 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    var BHDateGraph: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d"
+        return dateFormatter.string(from: self)
+    }
+    
     var BHMonth: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"
+        dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: self)
     }
     
@@ -74,6 +81,7 @@ extension Date {
     var BHYear: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY"
+        dateFormatter.locale = Locale(identifier: "en_US")
         return dateFormatter.string(from: self)
     }
     
@@ -86,8 +94,56 @@ extension Date {
         formatter.dateFormat = "MM-dd-yyyy"
         return formatter.string(from: self)
     }
+    
+    var BHReminderStorageFormat: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter.string(from: self)
+    }
+    
+    // https://stackoverflow.com/questions/46402684/how-to-get-start-and-end-of-the-week-in-swift
+    var startOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+        else { return nil }
+        return gregorian.date(byAdding: .day, value: 0, to: sunday)
+    }
+    
+    var endOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) 
+        else { return nil }
+        return gregorian.date(byAdding: .day, value: 6, to: sunday)
+    }
 
+    func weekdayName() -> String {
+        let calendar = Calendar.current
+        let weekdayIndex = calendar.component(.weekday, from: self) - 1
+        return calendar.shortStandaloneWeekdaySymbols[weekdayIndex]
+    }
+    
+    func monthName() -> String {
+        let calendar = Calendar.current
+        let weekdayIndex = calendar.component(.month, from: self) - 1
+        return calendar.shortMonthSymbols[weekdayIndex]
+    }
 
+    func startOfMonth() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func endOfMonth() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+    }
+
+    func startOfYear() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func endOfYear() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(year: 1, day: -1), to: self.startOfYear())!
+    }
     
     /*
    static func dayDifference(from date: Date) -> Int {

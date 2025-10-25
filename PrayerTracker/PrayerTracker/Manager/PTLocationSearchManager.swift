@@ -54,6 +54,12 @@ class PTLocationSearchManager : PTLocationConfirmer, MKLocalSearchCompleterDeleg
                 return
             }
             
+            if let error = error {
+                let errorString =  (error.localizedDescription.replacingOccurrences(of: " ", with: "_") as NSString).substring(to: 39)
+                PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.locationUpdate.caseValue, parameter: [PTAnalyticsConstant.locationUpdate.caseValue: errorString])
+                return
+            }
+            
             for item in response.mapItems {
                 if let location = item.placemark.location {
                     let city = item.placemark.name ?? ""
@@ -62,6 +68,7 @@ class PTLocationSearchManager : PTLocationConfirmer, MKLocalSearchCompleterDeleg
                         country = item.placemark.countryCode ?? ""
                     }
                     if !city.isEmpty {
+                        PTAnalyticsManager.logEvent(eventName:PTAnalyticsConstant.locationUpdate.caseValue, parameter: [PTAnalyticsConstant.locationUpdate.caseValue: city])
                         searchResult = PTLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, city: city, country: country, isManualSaved: true)
                         self.currentLocation = CLLocation(latitude: searchResult?.latitude ?? 0.0, longitude: searchResult?.longitude ?? 0.0)
                         self.locationViewModel.save(searchResult!)

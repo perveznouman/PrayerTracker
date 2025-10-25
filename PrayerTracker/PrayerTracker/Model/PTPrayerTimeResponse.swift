@@ -10,10 +10,10 @@ import Foundation
 struct PTPrayerTimeResponse: Codable {
     let code: Int
     let status: String
-    let data: [String: [PTPrayerData]]
+    let data: [String: [PTPrayerTimings]]
 }
 
-struct PTPrayerData: Codable {
+struct PTPrayerTimings: Codable {
     let timings: PTTimings
 }
 
